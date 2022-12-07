@@ -98,5 +98,8 @@
     "type": "git",
     "url": "https://github.com/aws/aws-sdk-js-v3.git",
     "directory": "clients/client-timestream-write"
+  },
+  "typedoc": {
+    "entryPoint": "src/index.ts"
   }
 }

@@ -3692,8 +3692,8 @@ it("RestJsonInputAndOutputWithNumericHeaders:ServerRequest", async () => {
     query: {},
     headers: {
       "x-float": "1.1",
-      "x-byte": "1",
       "x-long": "123",
+      "x-byte": "1",
       "x-integer": "123",
       "x-integerlist": "1, 2, 3",
       "x-double": "1.1",
@@ -29605,8 +29605,8 @@ it("RestJsonTimestampFormatHeaders:ServerRequest", async () => {
     headers: {
       "x-targetepochseconds": "1576540098",
       "x-memberdatetime": "2019-12-16T23:48:18Z",
-      "x-defaultformat": "Mon, 16 Dec 2019 23:48:18 GMT",
       "x-memberepochseconds": "1576540098",
+      "x-defaultformat": "Mon, 16 Dec 2019 23:48:18 GMT",
       "x-targethttpdate": "Mon, 16 Dec 2019 23:48:18 GMT",
       "x-memberhttpdate": "Mon, 16 Dec 2019 23:48:18 GMT",
       "x-targetdatetime": "2019-12-16T23:48:18Z",

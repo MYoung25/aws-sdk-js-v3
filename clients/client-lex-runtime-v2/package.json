@@ -104,5 +104,8 @@
     "type": "git",
     "url": "https://github.com/aws/aws-sdk-js-v3.git",
     "directory": "clients/client-lex-runtime-v2"
+  },
+  "typedoc": {
+    "entryPoint": "src/index.ts"
   }
 }

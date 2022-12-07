@@ -109,5 +109,8 @@
     "type": "git",
     "url": "https://github.com/aws/aws-sdk-js-v3.git",
     "directory": "clients/client-s3-control"
+  },
+  "typedoc": {
+    "entryPoint": "src/index.ts"
   }
 }
