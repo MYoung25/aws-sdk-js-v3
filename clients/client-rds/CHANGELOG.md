@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.225.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.224.0...v3.225.0) (2022-12-06)
+
+
+### Features
+
+* **client-rds:** This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations. ([cdbae39](https://github.com/aws/aws-sdk-js-v3/commit/cdbae395c1810061a1a68f405f56266cc15ce5d5))
+
+
+
+
+
+# [3.224.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.223.0...v3.224.0) (2022-12-05)
+
+
+### Features
+
+* **client-rds:** This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation. ([b1d84f4](https://github.com/aws/aws-sdk-js-v3/commit/b1d84f455d7ee69052142c50ce6c5af167404a54))
+
+
+
+
+
 # [3.223.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.222.0...v3.223.0) (2022-12-02)
 
 

@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.225.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.224.0...v3.225.0) (2022-12-06)
+
+
+### Features
+
+* **client-billingconductor:** This release adds the Tiering Pricing Rule feature. ([6ebdcd8](https://github.com/aws/aws-sdk-js-v3/commit/6ebdcd8aed01fe515d936a9f4c0c7ef4f2e1e459))
+* **client-connect:** This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html ([7ed68cc](https://github.com/aws/aws-sdk-js-v3/commit/7ed68ccc37318145119d97b7f2b818d2de670314))
+* **client-dynamodb-streams:** Endpoint Ruleset update: Use http instead of https for the "local" region. ([7ff89f0](https://github.com/aws/aws-sdk-js-v3/commit/7ff89f0a9af6b5659717fc600cdcfae7572aab51))
+* **client-dynamodb:** Endpoint Ruleset update: Use http instead of https for the "local" region. ([29cbf1a](https://github.com/aws/aws-sdk-js-v3/commit/29cbf1a2914f97c2c0a9d9a134033888d9602e0a))
+* **client-rds:** This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations. ([cdbae39](https://github.com/aws/aws-sdk-js-v3/commit/cdbae395c1810061a1a68f405f56266cc15ce5d5))
+* **client-sagemaker-featurestore-runtime:** For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores. ([01b0b8c](https://github.com/aws/aws-sdk-js-v3/commit/01b0b8c859d9171953fa644344ded06f506e1979))
+* **clients:** update client endpoints as of 2022-12-06 ([d382fbc](https://github.com/aws/aws-sdk-js-v3/commit/d382fbcb4fcb8a9127193c42ef38fc660c7181c0))
+
+
+
+
+
+# [3.224.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.223.0...v3.224.0) (2022-12-05)
+
+
+### Bug Fixes
+
+* **lib-dynamodb:** fix use of log filters in conjunction with DynamDBDocumentClient ([#4249](https://github.com/aws/aws-sdk-js-v3/issues/4249)) ([1534f62](https://github.com/aws/aws-sdk-js-v3/commit/1534f62bc3ca27a4007c2bde2f6bed18c4ee02a6))
+
+
+### Features
+
+* **client-cost-explorer:** This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration. ([d0dbebc](https://github.com/aws/aws-sdk-js-v3/commit/d0dbebcfd279c53b72dbbde1452dacab2e420b92))
+* **client-ec2:** Documentation updates for EC2. ([7446494](https://github.com/aws/aws-sdk-js-v3/commit/74464943a89d7d7785cf8fa1ba17f8146dd5bb3d))
+* **client-ivschat:** Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent. ([e94d8e5](https://github.com/aws/aws-sdk-js-v3/commit/e94d8e51d57d402310e3ea72ee0ca03f6ac89187))
+* **client-rds:** This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation. ([b1d84f4](https://github.com/aws/aws-sdk-js-v3/commit/b1d84f455d7ee69052142c50ce6c5af167404a54))
+* **client-transcribe:** Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE). ([57057bb](https://github.com/aws/aws-sdk-js-v3/commit/57057bbc49f6b619c0792e7f5b1e5f744a338efd))
+* **clients:** update client endpoints as of 2022-12-05 ([b302f16](https://github.com/aws/aws-sdk-js-v3/commit/b302f16ee52088daefee2b90e739b3776e95c2cf))
+
+
+
+
+
 # [3.223.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.222.0...v3.223.0) (2022-12-02)
 
 
