@@ -17,7 +17,7 @@ exec(cmd, (error, stdout, stderr) => {
   console.log(stdout);
   console.log(stderr);
   if (error) {
-    console.error(e);
+    console.error(error);
     return process.exit(error.code || 1);
   }
   try {

@@ -131,13 +131,17 @@ const copyToClients = async (sourceDir, destinationDir) => {
             url: "https://github.com/aws/aws-sdk-js-v3.git",
             directory: `clients/${clientName}`,
           },
+          typedoc: {
+            entryPoint: "src/index.ts",
+          },
         };
         // no need for the default prepack script
         delete mergedManifest.scripts.prepack;
         writeFileSync(destSubPath, JSON.stringify(mergedManifest, null, 2).concat(`\n`));
       } else if (packageSub === "typedoc.json") {
         const typedocJson = {
-          extends: "../../typedoc.client.json",
+          extends: ["../../typedoc.client.json"],
+          entryPoints: ["src/indext.ts"],
         };
         writeFileSync(destSubPath, JSON.stringify(typedocJson, null, 2).concat(`\n`));
       } else if (overWritableSubs.includes(packageSub) || !existsSync(destSubPath)) {
