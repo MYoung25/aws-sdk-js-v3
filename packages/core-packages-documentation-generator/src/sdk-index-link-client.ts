@@ -33,6 +33,7 @@ export class SdkIndexLinkClientPlugin {
   readonly defaultGroup: string;
 
   constructor(public readonly options: Options, public readonly logger: Logger, private readonly renderer: Renderer) {
+    console.log(Converter, Renderer);
     this.renderer.application.converter.on(Converter.EVENT_END, this.onConverterEnd);
     this.renderer.on(Renderer.EVENT_BEGIN_PAGE, this.onPageBegin);
   }

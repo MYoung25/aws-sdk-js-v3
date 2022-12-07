@@ -8,5 +8,5 @@
   "plugin": ["@aws-sdk/core-packages-documentation-generator"],
   "readme": "README.md",
   "skipErrorChecking": true,
-  "theme": "minimal"
+  "theme": "default"
 }
