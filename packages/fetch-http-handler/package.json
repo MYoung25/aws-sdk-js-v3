@@ -25,8 +25,7 @@
     "@aws-sdk/querystring-builder": "*",
     "@aws-sdk/types": "*",
     "@aws-sdk/util-base64": "*",
-    "tslib": "^2.3.1",
-    "typedoc": "^0.23.24"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@aws-sdk/abort-controller": "*",

@@ -41,8 +41,7 @@
     "@aws-sdk/util-defaults-mode-node": "*",
     "@aws-sdk/util-utf8": "*",
     "@aws-smithy/server-common": "1.0.0-alpha.6",
-    "tslib": "^2.3.1",
-    "typedoc": "^0.23.24"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@aws-sdk/service-client-documentation-generator": "*",

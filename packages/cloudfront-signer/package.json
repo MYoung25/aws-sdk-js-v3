@@ -20,8 +20,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@aws-sdk/url-parser": "*",
-    "typedoc": "^0.23.24"
+    "@aws-sdk/url-parser": "*"
   },
   "devDependencies": {
     "@tsconfig/recommended": "1.0.1",

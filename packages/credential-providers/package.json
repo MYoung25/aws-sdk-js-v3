@@ -41,8 +41,7 @@
     "@aws-sdk/property-provider": "*",
     "@aws-sdk/shared-ini-file-loader": "*",
     "@aws-sdk/types": "*",
-    "tslib": "^2.3.1",
-    "typedoc": "^0.23.24"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@tsconfig/recommended": "1.0.1",
