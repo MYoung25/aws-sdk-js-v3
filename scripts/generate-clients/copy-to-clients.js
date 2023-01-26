@@ -47,7 +47,6 @@ const mergeManifest = (fromContent = {}, toContent = {}) => {
           concurrently: "7.0.0",
           "downlevel-dts": "0.10.1",
           rimraf: "3.0.2",
-          typedoc: "0.19.2",
           typescript: "~4.6.2",
         };
         fromContent[name] = Object.keys(fromContent[name])
@@ -149,11 +148,6 @@ const copyToClients = async (sourceDir, destinationDir, solo) => {
         }
 
         writeFileSync(destSubPath, JSON.stringify(mergedManifest, null, 2).concat(`\n`));
-      } else if (packageSub === "typedoc.json") {
-        const typedocJson = {
-          extends: "../../typedoc.client.json",
-        };
-        writeFileSync(destSubPath, JSON.stringify(typedocJson, null, 2).concat(`\n`));
       } else if (overWritableSubs.includes(packageSub) || !existsSync(destSubPath)) {
         if (lstatSync(packageSubPath).isDirectory()) removeSync(destSubPath);
         copySync(packageSubPath, destSubPath, {
