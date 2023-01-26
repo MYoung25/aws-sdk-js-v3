@@ -56,7 +56,8 @@
     "@aws-sdk/util-user-agent-node": "*",
     "@aws-sdk/util-utf8": "*",
     "@aws-sdk/util-waiter": "*",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "typedoc": "^0.23.24"
   },
   "devDependencies": {
     "@aws-sdk/service-client-documentation-generator": "*",
@@ -65,13 +66,7 @@
     "concurrently": "7.0.0",
     "downlevel-dts": "0.10.1",
     "rimraf": "3.0.2",
-    "typedoc": "0.19.2",
     "typescript": "~4.6.2"
-  },
-  "overrides": {
-    "typedoc": {
-      "typescript": "~4.6.2"
-    }
   },
   "engines": {
     "node": ">=14.0.0"
