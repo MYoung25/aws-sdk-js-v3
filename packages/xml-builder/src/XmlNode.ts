@@ -4,6 +4,7 @@ import { XmlText } from "./XmlText";
 
 /**
  * Represents an XML node.
+ * @public
  */
 export class XmlNode {
   private attributes: Record<string, any> = {};

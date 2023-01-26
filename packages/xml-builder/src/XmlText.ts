@@ -2,6 +2,7 @@ import { escapeElement } from "./escape-element";
 import { Stringable } from "./stringable";
 /**
  * Represents an XML text value.
+ * @public
  */
 export class XmlText implements Stringable {
   constructor(private value: string) {}

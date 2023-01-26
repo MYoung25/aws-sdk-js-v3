@@ -20,11 +20,11 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@aws-sdk/url-parser": "*",
-    "@microsoft/api-documenter": "^7.20.1",
-    "@microsoft/api-extractor": "^7.34.0"
+    "@aws-sdk/url-parser": "*"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "@tsconfig/recommended": "1.0.1",
     "concurrently": "7.0.0",
     "downlevel-dts": "0.10.1",

@@ -24,12 +24,12 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@microsoft/api-documenter": "^7.20.1",
-    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@aws-sdk/types": "*",
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "@tsconfig/recommended": "1.0.1",
     "@types/node": "^14.14.31",
     "concurrently": "7.0.0",

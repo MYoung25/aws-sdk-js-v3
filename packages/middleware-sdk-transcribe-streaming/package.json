@@ -26,12 +26,12 @@
     "@aws-sdk/signature-v4": "*",
     "@aws-sdk/types": "*",
     "@aws-sdk/util-format-url": "*",
-    "@microsoft/api-documenter": "^7.20.1",
-    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "@tsconfig/recommended": "1.0.1",
     "@types/uuid": "^8.3.0",
     "concurrently": "7.0.0",

@@ -22,8 +22,6 @@
   "dependencies": {
     "@aws-sdk/protocol-http": "*",
     "@aws-sdk/types": "*",
-    "@microsoft/api-documenter": "^7.20.1",
-    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1"
   },
   "engines": {
@@ -46,6 +44,8 @@
     "directory": "packages/middleware-content-length"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "@tsconfig/recommended": "1.0.1",
     "concurrently": "7.0.0",
     "downlevel-dts": "0.10.1",
