@@ -49,6 +49,8 @@
     "@aws-sdk/util-user-agent-node": "*",
     "@aws-sdk/util-utf8": "*",
     "@aws-sdk/xml-builder": "*",
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "entities": "2.2.0",
     "fast-xml-parser": "4.0.11",
     "tslib": "^2.3.1",

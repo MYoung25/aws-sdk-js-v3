@@ -20,6 +20,8 @@
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
   "dependencies": {
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "mnemonist": "0.38.3",
     "tslib": "^2.3.1"
   },

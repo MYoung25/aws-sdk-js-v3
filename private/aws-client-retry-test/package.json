@@ -19,6 +19,8 @@
   "sideEffects": false,
   "dependencies": {
     "@aws-sdk/client-xray": "*",
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

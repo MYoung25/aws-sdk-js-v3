@@ -22,6 +22,8 @@
   "dependencies": {
     "@aws-sdk/eventstream-serde-universal": "*",
     "@aws-sdk/types": "*",
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1"
   },
   "engines": {

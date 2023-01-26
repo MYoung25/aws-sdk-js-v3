@@ -25,6 +25,8 @@
     "@aws-sdk/querystring-builder": "*",
     "@aws-sdk/types": "*",
     "@aws-sdk/util-base64": "*",
+    "@microsoft/api-documenter": "^7.20.1",
+    "@microsoft/api-extractor": "^7.34.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
