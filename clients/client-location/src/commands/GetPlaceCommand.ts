@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,12 +10,16 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
-import { GetPlaceRequest, GetPlaceResponse, GetPlaceResponseFilterSensitiveLog } from "../models/models_0";
+import {
+  GetPlaceRequest,
+  GetPlaceRequestFilterSensitiveLog,
+  GetPlaceResponse,
+  GetPlaceResponseFilterSensitiveLog,
+} from "../models/models_0";
 import { de_GetPlaceCommand, se_GetPlaceCommand } from "../protocols/Aws_restJson1";
 
 /**
@@ -63,6 +68,7 @@ export interface GetPlaceCommandOutput extends GetPlaceResponse, __MetadataBeare
  *   IndexName: "STRING_VALUE", // required
  *   PlaceId: "STRING_VALUE", // required
  *   Language: "STRING_VALUE",
+ *   Key: "STRING_VALUE",
  * };
  * const command = new GetPlaceCommand(input);
  * const response = await client.send(command);
@@ -172,7 +178,7 @@ export class GetPlaceCommand extends $Command<
       logger,
       clientName,
       commandName,
-      inputFilterSensitiveLog: (_: any) => _,
+      inputFilterSensitiveLog: GetPlaceRequestFilterSensitiveLog,
       outputFilterSensitiveLog: GetPlaceResponseFilterSensitiveLog,
     };
     const { requestHandler } = configuration;

@@ -1,8 +1,9 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
 import { getCrossRegionPresignedUrlPlugin } from "@aws-sdk/middleware-sdk-rds";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -10,9 +11,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { CreateDBInstanceReadReplicaMessage, CreateDBInstanceReadReplicaResult } from "../models/models_0";
 import { de_CreateDBInstanceReadReplicaCommand, se_CreateDBInstanceReadReplicaCommand } from "../protocols/Aws_query";
@@ -101,6 +101,12 @@ export interface CreateDBInstanceReadReplicaCommandOutput extends CreateDBInstan
  *   DeletionProtection: true || false,
  *   Domain: "STRING_VALUE",
  *   DomainIAMRoleName: "STRING_VALUE",
+ *   DomainFqdn: "STRING_VALUE",
+ *   DomainOu: "STRING_VALUE",
+ *   DomainAuthSecretArn: "STRING_VALUE",
+ *   DomainDnsIps: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
  *   ReplicaMode: "open-read-only" || "mounted",
  *   MaxAllocatedStorage: Number("int"),
  *   CustomIamInstanceProfile: "STRING_VALUE",
@@ -252,6 +258,11 @@ export interface CreateDBInstanceReadReplicaCommandOutput extends CreateDBInstan
  * //         Status: "STRING_VALUE",
  * //         FQDN: "STRING_VALUE",
  * //         IAMRoleName: "STRING_VALUE",
+ * //         OU: "STRING_VALUE",
+ * //         AuthSecretArn: "STRING_VALUE",
+ * //         DnsIps: [
+ * //           "STRING_VALUE",
+ * //         ],
  * //       },
  * //     ],
  * //     CopyTagsToSnapshot: true || false,

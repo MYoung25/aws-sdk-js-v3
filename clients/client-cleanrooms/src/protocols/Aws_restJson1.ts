@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -15,10 +16,12 @@ import {
   resolvedPath as __resolvedPath,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { BatchGetSchemaCommandInput, BatchGetSchemaCommandOutput } from "../commands/BatchGetSchemaCommand";
 import {
@@ -141,6 +144,7 @@ import {
   DataEncryptionMetadata,
   GlueTableReference,
   InternalServerException,
+  JoinOperator,
   MemberAbility,
   Membership,
   MembershipSummary,
@@ -3825,6 +3829,8 @@ const de_ValidationExceptionRes = async (parsedOutput: any, context: __SerdeCont
 
 // se_GlueTableReference omitted.
 
+// se_JoinOperatorsList omitted.
+
 // se_MemberAbilities omitted.
 
 // se_MemberList omitted.
@@ -4065,6 +4071,8 @@ const de_ConfiguredTableSummaryList = (output: any, context: __SerdeContext): Co
 // de_DataEncryptionMetadata omitted.
 
 // de_GlueTableReference omitted.
+
+// de_JoinOperatorsList omitted.
 
 // de_MemberAbilities omitted.
 

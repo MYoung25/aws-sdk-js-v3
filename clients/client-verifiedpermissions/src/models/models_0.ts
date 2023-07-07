@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { VerifiedPermissionsServiceException as __BaseException } from "./VerifiedPermissionsServiceException";
 
@@ -218,7 +218,7 @@ export interface CreateIdentitySourceInput {
    *              ensure the idempotency of the request. This lets you safely retry the request without
    *              accidentally performing the same operation a second time. Passing the same value to a
    *              later call to an operation requires that you also pass the same value for all other
-   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of
+   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
    *              value.</a>.</p>
    *          <p>If you don't provide this value, then Amazon Web Services generates a random one for
    *              you.</p>
@@ -474,7 +474,7 @@ export interface ValidationExceptionField {
  *                </p>
  *                <p>The policy attempts to access a record or entity attribute that isn't
  *                     specified in the schema. Test for the existence of the attribute first before
- *                     attempting to access its value. For more information, see the <a href="docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the
+ *                     attempting to access its value. For more information, see the <a href="https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the
  *                         <i>Cedar Policy Language Guide</i>.</p>
  *             </li>
  *             <li>
@@ -484,7 +484,7 @@ export interface ValidationExceptionField {
  *                <p>The policy attempts to access a record or entity attribute that is optional
  *                     and isn't guaranteed to be present. Test for the existence of the attribute
  *                     first before attempting to access its value. For more information, see the
- *                         <a href="docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the
+ *                         <a href="https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the
  *                         <i>Cedar Policy Language Guide</i>.</p>
  *             </li>
  *             <li>
@@ -645,7 +645,7 @@ export interface CreatePolicyInput {
    *              ensure the idempotency of the request. This lets you safely retry the request without
    *              accidentally performing the same operation a second time. Passing the same value to a
    *              later call to an operation requires that you also pass the same value for all other
-   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of
+   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
    *              value.</a>.</p>
    *          <p>If you don't provide this value, then Amazon Web Services generates a random one for
    *              you.</p>
@@ -782,7 +782,7 @@ export interface CreatePolicyStoreInput {
    *              ensure the idempotency of the request. This lets you safely retry the request without
    *              accidentally performing the same operation a second time. Passing the same value to a
    *              later call to an operation requires that you also pass the same value for all other
-   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of
+   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
    *              value.</a>.</p>
    *          <p>If you don't provide this value, then Amazon Web Services generates a random one for
    *              you.</p>
@@ -839,7 +839,7 @@ export interface CreatePolicyTemplateInput {
    *              ensure the idempotency of the request. This lets you safely retry the request without
    *              accidentally performing the same operation a second time. Passing the same value to a
    *              later call to an operation requires that you also pass the same value for all other
-   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of
+   *              parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of
    *              value.</a>.</p>
    *          <p>If you don't provide this value, then Amazon Web Services generates a random one for
    *              you.</p>
@@ -1057,7 +1057,7 @@ export namespace EntityReference {
 /**
  * @public
  * <p>Contains a description of an evaluation error.</p>
- *          <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
+ *          <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
  */
 export interface EvaluationErrorItem {
   /**
@@ -2555,8 +2555,7 @@ export type AttributeValue =
  */
 export namespace AttributeValue {
   /**
-   * <p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-boolean">Boolean</a>
-   *             type.</p>
+   * <p>An attribute value of <a href="https://docs.cedarpolicy.com/syntax-datatypes.html#boolean">Boolean</a> type.</p>
    *          <p>Example: <code>\{"boolean": true\}</code>
    *          </p>
    */
@@ -2587,8 +2586,7 @@ export namespace AttributeValue {
   }
 
   /**
-   * <p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-long">Long</a>
-   *             type.</p>
+   * <p>An attribute value of <a href="https://docs.cedarpolicy.com/syntax-datatypes.html#long">Long</a> type.</p>
    *          <p>Example: <code>\{"long": 0\}</code>
    *          </p>
    */
@@ -2603,8 +2601,7 @@ export namespace AttributeValue {
   }
 
   /**
-   * <p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-string">String</a>
-   *             type.</p>
+   * <p>An attribute value of <a href="https://docs.cedarpolicy.com/syntax-datatypes.html#string">String</a> type.</p>
    *          <p>Example: <code>\{"string": "abc"\}</code>
    *          </p>
    */
@@ -2619,8 +2616,7 @@ export namespace AttributeValue {
   }
 
   /**
-   * <p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-set">Set</a>
-   *             type.</p>
+   * <p>An attribute value of <a href="https://docs.cedarpolicy.com/syntax-datatypes.html#set">Set</a> type.</p>
    *          <p>Example: <code>\{"set": [ \{\} ] \}</code>
    *          </p>
    */
@@ -2635,8 +2631,7 @@ export namespace AttributeValue {
   }
 
   /**
-   * <p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-record">Record</a>
-   *             type.</p>
+   * <p>An attribute value of <a href="https://docs.cedarpolicy.com/syntax-datatypes.html#record">Record</a> type.</p>
    *          <p>Example: <code>\{"record": \{ "keyName": \{\} \} \}</code>
    *          </p>
    */
@@ -2733,19 +2728,9 @@ export namespace ContextDefinition {
  *          <p>This data type is used as one of the fields in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html">EntitiesDefinition</a>
  *             structure.</p>
  *          <p>
- *             <code>\{
- *     "id": \{
- *         "entityType": "Photo",
- *         "entityId": "VacationPhoto94.jpg"
- *     \},
- *     "Attributes": \{\},
- *     "Parents": [
- *         \{
- *             "entityType": "Album",
- *             "entityId": "alice_folder"
- *         \}
- *     ]
- * \}</code>
+ *             <code>\{ "id": \{ "entityType": "Photo", "entityId": "VacationPhoto94.jpg" \},
+ *                 "Attributes": \{\}, "Parents": [ \{ "entityType": "Album", "entityId": "alice_folder" \}
+ *                 ] \}</code>
  *          </p>
  */
 export interface EntityItem {

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { DescribeEndpointInput, DescribeEndpointOutput } from "../models/models_2";
 import { de_DescribeEndpointCommand, se_DescribeEndpointCommand } from "../protocols/Aws_json1_1";
@@ -92,7 +92,7 @@ export interface DescribeEndpointCommandOutput extends DescribeEndpointOutput, _
  * //     DestinationS3Uri: "STRING_VALUE", // required
  * //     KmsKeyId: "STRING_VALUE", // required
  * //   },
- * //   EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed", // required
+ * //   EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed" || "UpdateRollbackFailed", // required
  * //   FailureReason: "STRING_VALUE",
  * //   CreationTime: new Date("TIMESTAMP"), // required
  * //   LastModifiedTime: new Date("TIMESTAMP"), // required
@@ -119,6 +119,18 @@ export interface DescribeEndpointCommandOutput extends DescribeEndpointOutput, _
  * //           AlarmName: "STRING_VALUE",
  * //         },
  * //       ],
+ * //     },
+ * //     RollingUpdatePolicy: { // RollingUpdatePolicy
+ * //       MaximumBatchSize: {
+ * //         Type: "INSTANCE_COUNT" || "CAPACITY_PERCENT", // required
+ * //         Value: Number("int"), // required
+ * //       },
+ * //       WaitIntervalInSeconds: Number("int"), // required
+ * //       MaximumExecutionTimeoutInSeconds: Number("int"),
+ * //       RollbackMaximumBatchSize: {
+ * //         Type: "INSTANCE_COUNT" || "CAPACITY_PERCENT", // required
+ * //         Value: Number("int"), // required
+ * //       },
  * //     },
  * //   },
  * //   AsyncInferenceConfig: { // AsyncInferenceConfig

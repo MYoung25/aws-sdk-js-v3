@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { GuardDutyClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GuardDutyClient";
 import { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
@@ -37,7 +37,7 @@ export interface ListTagsForResourceCommandOutput extends ListTagsForResourceRes
 /**
  * @public
  * <p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters,
- *       IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this
+ *       IP sets, threat intel sets, publishing destination, with a limit of 50 tags per resource. When invoked, this
  *       operation returns all assigned tags for a given resource.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.

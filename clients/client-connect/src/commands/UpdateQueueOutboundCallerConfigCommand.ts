@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
 import { UpdateQueueOutboundCallerConfigRequest } from "../models/models_1";
@@ -52,6 +52,10 @@ export interface UpdateQueueOutboundCallerConfigCommandOutput extends __Metadata
  *     in
  *     this scenario, you will receive a
  *     <code>ResourceNotFoundException</code>.</p>
+ *             <p>Only use the phone number ARN format that doesn't contain <code>instance</code> in the
+ *     path, for example, <code>arn:aws:connect:us-east-1:1234567890:phone-number/uuid</code>. This is
+ *     the same ARN format that is returned when you call the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html">ListPhoneNumbersV2</a>
+ *     API.</p>
  *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.

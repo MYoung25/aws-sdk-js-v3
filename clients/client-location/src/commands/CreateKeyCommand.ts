@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { LocationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LocationClient";
 import { CreateKeyRequest, CreateKeyResponse, CreateKeyResponseFilterSensitiveLog } from "../models/models_0";
@@ -37,13 +37,10 @@ export interface CreateKeyCommandOutput extends CreateKeyResponse, __MetadataBea
 /**
  * @public
  * <p>Creates an API key resource in your Amazon Web Services account, which lets you grant
- *                 <code>geo:GetMap*</code> actions for Amazon Location Map resources to the API key
- *             bearer.</p>
- *          <important>
- *             <p>The API keys feature is in preview. We may add, change, or remove
- *             features before announcing general availability. For more information, see
- *             <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p>
- *          </important>
+ *             actions for Amazon Location resources to the API key bearer.</p>
+ *          <note>
+ *             <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript

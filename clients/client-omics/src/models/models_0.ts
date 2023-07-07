@@ -1,6 +1,6 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
-import { DocumentType as __DocumentType } from "@aws-sdk/types";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
+import { DocumentType as __DocumentType } from "@smithy/types";
 import { Readable } from "stream";
 
 import { OmicsServiceException as __BaseException } from "./OmicsServiceException";
@@ -2014,6 +2014,7 @@ export interface CreateVariantStoreResponse {
  * @enum
  */
 export const WorkflowEngine = {
+  CWL: "CWL",
   NEXTFLOW: "NEXTFLOW",
   WDL: "WDL",
 } as const;

@@ -2,8 +2,8 @@
 import {
   ExceptionOptionType as __ExceptionOptionType,
   LazyJsonString as __LazyJsonString,
-} from "@aws-sdk/smithy-client";
-import { DocumentType as __DocumentType } from "@aws-sdk/types";
+} from "@smithy/smithy-client";
+import { DocumentType as __DocumentType } from "@smithy/types";
 
 import { JsonProtocolServiceException as __BaseException } from "./JsonProtocolServiceException";
 
@@ -399,6 +399,14 @@ export interface OperationWithOptionalInputOutputOutput {
  */
 export interface PutAndGetInlineDocumentsInputOutput {
   inlineDocument?: __DocumentType;
+}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
 }
 
 /**

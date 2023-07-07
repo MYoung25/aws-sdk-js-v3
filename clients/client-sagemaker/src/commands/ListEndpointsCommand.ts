@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ListEndpointsInput, ListEndpointsOutput } from "../models/models_3";
 import { de_ListEndpointsCommand, se_ListEndpointsCommand } from "../protocols/Aws_json1_1";
@@ -53,7 +53,7 @@ export interface ListEndpointsCommandOutput extends ListEndpointsOutput, __Metad
  *   CreationTimeAfter: new Date("TIMESTAMP"),
  *   LastModifiedTimeBefore: new Date("TIMESTAMP"),
  *   LastModifiedTimeAfter: new Date("TIMESTAMP"),
- *   StatusEquals: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed",
+ *   StatusEquals: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed" || "UpdateRollbackFailed",
  * };
  * const command = new ListEndpointsCommand(input);
  * const response = await client.send(command);
@@ -64,7 +64,7 @@ export interface ListEndpointsCommandOutput extends ListEndpointsOutput, __Metad
  * //       EndpointArn: "STRING_VALUE", // required
  * //       CreationTime: new Date("TIMESTAMP"), // required
  * //       LastModifiedTime: new Date("TIMESTAMP"), // required
- * //       EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed", // required
+ * //       EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed" || "UpdateRollbackFailed", // required
  * //     },
  * //   ],
  * //   NextToken: "STRING_VALUE",

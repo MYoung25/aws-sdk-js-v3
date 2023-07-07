@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
 import { CancelJobRequest, CancelJobResponse } from "../models/models_0";
@@ -45,6 +45,14 @@ export interface CancelJobCommandOutput extends CancelJobResponse, __MetadataBea
  *         in<code>RUNNABLE</code> remains in <code>RUNNABLE</code> until it reaches the head of the
  *       job queue. Then the job status is updated to
  *       <code>FAILED</code>.</p>
+ *          <note>
+ *             <p>A <code>PENDING</code> job is canceled after all dependency jobs are completed.
+ *         Therefore, it may take longer than expected to cancel a job in <code>PENDING</code>
+ *         status.</p>
+ *             <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch  attempts to
+ *         cancel all child jobs. The array parent job is canceled when all child jobs are
+ *         completed.</p>
+ *          </note>
  *          <p>Jobs that progressed to the <code>STARTING</code> or
  *         <code>RUNNING</code> state aren't canceled. However, the API operation still succeeds, even
  *       if no job is canceled. These jobs must be terminated with the <a>TerminateJob</a>

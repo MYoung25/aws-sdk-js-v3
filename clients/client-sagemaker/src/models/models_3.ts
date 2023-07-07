@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { SENSITIVE_STRING } from "@smithy/smithy-client";
 
 import {
   ActionSummary,
@@ -89,9 +89,8 @@ import {
   SourceAlgorithmSpecification,
   StudioLifecycleConfigAppType,
   TensorBoardOutputConfig,
-  TrialComponentArtifact,
-  TrialComponentParameterValue,
   TrialComponentStatus,
+  TtlDuration,
   UiTemplate,
 } from "./models_1";
 import {
@@ -107,7 +106,6 @@ import {
   EdgePackagingJobStatus,
   EdgePackagingJobSummary,
   EMRStepMetadata,
-  Endpoint,
   EndpointConfigSortKey,
   EndpointConfigSummary,
   EndpointOutputConfiguration,
@@ -115,20 +113,16 @@ import {
   EndpointStatus,
   EndpointSummary,
   ExecutionStatus,
-  Experiment,
   ExperimentSummary,
   FailStepMetadata,
-  FeatureGroup,
   FeatureGroupSortBy,
   FeatureGroupSortOrder,
   FeatureGroupStatus,
   FeatureGroupSummary,
-  FeatureMetadata,
   Filter,
   FlowDefinitionSummary,
-  HubContentInfo,
-  HubContentSortBy,
-  HubInfo,
+  HubContentStatus,
+  HubStatus,
   HyperParameterTrainingJobSummary,
   HyperParameterTuningJobCompletionDetails,
   HyperParameterTuningJobConsumedResources,
@@ -157,6 +151,7 @@ import {
   ProjectStatus,
   RecommendationJobStatus,
   RecommendationMetrics,
+  ResourceType,
   ScheduleStatus,
   SecondaryStatus,
   SecondaryStatusTransition,
@@ -167,7 +162,6 @@ import {
   TrainingJobStatus,
   TrainingJobStatusCounters,
   TransformJobStatus,
-  TrialComponentMetricSummary,
   TrialComponentSource,
   TrialSource,
   UserProfileStatus,
@@ -176,6 +170,205 @@ import {
   Workforce,
   Workteam,
 } from "./models_2";
+
+/**
+ * @public
+ * <p>Part of the <code>SuggestionQuery</code> type. Specifies a hint for retrieving property
+ *       names that begin with the specified text.</p>
+ */
+export interface PropertyNameQuery {
+  /**
+   * <p>Text that begins a property's name.</p>
+   */
+  PropertyNameHint: string | undefined;
+}
+
+/**
+ * @public
+ * <p>Specified in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_GetSearchSuggestions.html">GetSearchSuggestions</a> request.
+ *       Limits the property names that are included in the response.</p>
+ */
+export interface SuggestionQuery {
+  /**
+   * <p>Defines a property name hint. Only property
+   *       names that begin with the specified hint are included in the response.</p>
+   */
+  PropertyNameQuery?: PropertyNameQuery;
+}
+
+/**
+ * @public
+ */
+export interface GetSearchSuggestionsRequest {
+  /**
+   * <p>The name of the SageMaker resource to search for.</p>
+   */
+  Resource: ResourceType | string | undefined;
+
+  /**
+   * <p>Limits the property names that are included in the response.</p>
+   */
+  SuggestionQuery?: SuggestionQuery;
+}
+
+/**
+ * @public
+ * <p>A property name returned from a <code>GetSearchSuggestions</code> call that specifies
+ *       a value in the <code>PropertyNameQuery</code> field.</p>
+ */
+export interface PropertyNameSuggestion {
+  /**
+   * <p>A suggested property name based on what you entered in the search textbox in the SageMaker
+   *       console.</p>
+   */
+  PropertyName?: string;
+}
+
+/**
+ * @public
+ */
+export interface GetSearchSuggestionsResponse {
+  /**
+   * <p>A list of property names for a <code>Resource</code> that match a
+   *       <code>SuggestionQuery</code>.</p>
+   */
+  PropertyNameSuggestions?: PropertyNameSuggestion[];
+}
+
+/**
+ * @public
+ * <p>Specifies configuration details for a Git repository when the repository is
+ *             updated.</p>
+ */
+export interface GitConfigForUpdate {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that
+   *             contains the credentials used to access the git repository. The secret must have a
+   *             staging label of <code>AWSCURRENT</code> and must be in the following format:</p>
+   *          <p>
+   *             <code>\{"username": <i>UserName</i>, "password":
+   *                     <i>Password</i>\}</code>
+   *          </p>
+   */
+  SecretArn?: string;
+}
+
+/**
+ * @public
+ * <p>Information about hub content.</p>
+ */
+export interface HubContentInfo {
+  /**
+   * <p>The name of the hub content.</p>
+   */
+  HubContentName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the hub content.</p>
+   */
+  HubContentArn: string | undefined;
+
+  /**
+   * <p>The version of the hub content.</p>
+   */
+  HubContentVersion: string | undefined;
+
+  /**
+   * <p>The type of hub content.</p>
+   */
+  HubContentType: HubContentType | string | undefined;
+
+  /**
+   * <p>The version of the hub content document schema.</p>
+   */
+  DocumentSchemaVersion: string | undefined;
+
+  /**
+   * <p>The display name of the hub content.</p>
+   */
+  HubContentDisplayName?: string;
+
+  /**
+   * <p>A description of the hub content.</p>
+   */
+  HubContentDescription?: string;
+
+  /**
+   * <p>The searchable keywords for the hub content.</p>
+   */
+  HubContentSearchKeywords?: string[];
+
+  /**
+   * <p>The status of the hub content.</p>
+   */
+  HubContentStatus: HubContentStatus | string | undefined;
+
+  /**
+   * <p>The date and time that the hub content was created.</p>
+   */
+  CreationTime: Date | undefined;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const HubContentSortBy = {
+  CREATION_TIME: "CreationTime",
+  HUB_CONTENT_NAME: "HubContentName",
+  HUB_CONTENT_STATUS: "HubContentStatus",
+} as const;
+
+/**
+ * @public
+ */
+export type HubContentSortBy = (typeof HubContentSortBy)[keyof typeof HubContentSortBy];
+
+/**
+ * @public
+ * <p>Information about a hub.</p>
+ */
+export interface HubInfo {
+  /**
+   * <p>The name of the hub.</p>
+   */
+  HubName: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the hub.</p>
+   */
+  HubArn: string | undefined;
+
+  /**
+   * <p>The display name of the hub.</p>
+   */
+  HubDisplayName?: string;
+
+  /**
+   * <p>A description of the hub.</p>
+   */
+  HubDescription?: string;
+
+  /**
+   * <p>The searchable keywords for the hub.</p>
+   */
+  HubSearchKeywords?: string[];
+
+  /**
+   * <p>The status of the hub.</p>
+   */
+  HubStatus: HubStatus | string | undefined;
+
+  /**
+   * <p>The date and time that the hub was created.</p>
+   */
+  CreationTime: Date | undefined;
+
+  /**
+   * <p>The date and time that the hub was last modified.</p>
+   */
+  LastModifiedTime: Date | undefined;
+}
 
 /**
  * @public
@@ -7911,6 +8104,12 @@ export interface ModelCard {
    * <p>The risk rating of the model. Different organizations might have different criteria for model card risk ratings. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html">Risk ratings</a>.</p>
    */
   RiskRating?: string;
+
+  /**
+   * <p>The model package group that contains the model package. Only relevant for model cards created for model packages in the Amazon SageMaker Model Registry.
+   *       </p>
+   */
+  ModelPackageGroupName?: string;
 }
 
 /**
@@ -8587,6 +8786,19 @@ export interface NestedFilters {
    *       <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.</p>
    */
   Filters: Filter[] | undefined;
+}
+
+/**
+ * @public
+ * <p>Updates the feature group online store configuration.</p>
+ */
+export interface OnlineStoreConfigUpdate {
+  /**
+   * <p>Time to live duration, where the record is hard deleted after the expiration time is
+   *          reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For
+   *          information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+   */
+  TtlDuration?: TtlDuration;
 }
 
 /**
@@ -9836,339 +10048,9 @@ export interface TrialComponentSourceDetail {
 }
 
 /**
- * @public
- * <p>The properties of a trial component as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a>
- *       API.</p>
- */
-export interface TrialComponent {
-  /**
-   * <p>The name of the trial component.</p>
-   */
-  TrialComponentName?: string;
-
-  /**
-   * <p>The name of the component as displayed. If <code>DisplayName</code> isn't specified,
-   *         <code>TrialComponentName</code> is displayed.</p>
-   */
-  DisplayName?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the trial component.</p>
-   */
-  TrialComponentArn?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) and job type of the source of the component.</p>
-   */
-  Source?: TrialComponentSource;
-
-  /**
-   * <p>The status of the trial component.</p>
-   */
-  Status?: TrialComponentStatus;
-
-  /**
-   * <p>When the component started.</p>
-   */
-  StartTime?: Date;
-
-  /**
-   * <p>When the component ended.</p>
-   */
-  EndTime?: Date;
-
-  /**
-   * <p>When the component was created.</p>
-   */
-  CreationTime?: Date;
-
-  /**
-   * <p>Who created the trial component.</p>
-   */
-  CreatedBy?: UserContext;
-
-  /**
-   * <p>When the component was last modified.</p>
-   */
-  LastModifiedTime?: Date;
-
-  /**
-   * <p>Information about the user who created or modified an experiment, trial, trial
-   *       component, lineage group, project, or model card.</p>
-   */
-  LastModifiedBy?: UserContext;
-
-  /**
-   * <p>The hyperparameters of the component.</p>
-   */
-  Parameters?: Record<string, TrialComponentParameterValue>;
-
-  /**
-   * <p>The input artifacts of the component.</p>
-   */
-  InputArtifacts?: Record<string, TrialComponentArtifact>;
-
-  /**
-   * <p>The output artifacts of the component.</p>
-   */
-  OutputArtifacts?: Record<string, TrialComponentArtifact>;
-
-  /**
-   * <p>The metrics for the component.</p>
-   */
-  Metrics?: TrialComponentMetricSummary[];
-
-  /**
-   * <p>Metadata properties of the tracking entity, trial, or trial component.</p>
-   */
-  MetadataProperties?: MetadataProperties;
-
-  /**
-   * <p>Details of the source of the component.</p>
-   */
-  SourceDetail?: TrialComponentSourceDetail;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the lineage group resource.</p>
-   */
-  LineageGroupArn?: string;
-
-  /**
-   * <p>The list of tags that are associated with the component. You can use <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API to search on the tags.</p>
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>An array of the parents of the component. A parent is a trial the component is associated
-   *       with and the experiment the trial is part of. A component might not have any parents.</p>
-   */
-  Parents?: Parent[];
-
-  /**
-   * <p>The name of the experiment run.</p>
-   */
-  RunName?: string;
-}
-
-/**
- * @public
- * <p>A single resource returned as part of the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API response.</p>
- */
-export interface SearchRecord {
-  /**
-   * <p>The properties of a training job.</p>
-   */
-  TrainingJob?: TrainingJob;
-
-  /**
-   * <p>The properties of an experiment.</p>
-   */
-  Experiment?: Experiment;
-
-  /**
-   * <p>The properties of a trial.</p>
-   */
-  Trial?: Trial;
-
-  /**
-   * <p>The properties of a trial component.</p>
-   */
-  TrialComponent?: TrialComponent;
-
-  /**
-   * <p>A hosted endpoint for real-time inference.</p>
-   */
-  Endpoint?: Endpoint;
-
-  /**
-   * <p>A versioned model that can be deployed for SageMaker inference.</p>
-   */
-  ModelPackage?: ModelPackage;
-
-  /**
-   * <p>A group of versioned models in the model registry.</p>
-   */
-  ModelPackageGroup?: ModelPackageGroup;
-
-  /**
-   * <p>A SageMaker Model Building Pipeline instance.</p>
-   */
-  Pipeline?: Pipeline;
-
-  /**
-   * <p>An execution of a pipeline.</p>
-   */
-  PipelineExecution?: PipelineExecution;
-
-  /**
-   * <p>Amazon SageMaker Feature Store stores features in a collection called Feature Group.
-   *          A Feature Group can be visualized as a table which has rows,
-   *          with a unique identifier for each row where each column in the table is a feature.
-   *          In principle, a Feature Group is composed of features and values per features.</p>
-   */
-  FeatureGroup?: FeatureGroup;
-
-  /**
-   * <p>The properties of a project.</p>
-   */
-  Project?: Project;
-
-  /**
-   * <p>The feature metadata used to search through the features.</p>
-   */
-  FeatureMetadata?: FeatureMetadata;
-
-  /**
-   * <p>The properties of a hyperparameter tuning job.</p>
-   */
-  HyperParameterTuningJob?: HyperParameterTuningJobSearchEntity;
-
-  /**
-   * <p>A model displayed in the Amazon SageMaker Model Dashboard.</p>
-   */
-  Model?: ModelDashboardModel;
-
-  /**
-   * <p>An Amazon SageMaker Model Card that documents details about a machine learning model.</p>
-   */
-  ModelCard?: ModelCard;
-}
-
-/**
- * @public
- */
-export interface SearchResponse {
-  /**
-   * <p>A list of <code>SearchRecord</code> objects.</p>
-   */
-  Results?: SearchRecord[];
-
-  /**
-   * <p>If the result of the previous <code>Search</code> request was truncated, the response
-   *       includes a NextToken. To retrieve the next set of results, use the token in the next
-   *       request.</p>
-   */
-  NextToken?: string;
-}
-
-/**
- * @public
- */
-export interface SendPipelineExecutionStepFailureRequest {
-  /**
-   * <p>The pipeline generated token from the Amazon SQS queue.</p>
-   */
-  CallbackToken: string | undefined;
-
-  /**
-   * <p>A message describing why the step failed.</p>
-   */
-  FailureReason?: string;
-
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *          operation. An idempotent operation completes no more than one time.</p>
-   */
-  ClientRequestToken?: string;
-}
-
-/**
- * @public
- */
-export interface SendPipelineExecutionStepFailureResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
-   */
-  PipelineExecutionArn?: string;
-}
-
-/**
- * @public
- */
-export interface SendPipelineExecutionStepSuccessRequest {
-  /**
-   * <p>The pipeline generated token from the Amazon SQS queue.</p>
-   */
-  CallbackToken: string | undefined;
-
-  /**
-   * <p>A list of the output parameters of the callback step.</p>
-   */
-  OutputParameters?: OutputParameter[];
-
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *          operation. An idempotent operation completes no more than one time.</p>
-   */
-  ClientRequestToken?: string;
-}
-
-/**
- * @public
- */
-export interface SendPipelineExecutionStepSuccessResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the pipeline execution.</p>
-   */
-  PipelineExecutionArn?: string;
-}
-
-/**
- * @public
- */
-export interface StartEdgeDeploymentStageRequest {
-  /**
-   * <p>The name of the edge deployment plan to start.</p>
-   */
-  EdgeDeploymentPlanName: string | undefined;
-
-  /**
-   * <p>The name of the stage to start.</p>
-   */
-  StageName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface StartInferenceExperimentRequest {
-  /**
-   * <p>The name of the inference experiment to start.</p>
-   */
-  Name: string | undefined;
-}
-
-/**
- * @public
- */
-export interface StartInferenceExperimentResponse {
-  /**
-   * <p>The ARN of the started inference experiment to start.</p>
-   */
-  InferenceExperimentArn: string | undefined;
-}
-
-/**
  * @internal
  */
 export const ModelCardFilterSensitiveLog = (obj: ModelCard): any => ({
   ...obj,
   ...(obj.Content && { Content: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const SearchRecordFilterSensitiveLog = (obj: SearchRecord): any => ({
-  ...obj,
-  ...(obj.TrialComponent && { TrialComponent: obj.TrialComponent }),
-  ...(obj.ModelCard && { ModelCard: ModelCardFilterSensitiveLog(obj.ModelCard) }),
-});
-
-/**
- * @internal
- */
-export const SearchResponseFilterSensitiveLog = (obj: SearchResponse): any => ({
-  ...obj,
-  ...(obj.Results && { Results: obj.Results.map((item) => SearchRecordFilterSensitiveLog(item)) }),
 });

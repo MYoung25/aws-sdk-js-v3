@@ -42,7 +42,7 @@ dependencies {
     api("software.amazon.smithy:smithy-protocol-test-traits:$smithyVersion")
     api("software.amazon.smithy:smithy-model:$smithyVersion")
     api("software.amazon.smithy:smithy-rules-engine:$smithyVersion")
-    api("software.amazon.smithy.typescript:smithy-typescript-codegen:0.15.0")
+    api("software.amazon.smithy.typescript:smithy-typescript-codegen:0.17.0")
 }
 
 tasks.register("set-aws-sdk-versions") {
@@ -57,7 +57,10 @@ tasks.register("set-aws-sdk-versions") {
                 var packageJson = Node.parse(packageJsonFile.readText()).expectObjectNode()
                 var packageName = packageJson.expectStringMember("name").getValue()
                 var packageVersion = packageJson.expectStringMember("version").getValue()
-                versionsFile.appendText("$packageName=$packageVersion\n")
+                var isPrivate = packageJson.getBooleanMemberOrDefault("private", false)
+                if (!isPrivate) {
+                    versionsFile.appendText("$packageName=$packageVersion\n")
+                }
             }
         }
     }

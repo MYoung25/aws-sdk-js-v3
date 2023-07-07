@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import {
   ActivityStreamMode,
@@ -4951,6 +4951,55 @@ export interface ModifyDBInstanceMessage {
   Domain?: string;
 
   /**
+   * <p>The fully qualified domain name (FQDN) of an Active Directory domain.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code>
+   *          </p>
+   */
+  DomainFqdn?: string;
+
+  /**
+   * <p>The Active Directory organizational unit for your DB instance to join.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Must be in the distinguished name format.</p>
+   *             </li>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code>
+   *          </p>
+   */
+  DomainOu?: string;
+
+  /**
+   * <p>The ARN for the Secrets Manager secret with the credentials for the user joining the domain.</p>
+   *          <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code>
+   *          </p>
+   */
+  DomainAuthSecretArn?: string;
+
+  /**
+   * <p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Two IP addresses must be provided.  If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>123.124.125.126,234.235.236.237</code>
+   *          </p>
+   */
+  DomainDnsIps?: string[];
+
+  /**
    * <p>Specifies whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags aren't copied.</p>
    *          <p>This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this
    *           value for an Aurora DB instance has no effect on the DB cluster setting. For more
@@ -5052,6 +5101,11 @@ export interface ModifyDBInstanceMessage {
    *          <p>This setting doesn't apply to RDS Custom DB instances.</p>
    */
   DomainIAMRoleName?: string;
+
+  /**
+   * <p>Specifies whether to remove the DB instance from the Active Directory domain.</p>
+   */
+  DisableDomain?: boolean;
 
   /**
    * <p>The order of priority in which an Aurora Replica is promoted to the primary instance
@@ -8129,6 +8183,56 @@ export interface RestoreDBInstanceFromDBSnapshotMessage {
   Domain?: string;
 
   /**
+   * <p>The fully qualified domain name (FQDN) of an Active Directory domain.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code>
+   *          </p>
+   */
+  DomainFqdn?: string;
+
+  /**
+   * <p>The Active Directory organizational unit for your DB instance to join.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Must be in the distinguished name format.</p>
+   *             </li>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code>
+   *          </p>
+   */
+  DomainOu?: string;
+
+  /**
+   * <p>The ARN for the Secrets Manager secret with the credentials for the user joining the domain.</p>
+   *          <p>Constraints:</p>
+   *          <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code>
+   *          </p>
+   */
+  DomainAuthSecretArn?: string;
+
+  /**
+   * <p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Two IP addresses must be provided.  If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>123.124.125.126,234.235.236.237</code>
+   *          </p>
+   */
+  DomainDnsIps?: string[];
+
+  /**
    * <p>A value that indicates whether to copy all tags from the restored DB instance to snapshots of the DB instance.</p>
    *          <p>In most cases, tags aren't copied by default. However, when you restore a DB instance from a DB snapshot, RDS checks whether you
    *           specify new tags. If yes, the new tags are added to the restored DB instance. If there are no new tags, RDS looks for the tags from
@@ -8139,8 +8243,8 @@ export interface RestoreDBInstanceFromDBSnapshotMessage {
   CopyTagsToSnapshot?: boolean;
 
   /**
-   * <p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>
-   *          <p>This setting doesn't apply to RDS Custom.</p>
+   * <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
+   *          <p>This setting doesn't apply to RDS Custom DB instances.</p>
    */
   DomainIAMRoleName?: string;
 
@@ -9168,10 +9272,65 @@ export interface RestoreDBInstanceToPointInTimeMessage {
   Domain?: string;
 
   /**
-   * <p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>
-   *          <p>This setting doesn't apply to RDS Custom.</p>
+   * <p>The name of the IAM role to use when making API calls to the Directory Service.</p>
+   *          <p>This setting doesn't apply to RDS Custom DB instances.</p>
    */
   DomainIAMRoleName?: string;
+
+  /**
+   * <p>The fully qualified domain name (FQDN) of an Active Directory domain.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code>
+   *          </p>
+   */
+  DomainFqdn?: string;
+
+  /**
+   * <p>The Active Directory organizational unit for your DB instance to join.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Must be in the distinguished name format.</p>
+   *             </li>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code>
+   *          </p>
+   */
+  DomainOu?: string;
+
+  /**
+   * <p>The ARN for the Secrets Manager secret with the credentials for the user joining the domain.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Can't be longer than 64 characters.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code>
+   *          </p>
+   */
+  DomainAuthSecretArn?: string;
+
+  /**
+   * <p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Two IP addresses must be provided.  If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p>
+   *             </li>
+   *          </ul>
+   *          <p>Example: <code>123.124.125.126,234.235.236.237</code>
+   *          </p>
+   */
+  DomainDnsIps?: string[];
 
   /**
    * <p>A value that indicates whether to enable mapping of Amazon Web Services Identity and Access Management

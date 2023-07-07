@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { GlueServiceException as __BaseException } from "./GlueServiceException";
 import {
@@ -22,6 +22,7 @@ import {
   FederatedDatabase,
   GlueTable,
   JobRun,
+  MLUserDataEncryption,
   Partition,
   PartitionInput,
   PartitionValueList,
@@ -31,13 +32,29 @@ import {
   SchemaId,
   StorageDescriptor,
   TaskStatusType,
-  TransformEncryption,
   TransformParameters,
   TransformType,
   Trigger,
   TriggerType,
   WorkerType,
 } from "./models_0";
+
+/**
+ * @public
+ * <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
+ *          <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>
+ */
+export interface TransformEncryption {
+  /**
+   * <p>An <code>MLUserDataEncryption</code> object containing the encryption mode and customer-provided KMS key ID.</p>
+   */
+  MlUserDataEncryption?: MLUserDataEncryption;
+
+  /**
+   * <p>The name of the security configuration.</p>
+   */
+  TaskRunSecurityConfigurationName?: string;
+}
 
 /**
  * @public
@@ -1002,6 +1019,46 @@ export interface CreateSessionResponse {
 
 /**
  * @public
+ * @enum
+ */
+export const MetadataOperation = {
+  CREATE: "CREATE",
+} as const;
+
+/**
+ * @public
+ */
+export type MetadataOperation = (typeof MetadataOperation)[keyof typeof MetadataOperation];
+
+/**
+ * @public
+ * <p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>
+ */
+export interface IcebergInput {
+  /**
+   * <p>A required metadata operation. Can only be set to <code>CREATE</code>.</p>
+   */
+  MetadataOperation: MetadataOperation | string | undefined;
+
+  /**
+   * <p>The table version for the Iceberg table. Defaults to 2.</p>
+   */
+  Version?: string;
+}
+
+/**
+ * @public
+ * <p>A structure representing an open format table.</p>
+ */
+export interface OpenTableFormatInput {
+  /**
+   * <p>Specifies an <code>IcebergInput</code> structure that defines an Apache Iceberg metadata table.</p>
+   */
+  IcebergInput?: IcebergInput;
+}
+
+/**
+ * @public
  * <p>A structure that describes a target table for resource linking.</p>
  */
 export interface TableIdentifier {
@@ -1153,6 +1210,11 @@ export interface CreateTableRequest {
    * <p>The ID of the transaction.</p>
    */
   TransactionId?: string;
+
+  /**
+   * <p>Specifies an <code>OpenTableFormatInput</code> structure when creating an open format table.</p>
+   */
+  OpenTableFormatInput?: OpenTableFormatInput;
 }
 
 /**
@@ -7151,114 +7213,4 @@ export interface GetUnfilteredTableMetadataRequest {
    * <p>(Required) A list of supported permission types. </p>
    */
   SupportedPermissionTypes: (PermissionType | string)[] | undefined;
-}
-
-/**
- * @public
- * <p>A filter that uses both column-level and row-level filtering.</p>
- */
-export interface ColumnRowFilter {
-  /**
-   * <p>A string containing the name of the column.</p>
-   */
-  ColumnName?: string;
-
-  /**
-   * <p>A string containing the row-level filter expression.</p>
-   */
-  RowFilterExpression?: string;
-}
-
-/**
- * @public
- */
-export interface GetUnfilteredTableMetadataResponse {
-  /**
-   * <p>A Table object containing the table metadata.</p>
-   */
-  Table?: Table;
-
-  /**
-   * <p>A list of column names that the user has been granted access to.</p>
-   */
-  AuthorizedColumns?: string[];
-
-  /**
-   * <p>A Boolean value that indicates whether the partition location is registered
-   *           with Lake Formation.</p>
-   */
-  IsRegisteredWithLakeFormation?: boolean;
-
-  /**
-   * <p>A list of column row filters.</p>
-   */
-  CellFilters?: ColumnRowFilter[];
-}
-
-/**
- * @public
- */
-export interface GetUserDefinedFunctionRequest {
-  /**
-   * <p>The ID of the Data Catalog where the function to be retrieved is located. If none is
-   *       provided, the Amazon Web Services account ID is used by default.</p>
-   */
-  CatalogId?: string;
-
-  /**
-   * <p>The name of the catalog database where the function is located.</p>
-   */
-  DatabaseName: string | undefined;
-
-  /**
-   * <p>The name of the function.</p>
-   */
-  FunctionName: string | undefined;
-}
-
-/**
- * @public
- * <p>Represents the equivalent of a Hive user-defined function
- *       (<code>UDF</code>) definition.</p>
- */
-export interface UserDefinedFunction {
-  /**
-   * <p>The name of the function.</p>
-   */
-  FunctionName?: string;
-
-  /**
-   * <p>The name of the catalog database that contains the function.</p>
-   */
-  DatabaseName?: string;
-
-  /**
-   * <p>The Java class that contains the function code.</p>
-   */
-  ClassName?: string;
-
-  /**
-   * <p>The owner of the function.</p>
-   */
-  OwnerName?: string;
-
-  /**
-   * <p>The owner type.</p>
-   */
-  OwnerType?: PrincipalType | string;
-
-  /**
-   * <p>The time at which the function was created.</p>
-   */
-  CreateTime?: Date;
-
-  /**
-   * <p>The resource URIs for the function.</p>
-   */
-  ResourceUris?: ResourceUri[];
-
-  /**
-   * <p>The ID of the Data Catalog in which the function resides.</p>
-   */
-  CatalogId?: string;
 }

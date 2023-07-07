@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -15,10 +16,13 @@ import {
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { v4 as generateIdempotencyToken } from "uuid";
 
 import {
@@ -146,6 +150,7 @@ import {
   BatchExecuteStatementOutput,
   BatchGetItemInput,
   BatchGetItemOutput,
+  BatchStatementError,
   BatchStatementRequest,
   BatchStatementResponse,
   BatchWriteItemInput,
@@ -4008,7 +4013,7 @@ const de_ConditionalCheckFailedExceptionRes = async (
   context: __SerdeContext
 ): Promise<ConditionalCheckFailedException> => {
   const body = parsedOutput.body;
-  const deserialized: any = _json(body);
+  const deserialized: any = de_ConditionalCheckFailedException(body, context);
   const exception = new ConditionalCheckFailedException({
     $metadata: deserializeMetadata(parsedOutput),
     ...deserialized,
@@ -4612,6 +4617,7 @@ const se_BatchStatementRequest = (input: BatchStatementRequest, context: __Serde
   return take(input, {
     ConsistentRead: [],
     Parameters: (_) => se_PreparedStatementParameters(_, context),
+    ReturnValuesOnConditionCheckFailure: [],
     Statement: [],
   });
 };
@@ -4723,6 +4729,7 @@ const se_DeleteItemInput = (input: DeleteItemInput, context: __SerdeContext): an
     ReturnConsumedCapacity: [],
     ReturnItemCollectionMetrics: [],
     ReturnValues: [],
+    ReturnValuesOnConditionCheckFailure: [],
     TableName: [],
   });
 };
@@ -4778,6 +4785,7 @@ const se_ExecuteStatementInput = (input: ExecuteStatementInput, context: __Serde
     NextToken: [],
     Parameters: (_) => se_PreparedStatementParameters(_, context),
     ReturnConsumedCapacity: [],
+    ReturnValuesOnConditionCheckFailure: [],
     Statement: [],
   });
 };
@@ -5089,6 +5097,7 @@ const se_MapAttributeValue = (input: Record<string, AttributeValue>, context: __
 const se_ParameterizedStatement = (input: ParameterizedStatement, context: __SerdeContext): any => {
   return take(input, {
     Parameters: (_) => se_PreparedStatementParameters(_, context),
+    ReturnValuesOnConditionCheckFailure: [],
     Statement: [],
   });
 };
@@ -5162,6 +5171,7 @@ const se_PutItemInput = (input: PutItemInput, context: __SerdeContext): any => {
     ReturnConsumedCapacity: [],
     ReturnItemCollectionMetrics: [],
     ReturnValues: [],
+    ReturnValuesOnConditionCheckFailure: [],
     TableName: [],
   });
 };
@@ -5514,6 +5524,7 @@ const se_UpdateItemInput = (input: UpdateItemInput, context: __SerdeContext): an
     ReturnConsumedCapacity: [],
     ReturnItemCollectionMetrics: [],
     ReturnValues: [],
+    ReturnValuesOnConditionCheckFailure: [],
     TableName: [],
     UpdateExpression: [],
   });
@@ -5804,14 +5815,23 @@ const de_BatchGetResponseMap = (
   );
 };
 
-// de_BatchStatementError omitted.
+/**
+ * deserializeAws_json1_0BatchStatementError
+ */
+const de_BatchStatementError = (output: any, context: __SerdeContext): BatchStatementError => {
+  return take(output, {
+    Code: __expectString,
+    Item: (_: any) => de_AttributeMap(_, context),
+    Message: __expectString,
+  }) as any;
+};
 
 /**
  * deserializeAws_json1_0BatchStatementResponse
  */
 const de_BatchStatementResponse = (output: any, context: __SerdeContext): BatchStatementResponse => {
   return take(output, {
-    Error: _json,
+    Error: (_: any) => de_BatchStatementError(_, context),
     Item: (_: any) => de_AttributeMap(_, context),
     TableName: __expectString,
   }) as any;
@@ -5897,7 +5917,15 @@ const de_Capacity = (output: any, context: __SerdeContext): Capacity => {
   }) as any;
 };
 
-// de_ConditionalCheckFailedException omitted.
+/**
+ * deserializeAws_json1_0ConditionalCheckFailedException
+ */
+const de_ConditionalCheckFailedException = (output: any, context: __SerdeContext): ConditionalCheckFailedException => {
+  return take(output, {
+    Item: (_: any) => de_AttributeMap(_, context),
+    message: __expectString,
+  }) as any;
+};
 
 /**
  * deserializeAws_json1_0ConsumedCapacity

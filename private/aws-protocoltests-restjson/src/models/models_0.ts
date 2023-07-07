@@ -2,8 +2,8 @@
 import {
   ExceptionOptionType as __ExceptionOptionType,
   LazyJsonString as __LazyJsonString,
-} from "@aws-sdk/smithy-client";
-import { DocumentType as __DocumentType } from "@aws-sdk/types";
+} from "@smithy/smithy-client";
+import { DocumentType as __DocumentType } from "@smithy/types";
 import { Readable } from "stream";
 
 import { RestJsonProtocolServiceException as __BaseException } from "./RestJsonProtocolServiceException";
@@ -1147,6 +1147,14 @@ export interface PostUnionWithJsonNameInput {
  */
 export interface PostUnionWithJsonNameOutput {
   value: UnionWithJsonName | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
 }
 
 /**

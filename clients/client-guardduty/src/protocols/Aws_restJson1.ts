@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -17,10 +18,12 @@ import {
   resolvedPath as __resolvedPath,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { v4 as generateIdempotencyToken } from "uuid";
 
 import {
@@ -7287,6 +7290,7 @@ const de_KubernetesDetails = (output: any, context: __SerdeContext): KubernetesD
 const de_KubernetesUserDetails = (output: any, context: __SerdeContext): KubernetesUserDetails => {
   return take(output, {
     Groups: [, _json, `groups`],
+    SessionName: [, _json, `sessionName`],
     Uid: [, __expectString, `uid`],
     Username: [, __expectString, `username`],
   }) as any;
@@ -8309,6 +8313,8 @@ const de_ServiceAdditionalInfo = (output: any, context: __SerdeContext): Service
     Value: [, __expectString, `value`],
   }) as any;
 };
+
+// de_SessionNameList omitted.
 
 // de_SourceIps omitted.
 

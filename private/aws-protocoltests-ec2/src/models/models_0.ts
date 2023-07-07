@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { EC2ProtocolServiceException as __BaseException } from "./EC2ProtocolServiceException";
 
@@ -106,6 +106,14 @@ export interface IgnoresWrappingXmlNameOutput {
  * @public
  */
 export interface NoInputAndOutputOutput {}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
+}
 
 /**
  * @public

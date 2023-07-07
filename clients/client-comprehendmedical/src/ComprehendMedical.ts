@@ -1,6 +1,6 @@
 // smithy-typescript generated code
-import { createAggregatedClient } from "@aws-sdk/smithy-client";
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/smithy-client";
+import { HttpHandlerOptions as __HttpHandlerOptions } from "@smithy/types";
 
 import {
   DescribeEntitiesDetectionV2JobCommand,
@@ -574,8 +574,7 @@ export interface ComprehendMedical {
 
 /**
  * @public
- * <p> Comprehend Medical; extracts structured information from unstructured clinical text. Use these actions
- *       to gain insight in your documents. </p>
+ * <p>Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. Amazon Comprehend Medical only detects entities in English language texts. Amazon Comprehend Medical places limits on the sizes of files allowed for different API operations. To learn more, see <a href="https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html">Guidelines and quotas</a> in the <i>Amazon Comprehend Medical Developer Guide</i>.</p>
  */
 export class ComprehendMedical extends ComprehendMedicalClient implements ComprehendMedical {}
 createAggregatedClient(commands, ComprehendMedical);

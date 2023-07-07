@@ -1,5 +1,10 @@
 // smithy-typescript generated code
 import {
+  HttpRequest as __HttpRequest,
+  HttpResponse as __HttpResponse,
+  isValidHostname as __isValidHostname,
+} from "@smithy/protocol-http";
+import {
   collectBody,
   decorateServiceException as __decorateServiceException,
   expectNonNull as __expectNonNull,
@@ -18,14 +23,13 @@ import {
   strictParseLong as __strictParseLong,
   strictParseShort as __strictParseShort,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
+} from "@smithy/smithy-client";
 import {
-  HttpRequest as __HttpRequest,
-  HttpResponse as __HttpResponse,
-  isValidHostname as __isValidHostname,
-} from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { XMLParser } from "fast-xml-parser";
 import { v4 as generateIdempotencyToken } from "uuid";
 
@@ -61,6 +65,10 @@ import {
 import { NestedStructuresCommandInput, NestedStructuresCommandOutput } from "../commands/NestedStructuresCommand";
 import { NoInputAndNoOutputCommandInput, NoInputAndNoOutputCommandOutput } from "../commands/NoInputAndNoOutputCommand";
 import { NoInputAndOutputCommandInput, NoInputAndOutputCommandOutput } from "../commands/NoInputAndOutputCommand";
+import {
+  PutWithContentEncodingCommandInput,
+  PutWithContentEncodingCommandOutput,
+} from "../commands/PutWithContentEncodingCommand";
 import {
   QueryIdempotencyTokenAutoFillCommandInput,
   QueryIdempotencyTokenAutoFillCommandOutput,
@@ -108,6 +116,7 @@ import {
   NestedStructWithMap,
   NoInputAndOutputInput,
   NoInputAndOutputOutput,
+  PutWithContentEncodingInput,
   QueryIdempotencyTokenAutoFillInput,
   QueryListsInput,
   QueryMapsInput,
@@ -362,6 +371,23 @@ export const se_NoInputAndOutputCommand = async (
   body = buildFormUrlencodedString({
     ...se_NoInputAndOutputInput(input, context),
     Action: "NoInputAndOutput",
+    Version: "2020-01-08",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+/**
+ * serializeAws_queryPutWithContentEncodingCommand
+ */
+export const se_PutWithContentEncodingCommand = async (
+  input: PutWithContentEncodingCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = SHARED_HEADERS;
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...se_PutWithContentEncodingInput(input, context),
+    Action: "PutWithContentEncoding",
     Version: "2020-01-08",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -1191,6 +1217,43 @@ const de_NoInputAndOutputCommandError = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<NoInputAndOutputCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseErrorBody(output.body, context),
+  };
+  const errorCode = loadQueryErrorCode(output, parsedOutput.body);
+  const parsedBody = parsedOutput.body;
+  return throwDefaultError({
+    output,
+    parsedBody: parsedBody.Error,
+    errorCode,
+  });
+};
+
+/**
+ * deserializeAws_queryPutWithContentEncodingCommand
+ */
+export const de_PutWithContentEncodingCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<PutWithContentEncodingCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return de_PutWithContentEncodingCommandError(output, context);
+  }
+  await collectBody(output.body, context);
+  const response: PutWithContentEncodingCommandOutput = {
+    $metadata: deserializeMetadata(output),
+  };
+  return response;
+};
+
+/**
+ * deserializeAws_queryPutWithContentEncodingCommandError
+ */
+const de_PutWithContentEncodingCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<PutWithContentEncodingCommandOutput> => {
   const parsedOutput: any = {
     ...output,
     body: await parseErrorBody(output.body, context),
@@ -2090,6 +2153,20 @@ const se_NestedStructWithMap = (input: NestedStructWithMap, context: __SerdeCont
  */
 const se_NoInputAndOutputInput = (input: NoInputAndOutputInput, context: __SerdeContext): any => {
   const entries: any = {};
+  return entries;
+};
+
+/**
+ * serializeAws_queryPutWithContentEncodingInput
+ */
+const se_PutWithContentEncodingInput = (input: PutWithContentEncodingInput, context: __SerdeContext): any => {
+  const entries: any = {};
+  if (input.encoding != null) {
+    entries["encoding"] = input.encoding;
+  }
+  if (input.data != null) {
+    entries["data"] = input.data;
+  }
   return entries;
 };
 

@@ -1,7 +1,7 @@
 import { HeadObjectCommand, S3, S3Client, S3ServiceException } from "@aws-sdk/client-s3";
-import { HttpResponse } from "@aws-sdk/protocol-http";
-import { RequestHandlerOutput } from "@aws-sdk/types";
-import { ConfiguredRetryStrategy, StandardRetryStrategy } from "@aws-sdk/util-retry";
+import { HttpResponse } from "@smithy/protocol-http";
+import { RequestHandlerOutput } from "@smithy/types";
+import { ConfiguredRetryStrategy, StandardRetryStrategy } from "@smithy/util-retry";
 import { Readable } from "stream";
 
 class MockRequestHandler {
@@ -89,7 +89,7 @@ describe("util-retry integration tests", () => {
     } catch (error) {
       expect(error).toStrictEqual(expectedException);
       expect(error.$metadata.httpStatusCode).toBe(429);
-      expect(error.$metadata.attempts).toBe(4);
+      expect(error.$metadata.attempts).toBe(3);
       expect(error.$metadata.totalRetryDelay).toBeGreaterThan(0);
     }
   });
@@ -97,13 +97,15 @@ describe("util-retry integration tests", () => {
   it("should use a shared capacity for retries", async () => {
     const expectedInitialCapacity = 500;
     const expectedDrainPerAttempt = 5;
-    const expectedRetryAttemptsPerRequest = 7;
+    const expectedRetryAttemptsPerRequest = 6;
+    // Set maxAttempts to one more than the number of retries (initial request + retries)
+    const maxAttempts = 7;
     const delayPerRetry = 1;
     const expectedRequests = 4;
     const expectedRemainingCapacity =
       expectedInitialCapacity - expectedDrainPerAttempt * expectedRetryAttemptsPerRequest * expectedRequests;
 
-    const retryStrategy = new ConfiguredRetryStrategy(expectedRetryAttemptsPerRequest, delayPerRetry);
+    const retryStrategy = new ConfiguredRetryStrategy(maxAttempts, delayPerRetry);
     const s3 = new S3({
       requestHandler: new MockRequestHandler(),
       retryStrategy,

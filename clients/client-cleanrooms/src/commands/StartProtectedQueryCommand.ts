@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { CleanRoomsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CleanRoomsClient";
 import {
@@ -41,7 +41,7 @@ export interface StartProtectedQueryCommandOutput extends StartProtectedQueryOut
 
 /**
  * @public
- * <p>Creates a protected query that is started by AWS Clean Rooms.</p>
+ * <p>Creates a protected query that is started by Clean Rooms .</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
@@ -52,7 +52,7 @@ export interface StartProtectedQueryCommandOutput extends StartProtectedQueryOut
  *   type: "STRING_VALUE", // required
  *   membershipIdentifier: "STRING_VALUE", // required
  *   sqlParameters: { // ProtectedQuerySQLParameters
- *     queryString: "STRING_VALUE", // required
+ *     queryString: "STRING_VALUE",
  *   },
  *   resultConfiguration: { // ProtectedQueryResultConfiguration
  *     outputConfiguration: { // ProtectedQueryOutputConfiguration Union: only one key present
@@ -73,7 +73,7 @@ export interface StartProtectedQueryCommandOutput extends StartProtectedQueryOut
  * //     membershipArn: "STRING_VALUE", // required
  * //     createTime: new Date("TIMESTAMP"), // required
  * //     sqlParameters: { // ProtectedQuerySQLParameters
- * //       queryString: "STRING_VALUE", // required
+ * //       queryString: "STRING_VALUE",
  * //     },
  * //     status: "STRING_VALUE", // required
  * //     resultConfiguration: { // ProtectedQueryResultConfiguration

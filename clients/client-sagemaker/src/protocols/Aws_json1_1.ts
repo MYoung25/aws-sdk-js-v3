@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -17,10 +18,13 @@ import {
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { v4 as generateIdempotencyToken } from "uuid";
 
 import { AddAssociationCommandInput, AddAssociationCommandOutput } from "../commands/AddAssociationCommand";
@@ -787,6 +791,7 @@ import {
   AddAssociationRequest,
   AdditionalInferenceSpecificationDefinition,
   AddTagsInput,
+  AggregationTransformationValue,
   Alarm,
   AlgorithmSpecification,
   AlgorithmSummary,
@@ -939,18 +944,18 @@ import {
   ResourceNotFound,
   ResourceSpec,
   RSessionAppSettings,
-  RStudioServerProAppSettings,
   S3DataSource,
   S3ModelDataSource,
-  SharingSettings,
   ShuffleConfig,
   StoppingCondition,
   TabularJobConfig,
   Tag,
   TargetPlatform,
-  TensorBoardAppSettings,
   TextClassificationJobConfig,
+  TimeSeriesConfig,
+  TimeSeriesForecastingJobConfig,
   TimeSeriesForecastingSettings,
+  TimeSeriesTransformations,
   TrafficRoutingConfig,
   TrainingImageConfig,
   TrainingInputMode,
@@ -965,7 +970,6 @@ import {
   TransformOutput,
   TransformResources,
   TransformS3DataSource,
-  UserSettings,
   VpcConfig,
 } from "../models/models_0";
 import {
@@ -1039,11 +1043,6 @@ import {
   DeleteHubContentRequest,
   DeleteHubRequest,
   DeleteHumanTaskUiRequest,
-  DeleteImageRequest,
-  DeleteImageVersionRequest,
-  DeleteInferenceExperimentRequest,
-  DeleteModelBiasJobDefinitionRequest,
-  DeleteModelInput,
   DeploymentConfig,
   DeploymentStage,
   DeviceSelectionConfig,
@@ -1162,30 +1161,41 @@ import {
   ResourceLimits,
   RetentionPolicy,
   RetryStrategy,
+  RollingUpdatePolicy,
+  RStudioServerProAppSettings,
   RStudioServerProDomainSettings,
   S3StorageConfig,
   ScheduleConfig,
   ServiceCatalogProvisioningDetails,
   ShadowModeConfig,
   ShadowModelVariantConfig,
+  SharingSettings,
   SourceAlgorithm,
   SourceAlgorithmSpecification,
   SourceIpConfig,
   SpaceSettings,
+  TensorBoardAppSettings,
   TensorBoardOutputConfig,
   TrafficPattern,
   TrialComponentArtifact,
   TrialComponentParameterValue,
   TrialComponentStatus,
+  TtlDuration,
   TuningJobCompletionCriteria,
   UiConfig,
   UiTemplate,
   USD,
+  UserSettings,
   WorkforceVpcConfigRequest,
 } from "../models/models_1";
 import {
+  DeleteImageRequest,
+  DeleteImageVersionRequest,
+  DeleteInferenceExperimentRequest,
+  DeleteModelBiasJobDefinitionRequest,
   DeleteModelCardRequest,
   DeleteModelExplainabilityJobDefinitionRequest,
+  DeleteModelInput,
   DeleteModelPackageGroupInput,
   DeleteModelPackageGroupPolicyInput,
   DeleteModelPackageInput,
@@ -1352,10 +1362,6 @@ import {
   GetLineageGroupPolicyRequest,
   GetModelPackageGroupPolicyInput,
   GetSagemakerServicecatalogPortfolioStatusInput,
-  GetSearchSuggestionsRequest,
-  GitConfigForUpdate,
-  HubContentInfo,
-  HubInfo,
   HyperParameterTrainingJobSummary,
   HyperParameterTuningJobCompletionDetails,
   InferenceRecommendation,
@@ -1368,18 +1374,20 @@ import {
   ProductionVariantStatus,
   ProductionVariantSummary,
   ProfilerRuleEvaluationStatus,
-  PropertyNameQuery,
   RecommendationMetrics,
   RStudioServerProDomainSettingsForUpdate,
   SecondaryStatusTransition,
   SelectedStep,
   SelectiveExecutionConfig,
-  SuggestionQuery,
   TrialComponentMetricSummary,
   Workforce,
   Workteam,
 } from "../models/models_2";
 import {
+  GetSearchSuggestionsRequest,
+  GitConfigForUpdate,
+  HubContentInfo,
+  HubInfo,
   HumanTaskUiSummary,
   HyperParameterTuningJobSearchEntity,
   HyperParameterTuningJobSummary,
@@ -1554,6 +1562,7 @@ import {
   NestedFilters,
   NotebookInstanceLifecycleConfigSummary,
   NotebookInstanceSummary,
+  OnlineStoreConfigUpdate,
   Parameter,
   Pipeline,
   PipelineExecution,
@@ -1565,6 +1574,7 @@ import {
   ProfilerConfigForUpdate,
   Project,
   ProjectSummary,
+  PropertyNameQuery,
   PutModelPackageGroupPolicyInput,
   QueryFilters,
   QueryLineageRequest,
@@ -1574,20 +1584,14 @@ import {
   RenderUiTemplateRequest,
   ResourceConfigForUpdate,
   RetryPipelineExecutionRequest,
-  SearchRecord,
-  SearchResponse,
-  SendPipelineExecutionStepFailureRequest,
-  SendPipelineExecutionStepSuccessRequest,
   SpaceDetails,
-  StartEdgeDeploymentStageRequest,
-  StartInferenceExperimentRequest,
   StudioLifecycleConfigDetails,
+  SuggestionQuery,
   TrainingJob,
   TrainingJobSummary,
   TransformJob,
   TransformJobSummary,
   Trial,
-  TrialComponent,
   TrialComponentSimpleSummary,
   TrialComponentSourceDetail,
   TrialComponentSummary,
@@ -1596,8 +1600,14 @@ import {
 } from "../models/models_3";
 import {
   SearchExpression,
+  SearchRecord,
   SearchRequest,
+  SearchResponse,
+  SendPipelineExecutionStepFailureRequest,
+  SendPipelineExecutionStepSuccessRequest,
   ServiceCatalogProvisioningUpdateDetails,
+  StartEdgeDeploymentStageRequest,
+  StartInferenceExperimentRequest,
   StartMonitoringScheduleRequest,
   StartNotebookInstanceInput,
   StartPipelineExecutionRequest,
@@ -1615,6 +1625,7 @@ import {
   StopProcessingJobRequest,
   StopTrainingJobRequest,
   StopTransformJobRequest,
+  TrialComponent,
   UpdateActionRequest,
   UpdateAppImageConfigRequest,
   UpdateArtifactRequest,
@@ -19038,6 +19049,8 @@ const de_ResourceNotFoundRes = async (parsedOutput: any, context: __SerdeContext
 
 // se_AddTagsInput omitted.
 
+// se_AggregationTransformations omitted.
+
 // se_Alarm omitted.
 
 // se_AlarmList omitted.
@@ -19989,6 +20002,10 @@ const se_EndpointInput = (input: EndpointInput, context: __SerdeContext): any =>
 
 // se_FileSystemDataSource omitted.
 
+// se_FillingTransformationMap omitted.
+
+// se_FillingTransformations omitted.
+
 // se_Filter omitted.
 
 // se_FilterList omitted.
@@ -19996,6 +20013,8 @@ const se_EndpointInput = (input: EndpointInput, context: __SerdeContext): any =>
 // se_FlowDefinitionOutputConfig omitted.
 
 // se_FlowDefinitionTaskKeywords omitted.
+
+// se_ForecastQuantiles omitted.
 
 // se_GetDeviceFleetReportRequest omitted.
 
@@ -20010,6 +20029,8 @@ const se_EndpointInput = (input: EndpointInput, context: __SerdeContext): any =>
 // se_GitConfig omitted.
 
 // se_GitConfigForUpdate omitted.
+
+// se_GroupingAttributeNames omitted.
 
 // se_Groups omitted.
 
@@ -21378,6 +21399,8 @@ const se_MonitoringScheduleConfig = (input: MonitoringScheduleConfig, context: _
 
 // se_OnlineStoreConfig omitted.
 
+// se_OnlineStoreConfigUpdate omitted.
+
 // se_OnlineStoreSecurityConfig omitted.
 
 // se_OutputConfig omitted.
@@ -21592,6 +21615,8 @@ const se_RetryPipelineExecutionRequest = (input: RetryPipelineExecutionRequest, 
 
 // se_RetryStrategy omitted.
 
+// se_RollingUpdatePolicy omitted.
+
 // se_RSessionAppSettings omitted.
 
 // se_RStudioServerProAppSettings omitted.
@@ -21792,7 +21817,13 @@ const se_StopPipelineExecutionRequest = (input: StopPipelineExecutionRequest, co
 
 // se_TextClassificationJobConfig omitted.
 
+// se_TimeSeriesConfig omitted.
+
+// se_TimeSeriesForecastingJobConfig omitted.
+
 // se_TimeSeriesForecastingSettings omitted.
+
+// se_TimeSeriesTransformations omitted.
 
 // se_TrafficPattern omitted.
 
@@ -21862,6 +21893,8 @@ const se_TrialComponentParameterValue = (input: TrialComponentParameterValue, co
 };
 
 // se_TrialComponentStatus omitted.
+
+// se_TtlDuration omitted.
 
 /**
  * serializeAws_json1_1TuningJobCompletionCriteria
@@ -22052,6 +22085,8 @@ const de_ActionSummary = (output: any, context: __SerdeContext): ActionSummary =
 // de_AgentVersion omitted.
 
 // de_AgentVersions omitted.
+
+// de_AggregationTransformations omitted.
 
 // de_Alarm omitted.
 
@@ -24590,6 +24625,10 @@ const de_FeatureMetadata = (output: any, context: __SerdeContext): FeatureMetada
 
 // de_FileSystemDataSource omitted.
 
+// de_FillingTransformationMap omitted.
+
+// de_FillingTransformations omitted.
+
 /**
  * deserializeAws_json1_1FinalAutoMLJobObjectiveMetric
  */
@@ -24657,6 +24696,8 @@ const de_FlowDefinitionSummary = (output: any, context: __SerdeContext): FlowDef
 
 // de_FlowDefinitionTaskKeywords omitted.
 
+// de_ForecastQuantiles omitted.
+
 /**
  * deserializeAws_json1_1GetDeviceFleetReportResponse
  */
@@ -24682,6 +24723,8 @@ const de_GetDeviceFleetReportResponse = (output: any, context: __SerdeContext): 
 // de_GetSearchSuggestionsResponse omitted.
 
 // de_GitConfig omitted.
+
+// de_GroupingAttributeNames omitted.
 
 // de_Groups omitted.
 
@@ -26129,6 +26172,7 @@ const de_ModelCard = (output: any, context: __SerdeContext): ModelCard => {
     ModelCardStatus: __expectString,
     ModelCardVersion: __expectInt32,
     ModelId: __expectString,
+    ModelPackageGroupName: __expectString,
     RiskRating: __expectString,
     SecurityConfig: _json,
     Tags: _json,
@@ -27429,6 +27473,7 @@ const de_RecommendationMetrics = (output: any, context: __SerdeContext): Recomme
     MaxInvocations: __expectInt32,
     MemoryUtilization: __limitedParseFloat32,
     ModelLatency: __expectInt32,
+    ModelSetupTime: __expectInt32,
   }) as any;
 };
 
@@ -27463,6 +27508,8 @@ const de_RecommendationMetrics = (output: any, context: __SerdeContext): Recomme
 // de_RetryPipelineExecutionResponse omitted.
 
 // de_RetryStrategy omitted.
+
+// de_RollingUpdatePolicy omitted.
 
 // de_RSessionAppSettings omitted.
 
@@ -27673,7 +27720,13 @@ const de_StudioLifecycleConfigsList = (output: any, context: __SerdeContext): St
 
 // de_TextClassificationJobConfig omitted.
 
+// de_TimeSeriesConfig omitted.
+
+// de_TimeSeriesForecastingJobConfig omitted.
+
 // de_TimeSeriesForecastingSettings omitted.
+
+// de_TimeSeriesTransformations omitted.
 
 // de_TrafficPattern omitted.
 
@@ -28060,6 +28113,8 @@ const de_TrialSummary = (output: any, context: __SerdeContext): TrialSummary => 
     TrialSource: _json,
   }) as any;
 };
+
+// de_TtlDuration omitted.
 
 /**
  * deserializeAws_json1_1TuningJobCompletionCriteria

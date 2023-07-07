@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
 import { BatchExecuteStatementInput, BatchExecuteStatementOutput } from "../models/models_0";
@@ -105,6 +105,7 @@ export interface BatchExecuteStatementCommandOutput extends BatchExecuteStatemen
  *         },
  *       ],
  *       ConsistentRead: true || false,
+ *       ReturnValuesOnConditionCheckFailure: "ALL_OLD" || "NONE",
  *     },
  *   ],
  *   ReturnConsumedCapacity: "INDEXES" || "TOTAL" || "NONE",
@@ -117,52 +118,55 @@ export interface BatchExecuteStatementCommandOutput extends BatchExecuteStatemen
  * //       Error: { // BatchStatementError
  * //         Code: "ConditionalCheckFailed" || "ItemCollectionSizeLimitExceeded" || "RequestLimitExceeded" || "ValidationError" || "ProvisionedThroughputExceeded" || "TransactionConflict" || "ThrottlingError" || "InternalServerError" || "ResourceNotFound" || "AccessDenied" || "DuplicateItem",
  * //         Message: "STRING_VALUE",
+ * //         Item: { // AttributeMap
+ * //           "<keys>": { // AttributeValue Union: only one key present
+ * //             S: "STRING_VALUE",
+ * //             N: "STRING_VALUE",
+ * //             B: "BLOB_VALUE",
+ * //             SS: [ // StringSetAttributeValue
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             NS: [ // NumberSetAttributeValue
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             BS: [ // BinarySetAttributeValue
+ * //               "BLOB_VALUE",
+ * //             ],
+ * //             M: { // MapAttributeValue
+ * //               "<keys>": {//  Union: only one key present
+ * //                 S: "STRING_VALUE",
+ * //                 N: "STRING_VALUE",
+ * //                 B: "BLOB_VALUE",
+ * //                 SS: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 NS: [
+ * //                   "STRING_VALUE",
+ * //                 ],
+ * //                 BS: [
+ * //                   "BLOB_VALUE",
+ * //                 ],
+ * //                 M: {
+ * //                   "<keys>": "<AttributeValue>",
+ * //                 },
+ * //                 L: [ // ListAttributeValue
+ * //                   "<AttributeValue>",
+ * //                 ],
+ * //                 NULL: true || false,
+ * //                 BOOL: true || false,
+ * //               },
+ * //             },
+ * //             L: [
+ * //               "<AttributeValue>",
+ * //             ],
+ * //             NULL: true || false,
+ * //             BOOL: true || false,
+ * //           },
+ * //         },
  * //       },
  * //       TableName: "STRING_VALUE",
- * //       Item: { // AttributeMap
- * //         "<keys>": { // AttributeValue Union: only one key present
- * //           S: "STRING_VALUE",
- * //           N: "STRING_VALUE",
- * //           B: "BLOB_VALUE",
- * //           SS: [ // StringSetAttributeValue
- * //             "STRING_VALUE",
- * //           ],
- * //           NS: [ // NumberSetAttributeValue
- * //             "STRING_VALUE",
- * //           ],
- * //           BS: [ // BinarySetAttributeValue
- * //             "BLOB_VALUE",
- * //           ],
- * //           M: { // MapAttributeValue
- * //             "<keys>": {//  Union: only one key present
- * //               S: "STRING_VALUE",
- * //               N: "STRING_VALUE",
- * //               B: "BLOB_VALUE",
- * //               SS: [
- * //                 "STRING_VALUE",
- * //               ],
- * //               NS: [
- * //                 "STRING_VALUE",
- * //               ],
- * //               BS: [
- * //                 "BLOB_VALUE",
- * //               ],
- * //               M: {
- * //                 "<keys>": "<AttributeValue>",
- * //               },
- * //               L: [ // ListAttributeValue
- * //                 "<AttributeValue>",
- * //               ],
- * //               NULL: true || false,
- * //               BOOL: true || false,
- * //             },
- * //           },
- * //           L: [
- * //             "<AttributeValue>",
- * //           ],
- * //           NULL: true || false,
- * //           BOOL: true || false,
- * //         },
+ * //       Item: {
+ * //         "<keys>": "<AttributeValue>",
  * //       },
  * //     },
  * //   ],

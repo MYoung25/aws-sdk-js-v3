@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
 import { BatchGetJobsRequest } from "../models/models_0";
@@ -511,7 +511,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               StreamName: "STRING_VALUE",
  * //               Classification: "STRING_VALUE",
  * //               Delimiter: "STRING_VALUE",
- * //               StartingPosition: "latest" || "trim_horizon" || "earliest",
+ * //               StartingPosition: "latest" || "trim_horizon" || "earliest" || "timestamp",
  * //               MaxFetchTimeInMs: Number("long"),
  * //               MaxFetchRecordsPerShard: Number("long"),
  * //               MaxRecordPerRead: Number("long"),
@@ -527,6 +527,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               RoleSessionName: "STRING_VALUE",
  * //               AddRecordTimestamp: "STRING_VALUE",
  * //               EmitConsumerLagMetrics: "STRING_VALUE",
+ * //               StartingTimestamp: new Date("TIMESTAMP"),
  * //             },
  * //             DataPreviewOptions: { // StreamingDataPreviewOptions
  * //               PollingTime: Number("long"),
@@ -554,6 +555,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               IncludeHeaders: true || false,
  * //               AddRecordTimestamp: "STRING_VALUE",
  * //               EmitConsumerLagMetrics: "STRING_VALUE",
+ * //               StartingTimestamp: new Date("TIMESTAMP"),
  * //             },
  * //             WindowSize: Number("int"),
  * //             DetectSchema: true || false,
@@ -573,7 +575,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               StreamName: "STRING_VALUE",
  * //               Classification: "STRING_VALUE",
  * //               Delimiter: "STRING_VALUE",
- * //               StartingPosition: "latest" || "trim_horizon" || "earliest",
+ * //               StartingPosition: "latest" || "trim_horizon" || "earliest" || "timestamp",
  * //               MaxFetchTimeInMs: Number("long"),
  * //               MaxFetchRecordsPerShard: Number("long"),
  * //               MaxRecordPerRead: Number("long"),
@@ -589,6 +591,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               RoleSessionName: "STRING_VALUE",
  * //               AddRecordTimestamp: "STRING_VALUE",
  * //               EmitConsumerLagMetrics: "STRING_VALUE",
+ * //               StartingTimestamp: new Date("TIMESTAMP"),
  * //             },
  * //             DataPreviewOptions: {
  * //               PollingTime: Number("long"),
@@ -620,6 +623,7 @@ export interface BatchGetJobsCommandOutput extends BatchGetJobsResponse, __Metad
  * //               IncludeHeaders: true || false,
  * //               AddRecordTimestamp: "STRING_VALUE",
  * //               EmitConsumerLagMetrics: "STRING_VALUE",
+ * //               StartingTimestamp: new Date("TIMESTAMP"),
  * //             },
  * //             DataPreviewOptions: {
  * //               PollingTime: Number("long"),

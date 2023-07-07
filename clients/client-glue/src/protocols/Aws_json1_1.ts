@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -11,13 +12,17 @@ import {
   expectString as __expectString,
   limitedParseDouble as __limitedParseDouble,
   parseEpochTimestamp as __parseEpochTimestamp,
+  parseRfc3339DateTimeWithOffset as __parseRfc3339DateTimeWithOffset,
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import {
   BatchCreatePartitionCommandInput,
@@ -556,6 +561,7 @@ import {
   GlueTable,
   GovernedCatalogSource,
   GovernedCatalogTarget,
+  IcebergTarget,
   IdempotentParameterMismatchException,
   IllegalSessionStateException,
   InternalServiceException,
@@ -645,7 +651,6 @@ import {
   StorageDescriptor,
   StreamingDataPreviewOptions,
   TransformConfigParameter,
-  TransformEncryption,
   TransformParameters,
   Union,
   UpsertRedshiftTargetOptions,
@@ -826,16 +831,16 @@ import {
   GetUnfilteredPartitionsMetadataRequest,
   GetUnfilteredPartitionsMetadataResponse,
   GetUnfilteredTableMetadataRequest,
-  GetUnfilteredTableMetadataResponse,
-  GetUserDefinedFunctionRequest,
   GluePolicy,
   GrokClassifier,
+  IcebergInput,
   JobBookmarksEncryption,
   JsonClassifier,
   Location,
   LongColumnStatisticsData,
   MappingEntry,
   MLTransform,
+  OpenTableFormatInput,
   PartitionIndex,
   PermissionType,
   PermissionTypeMismatchException,
@@ -858,10 +863,10 @@ import {
   TaskRun,
   TaskRunFilterCriteria,
   TaskRunSortCriteria,
+  TransformEncryption,
   TransformFilterCriteria,
   TransformSortCriteria,
   UnfilteredPartition,
-  UserDefinedFunction,
   UserDefinedFunctionInput,
   XMLClassifier,
 } from "../models/models_1";
@@ -887,6 +892,8 @@ import {
   DevEndpointCustomLibraries,
   GetJobResponse,
   GetJobsResponse,
+  GetUnfilteredTableMetadataResponse,
+  GetUserDefinedFunctionRequest,
   GetUserDefinedFunctionResponse,
   GetUserDefinedFunctionsRequest,
   GetUserDefinedFunctionsResponse,
@@ -994,6 +1001,7 @@ import {
   UpdateUserDefinedFunctionRequest,
   UpdateWorkflowRequest,
   UpdateXMLClassifierRequest,
+  UserDefinedFunction,
   VersionMismatchException,
 } from "../models/models_2";
 
@@ -15752,9 +15760,35 @@ const se_BinaryColumnStatisticsData = (input: BinaryColumnStatisticsData, contex
 
 // se_CatalogHudiSource omitted.
 
-// se_CatalogKafkaSource omitted.
+/**
+ * serializeAws_json1_1CatalogKafkaSource
+ */
+const se_CatalogKafkaSource = (input: CatalogKafkaSource, context: __SerdeContext): any => {
+  return take(input, {
+    DataPreviewOptions: _json,
+    Database: [],
+    DetectSchema: [],
+    Name: [],
+    StreamingOptions: (_) => se_KafkaStreamingSourceOptions(_, context),
+    Table: [],
+    WindowSize: [],
+  });
+};
 
-// se_CatalogKinesisSource omitted.
+/**
+ * serializeAws_json1_1CatalogKinesisSource
+ */
+const se_CatalogKinesisSource = (input: CatalogKinesisSource, context: __SerdeContext): any => {
+  return take(input, {
+    DataPreviewOptions: _json,
+    Database: [],
+    DetectSchema: [],
+    Name: [],
+    StreamingOptions: (_) => se_KinesisStreamingSourceOptions(_, context),
+    Table: [],
+    WindowSize: [],
+  });
+};
 
 // se_CatalogSchemaChangePolicy omitted.
 
@@ -15784,14 +15818,14 @@ const se_CodeGenConfigurationNode = (input: CodeGenConfigurationNode, context: _
     AthenaConnectorSource: _json,
     CatalogDeltaSource: _json,
     CatalogHudiSource: _json,
-    CatalogKafkaSource: _json,
-    CatalogKinesisSource: _json,
+    CatalogKafkaSource: (_) => se_CatalogKafkaSource(_, context),
+    CatalogKinesisSource: (_) => se_CatalogKinesisSource(_, context),
     CatalogSource: _json,
     CatalogTarget: _json,
     CustomCode: _json,
     DirectJDBCSource: _json,
-    DirectKafkaSource: _json,
-    DirectKinesisSource: _json,
+    DirectKafkaSource: (_) => se_DirectKafkaSource(_, context),
+    DirectKinesisSource: (_) => se_DirectKinesisSource(_, context),
     DropDuplicates: _json,
     DropFields: _json,
     DropNullFields: _json,
@@ -15928,6 +15962,7 @@ const se_CrawlerTargets = (input: CrawlerTargets, context: __SerdeContext): any 
     CatalogTargets: _json,
     DeltaTargets: _json,
     DynamoDBTargets: (_) => se_DynamoDBTargetList(_, context),
+    IcebergTargets: _json,
     JdbcTargets: _json,
     MongoDBTargets: _json,
     S3Targets: _json,
@@ -16084,6 +16119,7 @@ const se_CreateTableRequest = (input: CreateTableRequest, context: __SerdeContex
   return take(input, {
     CatalogId: [],
     DatabaseName: [],
+    OpenTableFormatInput: _json,
     PartitionIndexes: _json,
     TableInput: (_) => se_TableInput(_, context),
     TransactionId: [],
@@ -16282,9 +16318,31 @@ const se_DecimalNumber = (input: DecimalNumber, context: __SerdeContext): any =>
 
 // se_DirectJDBCSource omitted.
 
-// se_DirectKafkaSource omitted.
+/**
+ * serializeAws_json1_1DirectKafkaSource
+ */
+const se_DirectKafkaSource = (input: DirectKafkaSource, context: __SerdeContext): any => {
+  return take(input, {
+    DataPreviewOptions: _json,
+    DetectSchema: [],
+    Name: [],
+    StreamingOptions: (_) => se_KafkaStreamingSourceOptions(_, context),
+    WindowSize: [],
+  });
+};
 
-// se_DirectKinesisSource omitted.
+/**
+ * serializeAws_json1_1DirectKinesisSource
+ */
+const se_DirectKinesisSource = (input: DirectKinesisSource, context: __SerdeContext): any => {
+  return take(input, {
+    DataPreviewOptions: _json,
+    DetectSchema: [],
+    Name: [],
+    StreamingOptions: (_) => se_KinesisStreamingSourceOptions(_, context),
+    WindowSize: [],
+  });
+};
 
 // se_DirectSchemaChangePolicy omitted.
 
@@ -16601,6 +16659,12 @@ const se_GetTablesRequest = (input: GetTablesRequest, context: __SerdeContext): 
 
 // se_GovernedCatalogTarget omitted.
 
+// se_IcebergInput omitted.
+
+// se_IcebergTarget omitted.
+
+// se_IcebergTargetList omitted.
+
 // se_ImportCatalogToGlueRequest omitted.
 
 // se_JDBCConnectorOptions omitted.
@@ -16655,11 +16719,63 @@ const se_JobUpdate = (input: JobUpdate, context: __SerdeContext): any => {
 
 // se_JoinColumns omitted.
 
-// se_KafkaStreamingSourceOptions omitted.
+/**
+ * serializeAws_json1_1KafkaStreamingSourceOptions
+ */
+const se_KafkaStreamingSourceOptions = (input: KafkaStreamingSourceOptions, context: __SerdeContext): any => {
+  return take(input, {
+    AddRecordTimestamp: [],
+    Assign: [],
+    BootstrapServers: [],
+    Classification: [],
+    ConnectionName: [],
+    Delimiter: [],
+    EmitConsumerLagMetrics: [],
+    EndingOffsets: [],
+    IncludeHeaders: [],
+    MaxOffsetsPerTrigger: [],
+    MinPartitions: [],
+    NumRetries: [],
+    PollTimeoutMs: [],
+    RetryIntervalMs: [],
+    SecurityProtocol: [],
+    StartingOffsets: [],
+    StartingTimestamp: (_) => _.toISOString().split(".")[0] + "Z",
+    SubscribePattern: [],
+    TopicName: [],
+  });
+};
 
 // se_KeyList omitted.
 
-// se_KinesisStreamingSourceOptions omitted.
+/**
+ * serializeAws_json1_1KinesisStreamingSourceOptions
+ */
+const se_KinesisStreamingSourceOptions = (input: KinesisStreamingSourceOptions, context: __SerdeContext): any => {
+  return take(input, {
+    AddIdleTimeBetweenReads: [],
+    AddRecordTimestamp: [],
+    AvoidEmptyBatches: [],
+    Classification: [],
+    Delimiter: [],
+    DescribeShardInterval: [],
+    EmitConsumerLagMetrics: [],
+    EndpointUrl: [],
+    IdleTimeBetweenReadsInMs: [],
+    MaxFetchRecordsPerShard: [],
+    MaxFetchTimeInMs: [],
+    MaxRecordPerRead: [],
+    MaxRetryIntervalMs: [],
+    NumRetries: [],
+    RetryIntervalMs: [],
+    RoleArn: [],
+    RoleSessionName: [],
+    StartingPosition: [],
+    StartingTimestamp: (_) => _.toISOString().split(".")[0] + "Z",
+    StreamArn: [],
+    StreamName: [],
+  });
+};
 
 // se_LakeFormationConfiguration omitted.
 
@@ -16835,6 +16951,8 @@ const se_Mappings = (input: Mapping[], context: __SerdeContext): any => {
 // se_NullValueFields omitted.
 
 // se_OneInput omitted.
+
+// se_OpenTableFormatInput omitted.
 
 // se_Option omitted.
 
@@ -17640,9 +17758,35 @@ const de_CatalogImportStatus = (output: any, context: __SerdeContext): CatalogIm
   }) as any;
 };
 
-// de_CatalogKafkaSource omitted.
+/**
+ * deserializeAws_json1_1CatalogKafkaSource
+ */
+const de_CatalogKafkaSource = (output: any, context: __SerdeContext): CatalogKafkaSource => {
+  return take(output, {
+    DataPreviewOptions: _json,
+    Database: __expectString,
+    DetectSchema: __expectBoolean,
+    Name: __expectString,
+    StreamingOptions: (_: any) => de_KafkaStreamingSourceOptions(_, context),
+    Table: __expectString,
+    WindowSize: __expectInt32,
+  }) as any;
+};
 
-// de_CatalogKinesisSource omitted.
+/**
+ * deserializeAws_json1_1CatalogKinesisSource
+ */
+const de_CatalogKinesisSource = (output: any, context: __SerdeContext): CatalogKinesisSource => {
+  return take(output, {
+    DataPreviewOptions: _json,
+    Database: __expectString,
+    DetectSchema: __expectBoolean,
+    Name: __expectString,
+    StreamingOptions: (_: any) => de_KinesisStreamingSourceOptions(_, context),
+    Table: __expectString,
+    WindowSize: __expectInt32,
+  }) as any;
+};
 
 // de_CatalogSchemaChangePolicy omitted.
 
@@ -17696,14 +17840,14 @@ const de_CodeGenConfigurationNode = (output: any, context: __SerdeContext): Code
     AthenaConnectorSource: _json,
     CatalogDeltaSource: _json,
     CatalogHudiSource: _json,
-    CatalogKafkaSource: _json,
-    CatalogKinesisSource: _json,
+    CatalogKafkaSource: (_: any) => de_CatalogKafkaSource(_, context),
+    CatalogKinesisSource: (_: any) => de_CatalogKinesisSource(_, context),
     CatalogSource: _json,
     CatalogTarget: _json,
     CustomCode: _json,
     DirectJDBCSource: _json,
-    DirectKafkaSource: _json,
-    DirectKinesisSource: _json,
+    DirectKafkaSource: (_: any) => de_DirectKafkaSource(_, context),
+    DirectKinesisSource: (_: any) => de_DirectKinesisSource(_, context),
     DropDuplicates: _json,
     DropFields: _json,
     DropNullFields: _json,
@@ -18068,6 +18212,7 @@ const de_CrawlerTargets = (output: any, context: __SerdeContext): CrawlerTargets
     CatalogTargets: _json,
     DeltaTargets: _json,
     DynamoDBTargets: (_: any) => de_DynamoDBTargetList(_, context),
+    IcebergTargets: _json,
     JdbcTargets: _json,
     MongoDBTargets: _json,
     S3Targets: _json,
@@ -18563,9 +18708,31 @@ const de_DevEndpointList = (output: any, context: __SerdeContext): DevEndpoint[]
 
 // de_DirectJDBCSource omitted.
 
-// de_DirectKafkaSource omitted.
+/**
+ * deserializeAws_json1_1DirectKafkaSource
+ */
+const de_DirectKafkaSource = (output: any, context: __SerdeContext): DirectKafkaSource => {
+  return take(output, {
+    DataPreviewOptions: _json,
+    DetectSchema: __expectBoolean,
+    Name: __expectString,
+    StreamingOptions: (_: any) => de_KafkaStreamingSourceOptions(_, context),
+    WindowSize: __expectInt32,
+  }) as any;
+};
 
-// de_DirectKinesisSource omitted.
+/**
+ * deserializeAws_json1_1DirectKinesisSource
+ */
+const de_DirectKinesisSource = (output: any, context: __SerdeContext): DirectKinesisSource => {
+  return take(output, {
+    DataPreviewOptions: _json,
+    DetectSchema: __expectBoolean,
+    Name: __expectString,
+    StreamingOptions: (_: any) => de_KinesisStreamingSourceOptions(_, context),
+    WindowSize: __expectInt32,
+  }) as any;
+};
 
 // de_DirectSchemaChangePolicy omitted.
 
@@ -19400,6 +19567,10 @@ const de_GrokClassifier = (output: any, context: __SerdeContext): GrokClassifier
   }) as any;
 };
 
+// de_IcebergTarget omitted.
+
+// de_IcebergTargetList omitted.
+
 // de_IdempotentParameterMismatchException omitted.
 
 // de_IllegalBlueprintStateException omitted.
@@ -19553,13 +19724,65 @@ const de_JsonClassifier = (output: any, context: __SerdeContext): JsonClassifier
   }) as any;
 };
 
-// de_KafkaStreamingSourceOptions omitted.
+/**
+ * deserializeAws_json1_1KafkaStreamingSourceOptions
+ */
+const de_KafkaStreamingSourceOptions = (output: any, context: __SerdeContext): KafkaStreamingSourceOptions => {
+  return take(output, {
+    AddRecordTimestamp: __expectString,
+    Assign: __expectString,
+    BootstrapServers: __expectString,
+    Classification: __expectString,
+    ConnectionName: __expectString,
+    Delimiter: __expectString,
+    EmitConsumerLagMetrics: __expectString,
+    EndingOffsets: __expectString,
+    IncludeHeaders: __expectBoolean,
+    MaxOffsetsPerTrigger: __expectLong,
+    MinPartitions: __expectInt32,
+    NumRetries: __expectInt32,
+    PollTimeoutMs: __expectLong,
+    RetryIntervalMs: __expectLong,
+    SecurityProtocol: __expectString,
+    StartingOffsets: __expectString,
+    StartingTimestamp: (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+    SubscribePattern: __expectString,
+    TopicName: __expectString,
+  }) as any;
+};
 
 // de_KeySchemaElement omitted.
 
 // de_KeySchemaElementList omitted.
 
-// de_KinesisStreamingSourceOptions omitted.
+/**
+ * deserializeAws_json1_1KinesisStreamingSourceOptions
+ */
+const de_KinesisStreamingSourceOptions = (output: any, context: __SerdeContext): KinesisStreamingSourceOptions => {
+  return take(output, {
+    AddIdleTimeBetweenReads: __expectBoolean,
+    AddRecordTimestamp: __expectString,
+    AvoidEmptyBatches: __expectBoolean,
+    Classification: __expectString,
+    Delimiter: __expectString,
+    DescribeShardInterval: __expectLong,
+    EmitConsumerLagMetrics: __expectString,
+    EndpointUrl: __expectString,
+    IdleTimeBetweenReadsInMs: __expectLong,
+    MaxFetchRecordsPerShard: __expectLong,
+    MaxFetchTimeInMs: __expectLong,
+    MaxRecordPerRead: __expectLong,
+    MaxRetryIntervalMs: __expectLong,
+    NumRetries: __expectInt32,
+    RetryIntervalMs: __expectLong,
+    RoleArn: __expectString,
+    RoleSessionName: __expectString,
+    StartingPosition: __expectString,
+    StartingTimestamp: (_: any) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
+    StreamArn: __expectString,
+    StreamName: __expectString,
+  }) as any;
+};
 
 // de_LabelingSetGenerationTaskRunProperties omitted.
 

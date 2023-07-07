@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,12 +10,12 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import { UpdateEvaluationFormRequest, UpdateEvaluationFormResponse } from "../models/models_1";
+import { UpdateEvaluationFormResponse } from "../models/models_1";
+import { UpdateEvaluationFormRequest } from "../models/models_2";
 import { de_UpdateEvaluationFormCommand, se_UpdateEvaluationFormCommand } from "../protocols/Aws_restJson1";
 
 /**
@@ -37,9 +38,10 @@ export interface UpdateEvaluationFormCommandOutput extends UpdateEvaluationFormR
 /**
  * @public
  * <p>Updates details about a specific evaluation form version in the specified Amazon Connect
- *    instance. Question and section
- *    identifiers cannot be duplicated within the same evaluation form.</p>
- *          <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>
+ *    instance. Question and section identifiers cannot be duplicated within the same evaluation
+ *    form.</p>
+ *          <p>This operation does not support partial updates. Instead it does a full update of evaluation
+ *    form content.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript

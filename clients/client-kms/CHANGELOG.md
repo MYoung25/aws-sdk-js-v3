@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.366.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.365.0...v3.366.0) (2023-07-05)
+
+
+### Features
+
+* **client-kms:** Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call. ([4bdf266](https://github.com/aws/aws-sdk-js-v3/commit/4bdf26645db6985dc561d57bb8bcc59b06e7d460))
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.362.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.361.0...v3.362.0) (2023-06-28)
+
+**Note:** Version bump only for package @aws-sdk/client-kms
+
+
+
+
+
+# [3.360.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.359.0...v3.360.0) (2023-06-26)
+
+**Note:** Version bump only for package @aws-sdk/client-kms
+
+
+
+
+
 # [3.359.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.358.0...v3.359.0) (2023-06-23)
 
 **Note:** Version bump only for package @aws-sdk/client-kms

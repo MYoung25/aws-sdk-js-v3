@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { LazyJsonString as __LazyJsonString, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { LazyJsonString as __LazyJsonString, SENSITIVE_STRING } from "@smithy/smithy-client";
 
 import {
   AdditionalInferenceSpecificationDefinition,
@@ -23,6 +23,8 @@ import {
   BestObjectiveNotImproving,
   Bias,
   BlueGreenUpdatePolicy,
+  CanvasAppSettings,
+  CapacitySize,
   CaptureContentTypeHeader,
   CaptureOption,
   CaptureStatus,
@@ -64,6 +66,9 @@ import {
   ProductionVariantInstanceType,
   ResourceConfig,
   ResourceSpec,
+  RSessionAppSettings,
+  RStudioServerProAccessStatus,
+  RStudioServerProUserGroup,
   StoppingCondition,
   Tag,
   TrainingInputMode,
@@ -72,9 +77,145 @@ import {
   TransformJobDefinition,
   TransformOutput,
   TransformResources,
-  UserSettings,
   VpcConfig,
 } from "./models_0";
+
+/**
+ * @public
+ * <p>A collection of settings that configure user interaction with the
+ *                 <code>RStudioServerPro</code> app.</p>
+ */
+export interface RStudioServerProAppSettings {
+  /**
+   * <p>Indicates whether the current user has access to the <code>RStudioServerPro</code>
+   *             app.</p>
+   */
+  AccessStatus?: RStudioServerProAccessStatus | string;
+
+  /**
+   * <p>The level of permissions that the user has within the <code>RStudioServerPro</code>
+   *             app. This value defaults to `User`. The `Admin` value allows the user access to the
+   *             RStudio Administrative Dashboard.</p>
+   */
+  UserGroup?: RStudioServerProUserGroup | string;
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const NotebookOutputOption = {
+  Allowed: "Allowed",
+  Disabled: "Disabled",
+} as const;
+
+/**
+ * @public
+ */
+export type NotebookOutputOption = (typeof NotebookOutputOption)[keyof typeof NotebookOutputOption];
+
+/**
+ * @public
+ * <p>Specifies options for sharing SageMaker Studio notebooks. These settings are
+ *     specified as part of <code>DefaultUserSettings</code> when the <code>CreateDomain</code>
+ *     API is called, and as part of <code>UserSettings</code> when the <code>CreateUserProfile</code>
+ *     API is called. When <code>SharingSettings</code> is not specified, notebook sharing
+ *     isn't allowed.</p>
+ */
+export interface SharingSettings {
+  /**
+   * <p>Whether to include the notebook cell output when sharing the notebook. The default
+   *          is <code>Disabled</code>.</p>
+   */
+  NotebookOutputOption?: NotebookOutputOption | string;
+
+  /**
+   * <p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the Amazon S3 bucket used
+   *          to store the shared notebook snapshots.</p>
+   */
+  S3OutputPath?: string;
+
+  /**
+   * <p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the Amazon Web Services Key Management Service (KMS)
+   *          encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.</p>
+   */
+  S3KmsKeyId?: string;
+}
+
+/**
+ * @public
+ * <p>The TensorBoard app settings.</p>
+ */
+export interface TensorBoardAppSettings {
+  /**
+   * <p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>
+   */
+  DefaultResourceSpec?: ResourceSpec;
+}
+
+/**
+ * @public
+ * <p>A collection of settings that apply to users of Amazon SageMaker Studio. These settings are
+ *       specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code>
+ *       when the <code>CreateDomain</code> API is called.</p>
+ *          <p>
+ *             <code>SecurityGroups</code> is aggregated when specified in both calls. For all other
+ *      settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>
+ *      take precedence over those specified in <code>CreateDomain</code>.</p>
+ */
+export interface UserSettings {
+  /**
+   * <p>The execution role for the user.</p>
+   */
+  ExecutionRole?: string;
+
+  /**
+   * <p>The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p>
+   *          <p>Optional when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to
+   *          <code>PublicInternetOnly</code>.</p>
+   *          <p>Required when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to
+   *           <code>VpcOnly</code>, unless specified as part of the <code>DefaultUserSettings</code> for the domain.</p>
+   *          <p>Amazon SageMaker adds a security group to allow NFS traffic from SageMaker Studio. Therefore, the
+   *          number of security groups that you can specify is one less than the maximum number shown.</p>
+   */
+  SecurityGroups?: string[];
+
+  /**
+   * <p>Specifies options for sharing SageMaker Studio notebooks.</p>
+   */
+  SharingSettings?: SharingSettings;
+
+  /**
+   * <p>The Jupyter server's app settings.</p>
+   */
+  JupyterServerAppSettings?: JupyterServerAppSettings;
+
+  /**
+   * <p>The kernel gateway app settings.</p>
+   */
+  KernelGatewayAppSettings?: KernelGatewayAppSettings;
+
+  /**
+   * <p>The TensorBoard app settings.</p>
+   */
+  TensorBoardAppSettings?: TensorBoardAppSettings;
+
+  /**
+   * <p>A collection of settings that configure user interaction with the
+   *                 <code>RStudioServerPro</code> app.</p>
+   */
+  RStudioServerProAppSettings?: RStudioServerProAppSettings;
+
+  /**
+   * <p>A collection of settings that configure the <code>RSessionGateway</code> app.</p>
+   */
+  RSessionAppSettings?: RSessionAppSettings;
+
+  /**
+   * <p>The Canvas app settings.</p>
+   */
+  CanvasAppSettings?: CanvasAppSettings;
+}
 
 /**
  * @public
@@ -460,6 +601,38 @@ export interface CreateEdgePackagingJobRequest {
 
 /**
  * @public
+ * <p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>
+ */
+export interface RollingUpdatePolicy {
+  /**
+   * <p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy.
+   *         You can specify your batches as either instance count or the overall percentage or your fleet.</p>
+   *          <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker
+   *         uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>
+   */
+  MaximumBatchSize: CapacitySize | undefined;
+
+  /**
+   * <p>The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.</p>
+   */
+  WaitIntervalInSeconds: number | undefined;
+
+  /**
+   * <p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>
+   */
+  MaximumExecutionTimeoutInSeconds?: number;
+
+  /**
+   * <p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy.
+   *         You can specify your batches as either instance count or the overall percentage or your fleet.</p>
+   *          <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker
+   *         uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>
+   */
+  RollbackMaximumBatchSize?: CapacitySize;
+}
+
+/**
+ * @public
  * <p>The deployment configuration for an endpoint, which contains the desired deployment
  *             strategy and rollback configurations.</p>
  */
@@ -472,13 +645,18 @@ export interface DeploymentConfig {
    *             specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting
    *             by default.</p>
    */
-  BlueGreenUpdatePolicy: BlueGreenUpdatePolicy | undefined;
+  BlueGreenUpdatePolicy?: BlueGreenUpdatePolicy;
 
   /**
    * <p>Automatic rollback configuration for handling endpoint deployment failures and
    *             recovery.</p>
    */
   AutoRollbackConfiguration?: AutoRollbackConfig;
+
+  /**
+   * <p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>
+   */
+  RollingUpdatePolicy?: RollingUpdatePolicy;
 }
 
 /**
@@ -690,6 +868,11 @@ export interface ProductionVariantServerlessConfig {
   /**
    * <p>The amount of provisioned concurrency to allocate for the serverless endpoint.
    *    Should be less than or equal to <code>MaxConcurrency</code>.</p>
+   *          <note>
+   *             <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs.
+   *    For more information about creating an Inference Recommender job, see
+   *    <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJobs</a>.</p>
+   *          </note>
    */
   ProvisionedConcurrency?: number;
 }
@@ -1149,6 +1332,43 @@ export interface OnlineStoreSecurityConfig {
 
 /**
  * @public
+ * @enum
+ */
+export const TtlDurationUnit = {
+  DAYS: "Days",
+  HOURS: "Hours",
+  MINUTES: "Minutes",
+  SECONDS: "Seconds",
+  WEEKS: "Weeks",
+} as const;
+
+/**
+ * @public
+ */
+export type TtlDurationUnit = (typeof TtlDurationUnit)[keyof typeof TtlDurationUnit];
+
+/**
+ * @public
+ * <p>Time to live duration, where the record is hard deleted after the expiration time is
+ *          reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For
+ *          information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+ */
+export interface TtlDuration {
+  /**
+   * <p>
+   *             <code>TtlDuration</code> time unit.</p>
+   */
+  Unit?: TtlDurationUnit | string;
+
+  /**
+   * <p>
+   *             <code>TtlDuration</code> time value.</p>
+   */
+  Value?: number;
+}
+
+/**
+ * @public
  * <p>Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID, or
  *             <code>KMSKeyId</code>, for at rest data encryption. You can turn
  *             <code>OnlineStore</code> on or off by specifying the <code>EnableOnlineStore</code> flag
@@ -1170,6 +1390,13 @@ export interface OnlineStoreConfig {
    *          <p>The default value is <code>False</code>.</p>
    */
   EnableOnlineStore?: boolean;
+
+  /**
+   * <p>Time to live duration, where the record is hard deleted after the expiration time is
+   *          reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For
+   *          information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+   */
+  TtlDuration?: TtlDuration;
 }
 
 /**
@@ -3767,6 +3994,21 @@ export interface RecommendationJobPayloadConfig {
 
 /**
  * @public
+ * @enum
+ */
+export const RecommendationJobSupportedEndpointType = {
+  REALTIME: "RealTime",
+  SERVERLESS: "Serverless",
+} as const;
+
+/**
+ * @public
+ */
+export type RecommendationJobSupportedEndpointType =
+  (typeof RecommendationJobSupportedEndpointType)[keyof typeof RecommendationJobSupportedEndpointType];
+
+/**
+ * @public
  * <p>Specifies mandatory fields for running an Inference Recommender job directly in the
  *          <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJob</a>
  *          API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use
@@ -3826,6 +4068,13 @@ export interface RecommendationJobContainerConfig {
    *          <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig">DataInputConfig</a>.</p>
    */
   DataInputConfig?: string;
+
+  /**
+   * <p>The endpoint type to receive recommendations for. By default this is null, and the results of
+   *          the inference recommendation job return a combined list of both real-time and serverless benchmarks.
+   *          By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.</p>
+   */
+  SupportedEndpointType?: RecommendationJobSupportedEndpointType | string;
 }
 
 /**
@@ -3847,7 +4096,7 @@ export interface EndpointInputConfiguration {
   /**
    * <p>The instance types to use for the load test.</p>
    */
-  InstanceType: ProductionVariantInstanceType | string | undefined;
+  InstanceType?: ProductionVariantInstanceType | string;
 
   /**
    * <p>The inference specification name in the model package version.</p>
@@ -3858,6 +4107,11 @@ export interface EndpointInputConfiguration {
    * <p> The parameter you want to benchmark against.</p>
    */
   EnvironmentParameterRanges?: EnvironmentParameterRanges;
+
+  /**
+   * <p>Specifies the serverless configuration for an endpoint variant.</p>
+   */
+  ServerlessConfig?: ProductionVariantServerlessConfig;
 }
 
 /**
@@ -8066,7 +8320,8 @@ export interface CreatePipelineRequest {
   PipelineDisplayName?: string;
 
   /**
-   * <p>The JSON pipeline definition of the pipeline.</p>
+   * <p>The <a href="https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/">JSON
+   *          pipeline definition</a> of the pipeline.</p>
    */
   PipelineDefinition?: string;
 
@@ -10562,91 +10817,6 @@ export interface DeleteHumanTaskUiRequest {
    * <p>The name of the human task user interface (work task template) you want to delete.</p>
    */
   HumanTaskUiName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DeleteHumanTaskUiResponse {}
-
-/**
- * @public
- */
-export interface DeleteImageRequest {
-  /**
-   * <p>The name of the image to delete.</p>
-   */
-  ImageName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DeleteImageResponse {}
-
-/**
- * @public
- */
-export interface DeleteImageVersionRequest {
-  /**
-   * <p>The name of the image to delete.</p>
-   */
-  ImageName: string | undefined;
-
-  /**
-   * <p>The version to delete.</p>
-   */
-  Version?: number;
-
-  /**
-   * <p>The alias of the image to delete.</p>
-   */
-  Alias?: string;
-}
-
-/**
- * @public
- */
-export interface DeleteImageVersionResponse {}
-
-/**
- * @public
- */
-export interface DeleteInferenceExperimentRequest {
-  /**
-   * <p>The name of the inference experiment you want to delete.</p>
-   */
-  Name: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DeleteInferenceExperimentResponse {
-  /**
-   * <p>The ARN of the deleted inference experiment.</p>
-   */
-  InferenceExperimentArn: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DeleteModelInput {
-  /**
-   * <p>The name of the model to delete.</p>
-   */
-  ModelName: string | undefined;
-}
-
-/**
- * @public
- */
-export interface DeleteModelBiasJobDefinitionRequest {
-  /**
-   * <p>The name of the model bias job definition to delete.</p>
-   */
-  JobDefinitionName: string | undefined;
 }
 
 /**

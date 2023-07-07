@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.368.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.367.0...v3.368.0) (2023-07-07)
+
+
+### Features
+
+* **client-glue:** This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation. ([f4ee5d6](https://github.com/aws/aws-sdk-js-v3/commit/f4ee5d60ae8f417c5cd5111f4641722bf09de726))
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **client-glue:** This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against. ([2a11fd8](https://github.com/aws/aws-sdk-js-v3/commit/2a11fd8ae47cbc51fc87a5d019099528266f0f0c))
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.362.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.361.0...v3.362.0) (2023-06-28)
+
+**Note:** Version bump only for package @aws-sdk/client-glue
+
+
+
+
+
+# [3.360.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.359.0...v3.360.0) (2023-06-26)
+
+
+### Features
+
+* **client-glue:** Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job ([b441cef](https://github.com/aws/aws-sdk-js-v3/commit/b441cefc3b9a0bf46087cc5499e8449455003451))
+
+
+
+
+
 # [3.359.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.358.0...v3.359.0) (2023-06-23)
 
 **Note:** Version bump only for package @aws-sdk/client-glue

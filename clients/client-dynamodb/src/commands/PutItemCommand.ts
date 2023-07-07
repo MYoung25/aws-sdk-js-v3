@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { DynamoDBClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBClient";
 import { PutItemInput, PutItemOutput } from "../models/models_0";
@@ -42,8 +42,7 @@ export interface PutItemCommandOutput extends PutItemOutput, __MetadataBearer {}
  *             a new item if one with the specified primary key doesn't exist), or replace an existing
  *             item if it has certain attribute values. You can return the item's attribute values in
  *             the same operation, using the <code>ReturnValues</code> parameter.</p>
- *          <p>When you add an item, the primary key attributes are the only required attributes.
- *             </p>
+ *          <p>When you add an item, the primary key attributes are the only required attributes. </p>
  *          <p>Empty String and Binary attribute values are allowed. Attribute values of type String
  *             and Binary must have a length greater than zero if the attribute is used as a key
  *             attribute for a table or index. Set type attributes cannot be empty. </p>
@@ -132,6 +131,7 @@ export interface PutItemCommandOutput extends PutItemOutput, __MetadataBearer {}
  *   ExpressionAttributeValues: { // ExpressionAttributeValueMap
  *     "<keys>": "<AttributeValue>",
  *   },
+ *   ReturnValuesOnConditionCheckFailure: "ALL_OLD" || "NONE",
  * };
  * const command = new PutItemCommand(input);
  * const response = await client.send(command);

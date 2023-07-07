@@ -1,7 +1,4 @@
 // smithy-typescript generated code
-import { NodeHttpHandler, streamCollector } from "@aws-sdk/node-http-handler";
-import { fromBase64, toBase64 } from "@aws-sdk/util-base64";
-import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8";
 import {
   httpbinding,
   InternalFailureException as __InternalFailureException,
@@ -20,7 +17,10 @@ import {
   ValidationCustomizer as __ValidationCustomizer,
   ValidationFailure as __ValidationFailure,
 } from "@aws-smithy/server-common";
+import { NodeHttpHandler, streamCollector } from "@smithy/node-http-handler";
 import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { fromBase64, toBase64 } from "@smithy/util-base64";
+import { fromUtf8, toUtf8 } from "@smithy/util-utf8";
 
 import { serializeFrameworkException } from "../protocols/Aws_restJson1";
 import {
@@ -320,6 +320,11 @@ import {
   PostUnionWithJsonNameServerInput,
 } from "./operations/PostUnionWithJsonName";
 import {
+  PutWithContentEncoding,
+  PutWithContentEncodingSerializer,
+  PutWithContentEncodingServerInput,
+} from "./operations/PutWithContentEncoding";
+import {
   QueryIdempotencyTokenAutoFill,
   QueryIdempotencyTokenAutoFillSerializer,
   QueryIdempotencyTokenAutoFillServerInput,
@@ -447,6 +452,7 @@ export type RestJsonServiceOperations =
   | "OmitsSerializingEmptyLists"
   | "PostPlayerAction"
   | "PostUnionWithJsonName"
+  | "PutWithContentEncoding"
   | "QueryIdempotencyTokenAutoFill"
   | "QueryParamsAsStringListMap"
   | "QueryPrecedence"
@@ -538,6 +544,7 @@ export interface RestJsonService<Context> {
   OmitsSerializingEmptyLists: OmitsSerializingEmptyLists<Context>;
   PostPlayerAction: PostPlayerAction<Context>;
   PostUnionWithJsonName: PostUnionWithJsonName<Context>;
+  PutWithContentEncoding: PutWithContentEncoding<Context>;
   QueryIdempotencyTokenAutoFill: QueryIdempotencyTokenAutoFill<Context>;
   QueryParamsAsStringListMap: QueryParamsAsStringListMap<Context>;
   QueryPrecedence: QueryPrecedence<Context>;
@@ -1555,6 +1562,18 @@ export class RestJsonServiceHandler<Context> implements __ServiceHandler<Context
           this.validationCustomizer
         );
       }
+      case "PutWithContentEncoding": {
+        return handle(
+          request,
+          context,
+          "PutWithContentEncoding",
+          this.serializerFactory("PutWithContentEncoding"),
+          this.service.PutWithContentEncoding,
+          this.serializeFrameworkException,
+          PutWithContentEncodingServerInput.validate,
+          this.validationCustomizer
+        );
+      }
       case "QueryIdempotencyTokenAutoFill": {
         return handle(
           request,
@@ -2200,6 +2219,15 @@ export const getRestJsonServiceHandler = <Context>(
       [],
       { service: "RestJson", operation: "PostUnionWithJsonName" }
     ),
+    new httpbinding.UriSpec<"RestJson", "PutWithContentEncoding">(
+      "POST",
+      [
+        { type: "path_literal", value: "requestcompression" },
+        { type: "path_literal", value: "putcontentwithencoding" },
+      ],
+      [],
+      { service: "RestJson", operation: "PutWithContentEncoding" }
+    ),
     new httpbinding.UriSpec<"RestJson", "QueryIdempotencyTokenAutoFill">(
       "POST",
       [{ type: "path_literal", value: "QueryIdempotencyTokenAutoFill" }],
@@ -2437,6 +2465,8 @@ export const getRestJsonServiceHandler = <Context>(
         return new PostPlayerActionSerializer();
       case "PostUnionWithJsonName":
         return new PostUnionWithJsonNameSerializer();
+      case "PutWithContentEncoding":
+        return new PutWithContentEncodingSerializer();
       case "QueryIdempotencyTokenAutoFill":
         return new QueryIdempotencyTokenAutoFillSerializer();
       case "QueryParamsAsStringListMap":

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ChimeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeClient";
 import { ListMeetingsRequest, ListMeetingsResponse, ListMeetingsResponseFilterSensitiveLog } from "../models/models_1";
@@ -36,10 +36,15 @@ export interface ListMeetingsCommandOutput extends ListMeetingsResponse, __Metad
 
 /**
  * @public
- * <p>
- * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see
- * <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
- * in the <i>Amazon Chime SDK Developer Guide</i>.</p>
+ * @deprecated
+ *
+ * <p>Lists up to 100 active Amazon Chime SDK meetings.</p>
+ *          <important>
+ *             <p>ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.</p>
+ *          </important>
+ *          <p>For more information about the Amazon Chime SDK, see
+ *         <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+ *         in the <i>Amazon Chime SDK Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript

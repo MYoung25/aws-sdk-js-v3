@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
 import { PutRolePolicyRequest } from "../models/models_0";
@@ -40,12 +40,21 @@ export interface PutRolePolicyCommandOutput extends __MetadataBearer {}
  *             role.</p>
  *          <p>When you embed an inline policy in a role, the inline policy is used as part of the
  *             role's access (permissions) policy. The role's trust policy is created at the same time
- *             as the role, using <a>CreateRole</a>. You can update a role's trust policy
- *             using <a>UpdateAssumeRolePolicy</a>. For more information about IAM roles,
- *             see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using roles to
- *                 delegate permissions and federate identities</a>.</p>
+ *             as the role, using <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">
+ *                <code>CreateRole</code>
+ *             </a>.
+ *             You can update a role's trust policy using <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html">
+ *                <code>UpdateAssumerolePolicy</code>
+ *             </a>. For more information about IAM
+ *             roles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html">Using
+ *                 roles to delegate permissions and federate identities</a>.</p>
  *          <p>A role can also have a managed policy attached to it. To attach a managed policy to a
- *             role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
+ *             role, use <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html">
+ *                <code>AttachRolePolicy</code>
+ *             </a>. To create a new managed policy, use
+ *                 <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">
+ *                <code>CreatePolicy</code>
+ *             </a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
  *                 policies and inline policies</a> in the
  *             <i>IAM User Guide</i>.</p>
  *          <p>For information about the maximum number of inline policies that you can embed with a

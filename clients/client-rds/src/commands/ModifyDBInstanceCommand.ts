@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ModifyDBInstanceMessage, ModifyDBInstanceResult } from "../models/models_1";
 import { de_ModifyDBInstanceCommand, se_ModifyDBInstanceCommand } from "../protocols/Aws_query";
@@ -77,12 +77,19 @@ export interface ModifyDBInstanceCommandOutput extends ModifyDBInstanceResult, _
  *   TdeCredentialPassword: "STRING_VALUE",
  *   CACertificateIdentifier: "STRING_VALUE",
  *   Domain: "STRING_VALUE",
+ *   DomainFqdn: "STRING_VALUE",
+ *   DomainOu: "STRING_VALUE",
+ *   DomainAuthSecretArn: "STRING_VALUE",
+ *   DomainDnsIps: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
  *   CopyTagsToSnapshot: true || false,
  *   MonitoringInterval: Number("int"),
  *   DBPortNumber: Number("int"),
  *   PubliclyAccessible: true || false,
  *   MonitoringRoleArn: "STRING_VALUE",
  *   DomainIAMRoleName: "STRING_VALUE",
+ *   DisableDomain: true || false,
  *   PromotionTier: Number("int"),
  *   EnableIAMDatabaseAuthentication: true || false,
  *   EnablePerformanceInsights: true || false,
@@ -260,6 +267,11 @@ export interface ModifyDBInstanceCommandOutput extends ModifyDBInstanceResult, _
  * //         Status: "STRING_VALUE",
  * //         FQDN: "STRING_VALUE",
  * //         IAMRoleName: "STRING_VALUE",
+ * //         OU: "STRING_VALUE",
+ * //         AuthSecretArn: "STRING_VALUE",
+ * //         DnsIps: [
+ * //           "STRING_VALUE",
+ * //         ],
  * //       },
  * //     ],
  * //     CopyTagsToSnapshot: true || false,

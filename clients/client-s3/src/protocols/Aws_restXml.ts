@@ -1,4 +1,10 @@
 // smithy-typescript generated code
+import { XmlNode as __XmlNode, XmlText as __XmlText } from "@aws-sdk/xml-builder";
+import {
+  HttpRequest as __HttpRequest,
+  HttpResponse as __HttpResponse,
+  isValidHostname as __isValidHostname,
+} from "@smithy/protocol-http";
 import {
   collectBody,
   dateToUtcString as __dateToUtcString,
@@ -18,19 +24,14 @@ import {
   strictParseInt32 as __strictParseInt32,
   strictParseLong as __strictParseLong,
   withBaseException,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/smithy-client";
 import {
+  Endpoint as __Endpoint,
   EventStreamSerdeContext as __EventStreamSerdeContext,
   ResponseMetadata as __ResponseMetadata,
   SdkStreamSerdeContext as __SdkStreamSerdeContext,
-} from "@aws-sdk/types";
-import { XmlNode as __XmlNode, XmlText as __XmlText } from "@aws-sdk/xml-builder";
-import {
-  HttpRequest as __HttpRequest,
-  HttpResponse as __HttpResponse,
-  isValidHostname as __isValidHostname,
-} from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { XMLParser } from "fast-xml-parser";
 
 import {
@@ -381,6 +382,7 @@ import {
   ReplicationTime,
   ReplicationTimeValue,
   RequestPaymentConfiguration,
+  RestoreStatus,
   RoutingRule,
   S3KeyFilter,
   ServerSideEncryptionByDefault,
@@ -2400,6 +2402,10 @@ export const se_ListObjectsCommand = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     "x-amz-request-payer": input.RequestPayer!,
     "x-amz-expected-bucket-owner": input.ExpectedBucketOwner!,
+    "x-amz-optional-object-attributes": [
+      () => isSerializableHeaderValue(input.OptionalObjectAttributes),
+      () => (input.OptionalObjectAttributes! || []).map((_entry) => _entry as any).join(", "),
+    ],
   });
   let resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/";
   resolvedPath = __resolvedPath(resolvedPath, input, "Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -2434,6 +2440,10 @@ export const se_ListObjectsV2Command = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     "x-amz-request-payer": input.RequestPayer!,
     "x-amz-expected-bucket-owner": input.ExpectedBucketOwner!,
+    "x-amz-optional-object-attributes": [
+      () => isSerializableHeaderValue(input.OptionalObjectAttributes),
+      () => (input.OptionalObjectAttributes! || []).map((_entry) => _entry as any).join(", "),
+    ],
   });
   let resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/";
   resolvedPath = __resolvedPath(resolvedPath, input, "Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -2471,6 +2481,10 @@ export const se_ListObjectVersionsCommand = async (
   const headers: any = map({}, isSerializableHeaderValue, {
     "x-amz-expected-bucket-owner": input.ExpectedBucketOwner!,
     "x-amz-request-payer": input.RequestPayer!,
+    "x-amz-optional-object-attributes": [
+      () => isSerializableHeaderValue(input.OptionalObjectAttributes),
+      () => (input.OptionalObjectAttributes! || []).map((_entry) => _entry as any).join(", "),
+    ],
   });
   let resolvedPath = `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` + "/";
   resolvedPath = __resolvedPath(resolvedPath, input, "Bucket", () => input.Bucket!, "{Bucket}", false);
@@ -12099,6 +12113,9 @@ const de__Object = (output: any, context: __SerdeContext): _Object => {
   if (output["Owner"] !== undefined) {
     contents.Owner = de_Owner(output["Owner"], context);
   }
+  if (output["RestoreStatus"] !== undefined) {
+    contents.RestoreStatus = de_RestoreStatus(output["RestoreStatus"], context);
+  }
   return contents;
 };
 
@@ -12222,6 +12239,9 @@ const de_ObjectVersion = (output: any, context: __SerdeContext): ObjectVersion =
   }
   if (output["Owner"] !== undefined) {
     contents.Owner = de_Owner(output["Owner"], context);
+  }
+  if (output["RestoreStatus"] !== undefined) {
+    contents.RestoreStatus = de_RestoreStatus(output["RestoreStatus"], context);
   }
   return contents;
 };
@@ -12592,6 +12612,20 @@ const de_ReplicationTimeValue = (output: any, context: __SerdeContext): Replicat
   const contents: any = {};
   if (output["Minutes"] !== undefined) {
     contents.Minutes = __strictParseInt32(output["Minutes"]) as number;
+  }
+  return contents;
+};
+
+/**
+ * deserializeAws_restXmlRestoreStatus
+ */
+const de_RestoreStatus = (output: any, context: __SerdeContext): RestoreStatus => {
+  const contents: any = {};
+  if (output["IsRestoreInProgress"] !== undefined) {
+    contents.IsRestoreInProgress = __parseBoolean(output["IsRestoreInProgress"]);
+  }
+  if (output["RestoreExpiryDate"] !== undefined) {
+    contents.RestoreExpiryDate = __expectNonNull(__parseRfc3339DateTimeWithOffset(output["RestoreExpiryDate"]));
   }
   return contents;
 };

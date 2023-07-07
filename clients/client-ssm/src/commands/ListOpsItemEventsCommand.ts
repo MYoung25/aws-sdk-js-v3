@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ListOpsItemEventsRequest, ListOpsItemEventsResponse } from "../models/models_1";
 import { de_ListOpsItemEventsCommand, se_ListOpsItemEventsCommand } from "../protocols/Aws_json1_1";
@@ -92,8 +92,7 @@ export interface ListOpsItemEventsCommandOutput extends ListOpsItemEventsRespons
  *    again.</p>
  *
  * @throws {@link OpsItemLimitExceededException} (client fault)
- *  <p>The request caused OpsItems to exceed one or more quotas. For information about OpsItem
- *    quotas, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits">What are the resource limits for OpsCenter?</a>.</p>
+ *  <p>The request caused OpsItems to exceed one or more quotas.</p>
  *
  * @throws {@link OpsItemNotFoundException} (client fault)
  *  <p>The specified OpsItem ID doesn't exist. Verify the ID and try again.</p>

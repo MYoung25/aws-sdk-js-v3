@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -9,10 +10,13 @@ import {
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { AssociateKmsKeyCommandInput, AssociateKmsKeyCommandOutput } from "../commands/AssociateKmsKeyCommand";
 import { CancelExportTaskCommandInput, CancelExportTaskCommandOutput } from "../commands/CancelExportTaskCommand";
@@ -3943,6 +3947,7 @@ const de_DescribeMetricFiltersResponse = (output: any, context: __SerdeContext):
  */
 const de_GetQueryResultsResponse = (output: any, context: __SerdeContext): GetQueryResultsResponse => {
   return take(output, {
+    encryptionKey: __expectString,
     results: _json,
     statistics: (_: any) => de_QueryStatistics(_, context),
     status: __expectString,

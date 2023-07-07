@@ -1,6 +1,6 @@
 // smithy-typescript generated code
-import { createAggregatedClient } from "@aws-sdk/smithy-client";
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/smithy-client";
+import { HttpHandlerOptions as __HttpHandlerOptions } from "@smithy/types";
 
 import {
   CreateIdentitySourceCommand,
@@ -513,7 +513,7 @@ export interface VerifiedPermissions {
  *             control (ABAC) authorization models.</p>
  *          <p>For more information about configuring, administering, and using Amazon Verified Permissions in your
  *             applications, see the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/">Amazon Verified Permissions User Guide</a>.</p>
- *          <p>For more information about the Cedar policy language, see the <a href="docs.cedarpolicy.com">Cedar Policy Language Guide</a>.</p>
+ *          <p>For more information about the Cedar policy language, see the <a href="https://docs.cedarpolicy.com/">Cedar Policy Language Guide</a>.</p>
  *          <important>
  *             <p>When you write Cedar policies that reference principals, resources and actions,
  *                 you can define the unique identifiers used for each of those elements. We strongly

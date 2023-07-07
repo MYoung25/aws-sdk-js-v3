@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { SageMakerFeatureStoreRuntimeServiceException as __BaseException } from "./SageMakerFeatureStoreRuntimeServiceException";
 
@@ -24,6 +24,20 @@ export class AccessForbidden extends __BaseException {
     this.Message = opts.Message;
   }
 }
+
+/**
+ * @public
+ * @enum
+ */
+export const ExpirationTimeResponse = {
+  DISABLED: "Disabled",
+  ENABLED: "Enabled",
+} as const;
+
+/**
+ * @public
+ */
+export type ExpirationTimeResponse = (typeof ExpirationTimeResponse)[keyof typeof ExpirationTimeResponse];
 
 /**
  * @public
@@ -58,6 +72,14 @@ export interface BatchGetRecordRequest {
    *          retrieved in batch.</p>
    */
   Identifiers: BatchGetRecordIdentifier[] | undefined;
+
+  /**
+   * <p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,
+   *          <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is
+   *          not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return
+   *          null.</p>
+   */
+  ExpirationTimeResponse?: ExpirationTimeResponse | string;
 }
 
 /**
@@ -126,6 +148,11 @@ export interface BatchGetRecordResultDetail {
    * <p>The <code>Record</code> retrieved.</p>
    */
   Record: FeatureValue[] | undefined;
+
+  /**
+   * <p>The <code>ExpiresAt</code> ISO string of the requested record.</p>
+   */
+  ExpiresAt?: string;
 }
 
 /**
@@ -299,6 +326,14 @@ export interface GetRecordRequest {
    *          the Features are returned.</p>
    */
   FeatureNames?: string[];
+
+  /**
+   * <p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,
+   *          <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is
+   *          not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return
+   *          null.</p>
+   */
+  ExpirationTimeResponse?: ExpirationTimeResponse | string;
 }
 
 /**
@@ -309,6 +344,11 @@ export interface GetRecordResponse {
    * <p>The record you requested. A list of <code>FeatureValues</code>.</p>
    */
   Record?: FeatureValue[];
+
+  /**
+   * <p>The <code>ExpiresAt</code> ISO string of the requested record.</p>
+   */
+  ExpiresAt?: string;
 }
 
 /**
@@ -331,6 +371,43 @@ export class ResourceNotFound extends __BaseException {
     Object.setPrototypeOf(this, ResourceNotFound.prototype);
     this.Message = opts.Message;
   }
+}
+
+/**
+ * @public
+ * @enum
+ */
+export const TtlDurationUnit = {
+  DAYS: "Days",
+  HOURS: "Hours",
+  MINUTES: "Minutes",
+  SECONDS: "Seconds",
+  WEEKS: "Weeks",
+} as const;
+
+/**
+ * @public
+ */
+export type TtlDurationUnit = (typeof TtlDurationUnit)[keyof typeof TtlDurationUnit];
+
+/**
+ * @public
+ * <p>Time to live duration, where the record is hard deleted after the expiration time is
+ *          reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For
+ *          information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+ */
+export interface TtlDuration {
+  /**
+   * <p>
+   *             <code>TtlDuration</code> time unit.</p>
+   */
+  Unit: TtlDurationUnit | string | undefined;
+
+  /**
+   * <p>
+   *             <code>TtlDuration</code> time value.</p>
+   */
+  Value: number | undefined;
 }
 
 /**
@@ -364,4 +441,11 @@ export interface PutRecordRequest {
    *          record to all of the stores that you're using for the <code>FeatureGroup</code>.</p>
    */
   TargetStores?: (TargetStore | string)[];
+
+  /**
+   * <p>Time to live duration, where the record is hard deleted after the expiration time is
+   *          reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For
+   *          information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
+   */
+  TtlDuration?: TtlDuration;
 }

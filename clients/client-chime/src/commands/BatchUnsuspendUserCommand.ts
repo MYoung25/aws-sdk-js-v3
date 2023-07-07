@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ChimeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeClient";
 import { BatchUnsuspendUserRequest, BatchUnsuspendUserResponse } from "../models/models_0";
@@ -43,11 +43,9 @@ export interface BatchUnsuspendUserCommandOutput extends BatchUnsuspendUserRespo
  *         Managing Your Amazon Chime Accounts
  *     </a> in the account types, in the <i>Amazon Chime Administration Guide</i>.
  * </p>
- *          <p>
- * Previously suspended users who are unsuspended using this action are returned to
+ *          <p>Previously suspended users who are unsuspended using this action are returned to
  * <code>Registered</code>
- * status. Users who are not previously suspended are ignored.
- * </p>
+ * status. Users who are not previously suspended are ignored.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript

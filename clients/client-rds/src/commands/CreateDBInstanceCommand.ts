@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { CreateDBInstanceMessage, CreateDBInstanceResult } from "../models/models_0";
 import { de_CreateDBInstanceCommand, se_CreateDBInstanceCommand } from "../protocols/Aws_query";
@@ -94,6 +94,12 @@ export interface CreateDBInstanceCommandOutput extends CreateDBInstanceResult, _
  *   StorageEncrypted: true || false,
  *   KmsKeyId: "STRING_VALUE",
  *   Domain: "STRING_VALUE",
+ *   DomainFqdn: "STRING_VALUE",
+ *   DomainOu: "STRING_VALUE",
+ *   DomainAuthSecretArn: "STRING_VALUE",
+ *   DomainDnsIps: [ // StringList
+ *     "STRING_VALUE",
+ *   ],
  *   CopyTagsToSnapshot: true || false,
  *   MonitoringInterval: Number("int"),
  *   MonitoringRoleArn: "STRING_VALUE",
@@ -266,6 +272,11 @@ export interface CreateDBInstanceCommandOutput extends CreateDBInstanceResult, _
  * //         Status: "STRING_VALUE",
  * //         FQDN: "STRING_VALUE",
  * //         IAMRoleName: "STRING_VALUE",
+ * //         OU: "STRING_VALUE",
+ * //         AuthSecretArn: "STRING_VALUE",
+ * //         DnsIps: [
+ * //           "STRING_VALUE",
+ * //         ],
  * //       },
  * //     ],
  * //     CopyTagsToSnapshot: true || false,

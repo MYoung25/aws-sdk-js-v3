@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { GlueServiceException as __BaseException } from "./GlueServiceException";
 
@@ -1660,6 +1660,33 @@ export interface DynamoDBTarget {
 
 /**
  * @public
+ * <p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>
+ */
+export interface IcebergTarget {
+  /**
+   * <p>One or more Amazon S3 paths that contains Iceberg metadata folders as <code>s3://bucket/prefix</code>.</p>
+   */
+  Paths?: string[];
+
+  /**
+   * <p>The name of the connection to use to connect to the Iceberg target.</p>
+   */
+  ConnectionName?: string;
+
+  /**
+   * <p>A list of glob patterns used to exclude from the crawl.
+   *       For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.</p>
+   */
+  Exclusions?: string[];
+
+  /**
+   * <p>The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.</p>
+   */
+  MaximumTraversalDepth?: number;
+}
+
+/**
+ * @public
  * @enum
  */
 export const JdbcMetadataEntry = {
@@ -1793,6 +1820,11 @@ export interface CrawlerTargets {
    * <p>Specifies Delta data store targets.</p>
    */
   DeltaTargets?: DeltaTarget[];
+
+  /**
+   * <p>Specifies Apache Iceberg data store targets.</p>
+   */
+  IcebergTargets?: IcebergTarget[];
 }
 
 /**
@@ -2572,6 +2604,12 @@ export interface KafkaStreamingSourceOptions {
    * <p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>
    */
   EmitConsumerLagMetrics?: string;
+
+  /**
+   * <p>The timestamp of the record in the Kafka topic to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00"). </p>
+   *          <p>Only one of <code>StartingTimestamp</code> or <code>StartingOffsets</code> must be set.</p>
+   */
+  StartingTimestamp?: Date;
 }
 
 /**
@@ -2622,6 +2660,7 @@ export interface CatalogKafkaSource {
 export const StartingPosition = {
   EARLIEST: "earliest",
   LATEST: "latest",
+  TIMESTAMP: "timestamp",
   TRIM_HORIZON: "trim_horizon",
 } as const;
 
@@ -2656,7 +2695,8 @@ export interface KinesisStreamingSourceOptions {
   Delimiter?: string;
 
   /**
-   * <p>The starting position in the Kinesis data stream to read data from. The possible values are <code>"latest"</code>, <code>"trim_horizon"</code>, or <code>"earliest"</code>. The default value is <code>"latest"</code>.</p>
+   * <p>The starting position in the Kinesis data stream to read data from. The possible values are <code>"latest"</code>, <code>"trim_horizon"</code>, <code>"earliest"</code>, or a timestamp string in UTC format in the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where <code>Z</code> represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00-04:00"). The default value is <code>"latest"</code>.</p>
+   *          <p>Note: Using a value that is a timestamp string in UTC format for "startingPosition" is supported only for Glue version 4.0 or later.</p>
    */
   StartingPosition?: StartingPosition | string;
 
@@ -2734,6 +2774,11 @@ export interface KinesisStreamingSourceOptions {
    * <p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue  to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>
    */
   EmitConsumerLagMetrics?: string;
+
+  /**
+   * <p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00"). </p>
+   */
+  StartingTimestamp?: Date;
 }
 
 /**
@@ -8185,21 +8230,4 @@ export interface MLUserDataEncryption {
    * <p>The ID for the customer-provided KMS key.</p>
    */
   KmsKeyId?: string;
-}
-
-/**
- * @public
- * <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
- *          <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>
- */
-export interface TransformEncryption {
-  /**
-   * <p>An <code>MLUserDataEncryption</code> object containing the encryption mode and customer-provided KMS key ID.</p>
-   */
-  MlUserDataEncryption?: MLUserDataEncryption;
-
-  /**
-   * <p>The name of the security configuration.</p>
-   */
-  TaskRunSecurityConfigurationName?: string;
 }

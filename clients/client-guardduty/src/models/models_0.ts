@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { GuardDutyServiceException as __BaseException } from "./GuardDutyServiceException";
 
@@ -4145,6 +4145,12 @@ export interface KubernetesUserDetails {
    * <p>The groups that include the user who called the Kubernetes API.</p>
    */
   Groups?: string[];
+
+  /**
+   * <p>Entity that assumes the IAM role
+   *       when Kubernetes RBAC permissions are assigned to that role.</p>
+   */
+  SessionName?: string[];
 }
 
 /**

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
 import { CreateApplicationRequest, CreateApplicationResult } from "../models/models_0";
@@ -55,7 +55,7 @@ export interface CreateApplicationCommandOutput extends CreateApplicationResult,
  *   Description: "STRING_VALUE",
  *   IconS3Location: { // S3Location
  *     S3Bucket: "STRING_VALUE", // required
- *     S3Key: "STRING_VALUE", // required
+ *     S3Key: "STRING_VALUE",
  *   },
  *   LaunchPath: "STRING_VALUE", // required
  *   WorkingDirectory: "STRING_VALUE",
@@ -90,7 +90,7 @@ export interface CreateApplicationCommandOutput extends CreateApplicationResult,
  * //     AppBlockArn: "STRING_VALUE",
  * //     IconS3Location: { // S3Location
  * //       S3Bucket: "STRING_VALUE", // required
- * //       S3Key: "STRING_VALUE", // required
+ * //       S3Key: "STRING_VALUE",
  * //     },
  * //     Platforms: [ // Platforms
  * //       "WINDOWS" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "AMAZON_LINUX2",

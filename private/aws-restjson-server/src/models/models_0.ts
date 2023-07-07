@@ -1,10 +1,5 @@
 // smithy-typescript generated code
 import {
-  ExceptionOptionType as __ExceptionOptionType,
-  LazyJsonString as __LazyJsonString,
-} from "@aws-sdk/smithy-client";
-import { DocumentType as __DocumentType } from "@aws-sdk/types";
-import {
   CompositeCollectionValidator as __CompositeCollectionValidator,
   CompositeMapValidator as __CompositeMapValidator,
   CompositeStructureValidator as __CompositeStructureValidator,
@@ -18,6 +13,11 @@ import {
   UniqueItemsValidator as __UniqueItemsValidator,
   ValidationFailure as __ValidationFailure,
 } from "@aws-smithy/server-common";
+import {
+  ExceptionOptionType as __ExceptionOptionType,
+  LazyJsonString as __LazyJsonString,
+} from "@smithy/smithy-client";
+import { DocumentType as __DocumentType } from "@smithy/types";
 import { Readable } from "stream";
 
 /**
@@ -4432,6 +4432,47 @@ export namespace PostUnionWithJsonNameOutput {
       return memberValidators[member]!;
     }
     return [...getMemberValidator("value").validate(obj.value, `${path}/value`)];
+  };
+}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
+}
+
+export namespace PutWithContentEncodingInput {
+  const memberValidators: {
+    encoding?: __MultiConstraintValidator<string>;
+    data?: __MultiConstraintValidator<string>;
+  } = {};
+  /**
+   * @internal
+   */
+  export const validate = (obj: PutWithContentEncodingInput, path = ""): __ValidationFailure[] => {
+    function getMemberValidator<T extends keyof typeof memberValidators>(
+      member: T
+    ): NonNullable<(typeof memberValidators)[T]> {
+      if (memberValidators[member] === undefined) {
+        switch (member) {
+          case "encoding": {
+            memberValidators["encoding"] = new __NoOpValidator();
+            break;
+          }
+          case "data": {
+            memberValidators["data"] = new __NoOpValidator();
+            break;
+          }
+        }
+      }
+      return memberValidators[member]!;
+    }
+    return [
+      ...getMemberValidator("encoding").validate(obj.encoding, `${path}/encoding`),
+      ...getMemberValidator("data").validate(obj.data, `${path}/data`),
+    ];
   };
 }
 

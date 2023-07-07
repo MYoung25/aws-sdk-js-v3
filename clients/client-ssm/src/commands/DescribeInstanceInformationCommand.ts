@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { DescribeInstanceInformationRequest, DescribeInstanceInformationResult } from "../models/models_0";
 import { de_DescribeInstanceInformationCommand, se_DescribeInstanceInformationCommand } from "../protocols/Aws_json1_1";
@@ -36,16 +36,15 @@ export interface DescribeInstanceInformationCommandOutput extends DescribeInstan
 
 /**
  * @public
- * <p>Describes one or more of your managed nodes, including information about the operating
- *    system platform, the version of SSM Agent installed on the managed node, node status, and so
- *    on.</p>
- *          <p>If you specify one or more managed node IDs, it returns information for those managed nodes.
- *    If you don't specify node IDs, it returns information for all your managed nodes. If you specify
- *    a node ID that isn't valid or a node that you don't own, you receive an error.</p>
+ * <p>Provides information about one or more of your managed nodes, including the operating system
+ *    platform, SSM Agent version, association status, and IP address. This operation does not return
+ *    information for nodes that are either Stopped or Terminated.</p>
+ *          <p>If you specify one or more node IDs, the operation returns information for those managed
+ *    nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you
+ *    specify a node ID that isn't valid or a node that you don't own, you receive an error.</p>
  *          <note>
- *             <p>The <code>IamRole</code> field for this API operation is the Identity and Access Management
- *      (IAM) role assigned to on-premises managed nodes. This call doesn't return the
- *      IAM role for EC2 instances.</p>
+ *             <p>The <code>IamRole</code> field returned for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This operation does not
+ *     return the IAM role for EC2 instances.</p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.

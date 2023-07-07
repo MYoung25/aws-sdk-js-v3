@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
 import { SuspendContactRecordingRequest, SuspendContactRecordingResponse } from "../models/models_1";
@@ -37,9 +37,10 @@ export interface SuspendContactRecordingCommandOutput extends SuspendContactReco
 /**
  * @public
  * <p>When a contact is being recorded, this API suspends recording the call or screen. For
- *    example, you might suspend the call or screen recording while collecting sensitive
- *    information, such as a credit card number. Then use ResumeContactRecording to restart recording.</p>
- *          <p>The period of time that the recording is suspended is filled with silence in the final recording.</p>
+ *    example, you might suspend the call or screen recording while collecting sensitive information,
+ *    such as a credit card number. Then use ResumeContactRecording to restart recording.</p>
+ *          <p>The period of time that the recording is suspended is filled with silence in the final
+ *    recording.</p>
  *          <p>Voice and screen recordings are supported.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.

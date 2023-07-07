@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   _json,
   collectBody,
@@ -14,10 +15,12 @@ import {
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { CancelJobCommandInput, CancelJobCommandOutput } from "../commands/CancelJobCommand";
 import {
@@ -133,6 +136,7 @@ import {
   PlatformCapability,
   ResourceRequirement,
   RetryStrategy,
+  RuntimePlatform,
   SchedulingPolicyDetail,
   Secret,
   ServerException,
@@ -2273,6 +2277,8 @@ const se_FairsharePolicy = (input: FairsharePolicy, context: __SerdeContext): an
 
 // se_RetryStrategy omitted.
 
+// se_RuntimePlatform omitted.
+
 // se_Secret omitted.
 
 // se_SecretList omitted.
@@ -2500,6 +2506,8 @@ const de_FairsharePolicy = (output: any, context: __SerdeContext): FairsharePoli
 // de_ResourceRequirements omitted.
 
 // de_RetryStrategy omitted.
+
+// de_RuntimePlatform omitted.
 
 /**
  * deserializeAws_restJson1SchedulingPolicyDetail

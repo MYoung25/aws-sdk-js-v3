@@ -1,6 +1,6 @@
 {
   "name": "@aws-sdk/middleware-retry",
-  "version": "3.357.0",
+  "version": "3.366.0",
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
     "build:cjs": "tsc -p tsconfig.cjs.json",
@@ -10,8 +10,7 @@
     "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
     "clean": "rimraf ./dist-* && rimraf *.tsbuildinfo",
     "extract:docs": "api-extractor run --local",
-    "test": "jest",
-    "test:integration": "jest -c jest.config.integ.js"
+    "test": "jest"
   },
   "main": "./dist-cjs/index.js",
   "module": "./dist-es/index.js",

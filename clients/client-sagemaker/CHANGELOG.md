@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.365.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.364.0...v3.365.0) (2023-07-03)
+
+
+### Features
+
+* **client-sagemaker:** SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints. ([7994c9d](https://github.com/aws/aws-sdk-js-v3/commit/7994c9d86ffe413039289edbe3fc7e3113d56526))
+
+
+
+
+
+# [3.364.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.363.0...v3.364.0) (2023-06-30)
+
+
+### Features
+
+* **client-sagemaker:** This release adds support for rolling deployment in SageMaker Inference. ([83d2ff0](https://github.com/aws/aws-sdk-js-v3/commit/83d2ff0897ae0bc07d3000f82580b7e4bd94b94d))
+
+
+
+
+
+# [3.363.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.362.0...v3.363.0) (2023-06-29)
+
+
+### Features
+
+* **client-sagemaker:** Adding support for timeseries forecasting in the CreateAutoMLJobV2 API. ([1c2f6f0](https://github.com/aws/aws-sdk-js-v3/commit/1c2f6f07c99c638dd0683f15b47478157e046f14))
+* **clients:** use migrated [@smithy](https://github.com/smithy) packages ([#4873](https://github.com/aws/aws-sdk-js-v3/issues/4873)) ([d036e2e](https://github.com/aws/aws-sdk-js-v3/commit/d036e2e43cd33cfd497871f97dde907c3078b2fd))
+
+
+
+
+
+# [3.362.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.361.0...v3.362.0) (2023-06-28)
+
+
+### Features
+
+* **client-sagemaker:** This release adds support for Model Cards Model Registry integration. ([75339d2](https://github.com/aws/aws-sdk-js-v3/commit/75339d289ed4aede2aa3e4d325eab3327769d89c))
+
+
+
+
+
+# [3.361.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.360.0...v3.361.0) (2023-06-27)
+
+
+### Features
+
+* **client-sagemaker:** Introducing TTL for online store records in feature groups. ([9e6d60d](https://github.com/aws/aws-sdk-js-v3/commit/9e6d60d0d26333dc6f4b01c65b1607793d4bfcbd))
+
+
+
+
+
+# [3.360.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.359.0...v3.360.0) (2023-06-26)
+
+**Note:** Version bump only for package @aws-sdk/client-sagemaker
+
+
+
+
+
 # [3.359.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.358.0...v3.359.0) (2023-06-23)
 
 **Note:** Version bump only for package @aws-sdk/client-sagemaker

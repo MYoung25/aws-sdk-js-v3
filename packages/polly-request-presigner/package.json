@@ -1,6 +1,6 @@
 {
   "name": "@aws-sdk/polly-request-presigner",
-  "version": "3.359.0",
+  "version": "3.363.0",
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
     "build:cjs": "tsc -p tsconfig.cjs.json",
@@ -22,10 +22,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@aws-sdk/client-polly": "*",
-    "@aws-sdk/protocol-http": "*",
-    "@aws-sdk/signature-v4": "*",
     "@aws-sdk/types": "*",
     "@aws-sdk/util-format-url": "*",
+    "@smithy/protocol-http": "^1.1.0",
+    "@smithy/signature-v4": "^1.0.1",
+    "@smithy/types": "^1.1.0",
     "tslib": "^2.5.0"
   },
   "devDependencies": {

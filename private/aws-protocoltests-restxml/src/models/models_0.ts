@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { RestXmlProtocolServiceException as __BaseException } from "./RestXmlProtocolServiceException";
 
@@ -405,6 +405,14 @@ export interface NullAndEmptyHeadersIO {
 export interface OmitsNullSerializesEmptyStringInput {
   nullValue?: string;
   emptyString?: string;
+}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
 }
 
 /**

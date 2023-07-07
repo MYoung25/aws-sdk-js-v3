@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,12 +10,10 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
-import { SearchResponse, SearchResponseFilterSensitiveLog } from "../models/models_3";
-import { SearchRequest } from "../models/models_4";
+import { SearchRequest, SearchResponse, SearchResponseFilterSensitiveLog } from "../models/models_4";
 import { de_SearchCommand, se_SearchCommand } from "../protocols/Aws_json1_1";
 import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
 
@@ -871,7 +870,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //           DestinationS3Uri: "STRING_VALUE", // required
  * //           KmsKeyId: "STRING_VALUE", // required
  * //         },
- * //         EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed", // required
+ * //         EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed" || "UpdateRollbackFailed", // required
  * //         FailureReason: "STRING_VALUE",
  * //         CreationTime: new Date("TIMESTAMP"), // required
  * //         LastModifiedTime: new Date("TIMESTAMP"), // required
@@ -1333,6 +1332,10 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //             KmsKeyId: "STRING_VALUE",
  * //           },
  * //           EnableOnlineStore: true || false,
+ * //           TtlDuration: { // TtlDuration
+ * //             Unit: "Seconds" || "Minutes" || "Hours" || "Days" || "Weeks",
+ * //             Value: Number("int"),
+ * //           },
  * //         },
  * //         OfflineStoreConfig: { // OfflineStoreConfig
  * //           S3StorageConfig: { // S3StorageConfig
@@ -1769,7 +1772,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //             EndpointArn: "STRING_VALUE", // required
  * //             CreationTime: new Date("TIMESTAMP"), // required
  * //             LastModifiedTime: new Date("TIMESTAMP"), // required
- * //             EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed", // required
+ * //             EndpointStatus: "OutOfService" || "Creating" || "Updating" || "SystemUpdating" || "RollingBack" || "InService" || "Deleting" || "Failed" || "UpdateRollbackFailed", // required
  * //           },
  * //         ],
  * //         LastBatchTransformJob: {
@@ -1972,6 +1975,7 @@ export interface SearchCommandOutput extends SearchResponse, __MetadataBearer {}
  * //         Tags: "<TagList>",
  * //         ModelId: "STRING_VALUE",
  * //         RiskRating: "STRING_VALUE",
+ * //         ModelPackageGroupName: "STRING_VALUE",
  * //       },
  * //     },
  * //   ],

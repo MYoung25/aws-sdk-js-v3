@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@smithy/smithy-client";
 
 import {
   AlarmConfiguration,
@@ -129,6 +129,10 @@ export interface DescribeOpsItemsRequest {
    *             </li>
    *             <li>
    *                <p>Key: AutomationId</p>
+   *                <p>Operations: Equals</p>
+   *             </li>
+   *             <li>
+   *                <p>Key: AccountId</p>
    *                <p>Operations: Equals</p>
    *             </li>
    *          </ul>
@@ -3434,7 +3438,8 @@ export interface OpsItem {
    *          <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in
    *    the request. Use the <code>/aws/automations</code> key in OperationalData to associate an
    *    Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see
-   *     <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+   *     <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html">Creating OpsItems
+   *     manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
    */
   OperationalData?: Record<string, OpsItemDataValue>;
 
@@ -8235,9 +8240,9 @@ export interface PutParameterRequest {
    *     validated asynchronously, and the <code>PutParameter</code> call returns before the validation
    *     is complete. If you submit an invalid AMI value, the PutParameter operation will return success,
    *     but the asynchronous validation will fail and the parameter will not be created or updated. To
-   *     monitor whether your <code>aws:ec2:image</code> parameters are created successfully,  see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html">Setting
-   *      up notifications or trigger actions based on Parameter Store events</a>.  For more
-   *     information about  AMI format validation , see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter
+   *     monitor whether your <code>aws:ec2:image</code> parameters are created successfully, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html">Setting
+   *      up notifications or trigger actions based on Parameter Store events</a>. For more
+   *     information about AMI format validation , see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter
    *      support for Amazon Machine Image (AMI) IDs</a>. </p>
    *          </note>
    */

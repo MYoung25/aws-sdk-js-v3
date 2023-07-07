@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType } from "@smithy/smithy-client";
 
 import { QueryProtocolServiceException as __BaseException } from "./QueryProtocolServiceException";
 
@@ -182,6 +182,14 @@ export interface NoInputAndOutputInput {}
  * @public
  */
 export interface NoInputAndOutputOutput {}
+
+/**
+ * @public
+ */
+export interface PutWithContentEncodingInput {
+  encoding?: string;
+  data?: string;
+}
 
 /**
  * @public

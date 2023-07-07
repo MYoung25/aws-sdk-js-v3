@@ -1,7 +1,4 @@
 // smithy-typescript generated code
-import { RegionInputConfig, RegionResolvedConfig, resolveRegionConfig } from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import { EndpointInputConfig, EndpointResolvedConfig, resolveEndpointConfig } from "@aws-sdk/middleware-endpoint";
 import {
   getHostHeaderPlugin,
   HostHeaderInputConfig,
@@ -10,7 +7,6 @@ import {
 } from "@aws-sdk/middleware-host-header";
 import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
 import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
 import {
   AwsAuthInputConfig,
   AwsAuthResolvedConfig,
@@ -23,34 +19,40 @@ import {
   UserAgentInputConfig,
   UserAgentResolvedConfig,
 } from "@aws-sdk/middleware-user-agent";
+import { Credentials as __Credentials } from "@aws-sdk/types";
+import { RegionInputConfig, RegionResolvedConfig, resolveRegionConfig } from "@smithy/config-resolver";
+import { getContentLengthPlugin } from "@smithy/middleware-content-length";
+import { EndpointInputConfig, EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/middleware-endpoint";
+import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@smithy/middleware-retry";
+import { HttpHandler as __HttpHandler } from "@smithy/protocol-http";
 import {
   Client as __Client,
   DefaultsMode as __DefaultsMode,
   SmithyConfiguration as __SmithyConfiguration,
   SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/smithy-client";
 import {
   BodyLengthCalculator as __BodyLengthCalculator,
   Checksum as __Checksum,
   ChecksumConstructor as __ChecksumConstructor,
-  Credentials as __Credentials,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
   EndpointV2 as __EndpointV2,
   Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
+  Provider as __Provider,
   Provider,
+  StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
-import { HttpHandler as __HttpHandler } from "@smithy/protocol-http";
-import {
-  Decoder as __Decoder,
-  Encoder as __Encoder,
-  Provider as __Provider,
-  StreamCollector as __StreamCollector,
 } from "@smithy/types";
 
+import {
+  AssociateAppBlockBuilderAppBlockCommandInput,
+  AssociateAppBlockBuilderAppBlockCommandOutput,
+} from "./commands/AssociateAppBlockBuilderAppBlockCommand";
 import {
   AssociateApplicationFleetCommandInput,
   AssociateApplicationFleetCommandOutput,
@@ -69,6 +71,14 @@ import {
   BatchDisassociateUserStackCommandOutput,
 } from "./commands/BatchDisassociateUserStackCommand";
 import { CopyImageCommandInput, CopyImageCommandOutput } from "./commands/CopyImageCommand";
+import {
+  CreateAppBlockBuilderCommandInput,
+  CreateAppBlockBuilderCommandOutput,
+} from "./commands/CreateAppBlockBuilderCommand";
+import {
+  CreateAppBlockBuilderStreamingURLCommandInput,
+  CreateAppBlockBuilderStreamingURLCommandOutput,
+} from "./commands/CreateAppBlockBuilderStreamingURLCommand";
 import { CreateAppBlockCommandInput, CreateAppBlockCommandOutput } from "./commands/CreateAppBlockCommand";
 import { CreateApplicationCommandInput, CreateApplicationCommandOutput } from "./commands/CreateApplicationCommand";
 import {
@@ -90,6 +100,10 @@ import {
   CreateUsageReportSubscriptionCommandOutput,
 } from "./commands/CreateUsageReportSubscriptionCommand";
 import { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+import {
+  DeleteAppBlockBuilderCommandInput,
+  DeleteAppBlockBuilderCommandOutput,
+} from "./commands/DeleteAppBlockBuilderCommand";
 import { DeleteAppBlockCommandInput, DeleteAppBlockCommandOutput } from "./commands/DeleteAppBlockCommand";
 import { DeleteApplicationCommandInput, DeleteApplicationCommandOutput } from "./commands/DeleteApplicationCommand";
 import {
@@ -110,6 +124,14 @@ import {
   DeleteUsageReportSubscriptionCommandOutput,
 } from "./commands/DeleteUsageReportSubscriptionCommand";
 import { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+import {
+  DescribeAppBlockBuilderAppBlockAssociationsCommandInput,
+  DescribeAppBlockBuilderAppBlockAssociationsCommandOutput,
+} from "./commands/DescribeAppBlockBuilderAppBlockAssociationsCommand";
+import {
+  DescribeAppBlockBuildersCommandInput,
+  DescribeAppBlockBuildersCommandOutput,
+} from "./commands/DescribeAppBlockBuildersCommand";
 import { DescribeAppBlocksCommandInput, DescribeAppBlocksCommandOutput } from "./commands/DescribeAppBlocksCommand";
 import {
   DescribeApplicationFleetAssociationsCommandInput,
@@ -150,6 +172,10 @@ import {
 } from "./commands/DescribeUserStackAssociationsCommand";
 import { DisableUserCommandInput, DisableUserCommandOutput } from "./commands/DisableUserCommand";
 import {
+  DisassociateAppBlockBuilderAppBlockCommandInput,
+  DisassociateAppBlockBuilderAppBlockCommandOutput,
+} from "./commands/DisassociateAppBlockBuilderAppBlockCommand";
+import {
   DisassociateApplicationFleetCommandInput,
   DisassociateApplicationFleetCommandOutput,
 } from "./commands/DisassociateApplicationFleetCommand";
@@ -176,12 +202,24 @@ import {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
+import {
+  StartAppBlockBuilderCommandInput,
+  StartAppBlockBuilderCommandOutput,
+} from "./commands/StartAppBlockBuilderCommand";
 import { StartFleetCommandInput, StartFleetCommandOutput } from "./commands/StartFleetCommand";
 import { StartImageBuilderCommandInput, StartImageBuilderCommandOutput } from "./commands/StartImageBuilderCommand";
+import {
+  StopAppBlockBuilderCommandInput,
+  StopAppBlockBuilderCommandOutput,
+} from "./commands/StopAppBlockBuilderCommand";
 import { StopFleetCommandInput, StopFleetCommandOutput } from "./commands/StopFleetCommand";
 import { StopImageBuilderCommandInput, StopImageBuilderCommandOutput } from "./commands/StopImageBuilderCommand";
 import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import {
+  UpdateAppBlockBuilderCommandInput,
+  UpdateAppBlockBuilderCommandOutput,
+} from "./commands/UpdateAppBlockBuilderCommand";
 import { UpdateApplicationCommandInput, UpdateApplicationCommandOutput } from "./commands/UpdateApplicationCommand";
 import {
   UpdateDirectoryConfigCommandInput,
@@ -208,12 +246,15 @@ export { __Client };
  * @public
  */
 export type ServiceInputTypes =
+  | AssociateAppBlockBuilderAppBlockCommandInput
   | AssociateApplicationFleetCommandInput
   | AssociateApplicationToEntitlementCommandInput
   | AssociateFleetCommandInput
   | BatchAssociateUserStackCommandInput
   | BatchDisassociateUserStackCommandInput
   | CopyImageCommandInput
+  | CreateAppBlockBuilderCommandInput
+  | CreateAppBlockBuilderStreamingURLCommandInput
   | CreateAppBlockCommandInput
   | CreateApplicationCommandInput
   | CreateDirectoryConfigCommandInput
@@ -226,6 +267,7 @@ export type ServiceInputTypes =
   | CreateUpdatedImageCommandInput
   | CreateUsageReportSubscriptionCommandInput
   | CreateUserCommandInput
+  | DeleteAppBlockBuilderCommandInput
   | DeleteAppBlockCommandInput
   | DeleteApplicationCommandInput
   | DeleteDirectoryConfigCommandInput
@@ -237,6 +279,8 @@ export type ServiceInputTypes =
   | DeleteStackCommandInput
   | DeleteUsageReportSubscriptionCommandInput
   | DeleteUserCommandInput
+  | DescribeAppBlockBuilderAppBlockAssociationsCommandInput
+  | DescribeAppBlockBuildersCommandInput
   | DescribeAppBlocksCommandInput
   | DescribeApplicationFleetAssociationsCommandInput
   | DescribeApplicationsCommandInput
@@ -252,6 +296,7 @@ export type ServiceInputTypes =
   | DescribeUserStackAssociationsCommandInput
   | DescribeUsersCommandInput
   | DisableUserCommandInput
+  | DisassociateAppBlockBuilderAppBlockCommandInput
   | DisassociateApplicationFleetCommandInput
   | DisassociateApplicationFromEntitlementCommandInput
   | DisassociateFleetCommandInput
@@ -261,12 +306,15 @@ export type ServiceInputTypes =
   | ListAssociatedStacksCommandInput
   | ListEntitledApplicationsCommandInput
   | ListTagsForResourceCommandInput
+  | StartAppBlockBuilderCommandInput
   | StartFleetCommandInput
   | StartImageBuilderCommandInput
+  | StopAppBlockBuilderCommandInput
   | StopFleetCommandInput
   | StopImageBuilderCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateAppBlockBuilderCommandInput
   | UpdateApplicationCommandInput
   | UpdateDirectoryConfigCommandInput
   | UpdateEntitlementCommandInput
@@ -278,12 +326,15 @@ export type ServiceInputTypes =
  * @public
  */
 export type ServiceOutputTypes =
+  | AssociateAppBlockBuilderAppBlockCommandOutput
   | AssociateApplicationFleetCommandOutput
   | AssociateApplicationToEntitlementCommandOutput
   | AssociateFleetCommandOutput
   | BatchAssociateUserStackCommandOutput
   | BatchDisassociateUserStackCommandOutput
   | CopyImageCommandOutput
+  | CreateAppBlockBuilderCommandOutput
+  | CreateAppBlockBuilderStreamingURLCommandOutput
   | CreateAppBlockCommandOutput
   | CreateApplicationCommandOutput
   | CreateDirectoryConfigCommandOutput
@@ -296,6 +347,7 @@ export type ServiceOutputTypes =
   | CreateUpdatedImageCommandOutput
   | CreateUsageReportSubscriptionCommandOutput
   | CreateUserCommandOutput
+  | DeleteAppBlockBuilderCommandOutput
   | DeleteAppBlockCommandOutput
   | DeleteApplicationCommandOutput
   | DeleteDirectoryConfigCommandOutput
@@ -307,6 +359,8 @@ export type ServiceOutputTypes =
   | DeleteStackCommandOutput
   | DeleteUsageReportSubscriptionCommandOutput
   | DeleteUserCommandOutput
+  | DescribeAppBlockBuilderAppBlockAssociationsCommandOutput
+  | DescribeAppBlockBuildersCommandOutput
   | DescribeAppBlocksCommandOutput
   | DescribeApplicationFleetAssociationsCommandOutput
   | DescribeApplicationsCommandOutput
@@ -322,6 +376,7 @@ export type ServiceOutputTypes =
   | DescribeUserStackAssociationsCommandOutput
   | DescribeUsersCommandOutput
   | DisableUserCommandOutput
+  | DisassociateAppBlockBuilderAppBlockCommandOutput
   | DisassociateApplicationFleetCommandOutput
   | DisassociateApplicationFromEntitlementCommandOutput
   | DisassociateFleetCommandOutput
@@ -331,12 +386,15 @@ export type ServiceOutputTypes =
   | ListAssociatedStacksCommandOutput
   | ListEntitledApplicationsCommandOutput
   | ListTagsForResourceCommandOutput
+  | StartAppBlockBuilderCommandOutput
   | StartFleetCommandOutput
   | StartImageBuilderCommandOutput
+  | StopAppBlockBuilderCommandOutput
   | StopFleetCommandOutput
   | StopImageBuilderCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateAppBlockBuilderCommandOutput
   | UpdateApplicationCommandOutput
   | UpdateDirectoryConfigCommandOutput
   | UpdateEntitlementCommandOutput
@@ -354,7 +412,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   requestHandler?: __HttpHandler;
 
   /**
-   * A constructor for a class implementing the {@link @aws-sdk/types#ChecksumConstructor} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
@@ -463,7 +521,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   logger?: __Logger;
 
   /**
-   * The {@link @aws-sdk/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
    */
   defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }

@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { SENSITIVE_STRING } from "@smithy/smithy-client";
 
 import {
   ActionSource,
@@ -78,7 +78,6 @@ import {
   TransformOutput,
   TransformResources,
   UserContext,
-  UserSettings,
   VpcConfig,
 } from "./models_0";
 import {
@@ -174,8 +173,94 @@ import {
   TrialComponentArtifact,
   TrialComponentParameterValue,
   TrialComponentStatus,
+  UserSettings,
   VendorGuidance,
 } from "./models_1";
+
+/**
+ * @public
+ */
+export interface DeleteHumanTaskUiResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteImageRequest {
+  /**
+   * <p>The name of the image to delete.</p>
+   */
+  ImageName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteImageResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteImageVersionRequest {
+  /**
+   * <p>The name of the image to delete.</p>
+   */
+  ImageName: string | undefined;
+
+  /**
+   * <p>The version to delete.</p>
+   */
+  Version?: number;
+
+  /**
+   * <p>The alias of the image to delete.</p>
+   */
+  Alias?: string;
+}
+
+/**
+ * @public
+ */
+export interface DeleteImageVersionResponse {}
+
+/**
+ * @public
+ */
+export interface DeleteInferenceExperimentRequest {
+  /**
+   * <p>The name of the inference experiment you want to delete.</p>
+   */
+  Name: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteInferenceExperimentResponse {
+  /**
+   * <p>The ARN of the deleted inference experiment.</p>
+   */
+  InferenceExperimentArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteModelInput {
+  /**
+   * <p>The name of the model to delete.</p>
+   */
+  ModelName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteModelBiasJobDefinitionRequest {
+  /**
+   * <p>The name of the model bias job definition to delete.</p>
+   */
+  JobDefinitionName: string | undefined;
+}
 
 /**
  * @public
@@ -2186,6 +2271,7 @@ export const EndpointStatus = {
   OUT_OF_SERVICE: "OutOfService",
   ROLLING_BACK: "RollingBack",
   SYSTEM_UPDATING: "SystemUpdating",
+  UPDATE_ROLLBACK_FAILED: "UpdateRollbackFailed",
   UPDATING: "Updating",
 } as const;
 
@@ -4349,12 +4435,17 @@ export interface EndpointOutputConfiguration {
   /**
    * <p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>
    */
-  InstanceType: ProductionVariantInstanceType | string | undefined;
+  InstanceType?: ProductionVariantInstanceType | string;
 
   /**
    * <p>The number of instances recommended to launch initially.</p>
    */
-  InitialInstanceCount: number | undefined;
+  InitialInstanceCount?: number;
+
+  /**
+   * <p>Specifies the serverless configuration for an endpoint variant.</p>
+   */
+  ServerlessConfig?: ProductionVariantServerlessConfig;
 }
 
 /**
@@ -4395,6 +4486,15 @@ export interface RecommendationMetrics {
    *             <code>NaN</code> indicates that the value is not available.</p>
    */
   MemoryUtilization?: number;
+
+  /**
+   * <p>The time it takes to launch new compute resources for a serverless endpoint.
+   *          The time can vary depending on the model size, how long it takes to download the
+   *          model, and the start-up time of the container.</p>
+   *          <p>
+   *             <code>NaN</code> indicates that the value is not available.</p>
+   */
+  ModelSetupTime?: number;
 }
 
 /**
@@ -10011,205 +10111,6 @@ export const ResourceType = {
  * @public
  */
 export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
-
-/**
- * @public
- * <p>Part of the <code>SuggestionQuery</code> type. Specifies a hint for retrieving property
- *       names that begin with the specified text.</p>
- */
-export interface PropertyNameQuery {
-  /**
-   * <p>Text that begins a property's name.</p>
-   */
-  PropertyNameHint: string | undefined;
-}
-
-/**
- * @public
- * <p>Specified in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_GetSearchSuggestions.html">GetSearchSuggestions</a> request.
- *       Limits the property names that are included in the response.</p>
- */
-export interface SuggestionQuery {
-  /**
-   * <p>Defines a property name hint. Only property
-   *       names that begin with the specified hint are included in the response.</p>
-   */
-  PropertyNameQuery?: PropertyNameQuery;
-}
-
-/**
- * @public
- */
-export interface GetSearchSuggestionsRequest {
-  /**
-   * <p>The name of the SageMaker resource to search for.</p>
-   */
-  Resource: ResourceType | string | undefined;
-
-  /**
-   * <p>Limits the property names that are included in the response.</p>
-   */
-  SuggestionQuery?: SuggestionQuery;
-}
-
-/**
- * @public
- * <p>A property name returned from a <code>GetSearchSuggestions</code> call that specifies
- *       a value in the <code>PropertyNameQuery</code> field.</p>
- */
-export interface PropertyNameSuggestion {
-  /**
-   * <p>A suggested property name based on what you entered in the search textbox in the SageMaker
-   *       console.</p>
-   */
-  PropertyName?: string;
-}
-
-/**
- * @public
- */
-export interface GetSearchSuggestionsResponse {
-  /**
-   * <p>A list of property names for a <code>Resource</code> that match a
-   *       <code>SuggestionQuery</code>.</p>
-   */
-  PropertyNameSuggestions?: PropertyNameSuggestion[];
-}
-
-/**
- * @public
- * <p>Specifies configuration details for a Git repository when the repository is
- *             updated.</p>
- */
-export interface GitConfigForUpdate {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that
-   *             contains the credentials used to access the git repository. The secret must have a
-   *             staging label of <code>AWSCURRENT</code> and must be in the following format:</p>
-   *          <p>
-   *             <code>\{"username": <i>UserName</i>, "password":
-   *                     <i>Password</i>\}</code>
-   *          </p>
-   */
-  SecretArn?: string;
-}
-
-/**
- * @public
- * <p>Information about hub content.</p>
- */
-export interface HubContentInfo {
-  /**
-   * <p>The name of the hub content.</p>
-   */
-  HubContentName: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hub content.</p>
-   */
-  HubContentArn: string | undefined;
-
-  /**
-   * <p>The version of the hub content.</p>
-   */
-  HubContentVersion: string | undefined;
-
-  /**
-   * <p>The type of hub content.</p>
-   */
-  HubContentType: HubContentType | string | undefined;
-
-  /**
-   * <p>The version of the hub content document schema.</p>
-   */
-  DocumentSchemaVersion: string | undefined;
-
-  /**
-   * <p>The display name of the hub content.</p>
-   */
-  HubContentDisplayName?: string;
-
-  /**
-   * <p>A description of the hub content.</p>
-   */
-  HubContentDescription?: string;
-
-  /**
-   * <p>The searchable keywords for the hub content.</p>
-   */
-  HubContentSearchKeywords?: string[];
-
-  /**
-   * <p>The status of the hub content.</p>
-   */
-  HubContentStatus: HubContentStatus | string | undefined;
-
-  /**
-   * <p>The date and time that the hub content was created.</p>
-   */
-  CreationTime: Date | undefined;
-}
-
-/**
- * @public
- * @enum
- */
-export const HubContentSortBy = {
-  CREATION_TIME: "CreationTime",
-  HUB_CONTENT_NAME: "HubContentName",
-  HUB_CONTENT_STATUS: "HubContentStatus",
-} as const;
-
-/**
- * @public
- */
-export type HubContentSortBy = (typeof HubContentSortBy)[keyof typeof HubContentSortBy];
-
-/**
- * @public
- * <p>Information about a hub.</p>
- */
-export interface HubInfo {
-  /**
-   * <p>The name of the hub.</p>
-   */
-  HubName: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hub.</p>
-   */
-  HubArn: string | undefined;
-
-  /**
-   * <p>The display name of the hub.</p>
-   */
-  HubDisplayName?: string;
-
-  /**
-   * <p>A description of the hub.</p>
-   */
-  HubDescription?: string;
-
-  /**
-   * <p>The searchable keywords for the hub.</p>
-   */
-  HubSearchKeywords?: string[];
-
-  /**
-   * <p>The status of the hub.</p>
-   */
-  HubStatus: HubStatus | string | undefined;
-
-  /**
-   * <p>The date and time that the hub was created.</p>
-   */
-  CreationTime: Date | undefined;
-
-  /**
-   * <p>The date and time that the hub was last modified.</p>
-   */
-  LastModifiedTime: Date | undefined;
-}
 
 /**
  * @internal

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
 import { CreateAppBlockRequest, CreateAppBlockResult } from "../models/models_0";
@@ -55,12 +55,12 @@ export interface CreateAppBlockCommandOutput extends CreateAppBlockResult, __Met
  *   DisplayName: "STRING_VALUE",
  *   SourceS3Location: { // S3Location
  *     S3Bucket: "STRING_VALUE", // required
- *     S3Key: "STRING_VALUE", // required
+ *     S3Key: "STRING_VALUE",
  *   },
  *   SetupScriptDetails: { // ScriptDetails
  *     ScriptS3Location: {
  *       S3Bucket: "STRING_VALUE", // required
- *       S3Key: "STRING_VALUE", // required
+ *       S3Key: "STRING_VALUE",
  *     },
  *     ExecutablePath: "STRING_VALUE", // required
  *     ExecutableParameters: "STRING_VALUE",
@@ -69,6 +69,16 @@ export interface CreateAppBlockCommandOutput extends CreateAppBlockResult, __Met
  *   Tags: { // Tags
  *     "<keys>": "STRING_VALUE",
  *   },
+ *   PostSetupScriptDetails: {
+ *     ScriptS3Location: {
+ *       S3Bucket: "STRING_VALUE", // required
+ *       S3Key: "STRING_VALUE",
+ *     },
+ *     ExecutablePath: "STRING_VALUE", // required
+ *     ExecutableParameters: "STRING_VALUE",
+ *     TimeoutInSeconds: Number("int"), // required
+ *   },
+ *   PackagingType: "CUSTOM" || "APPSTREAM2",
  * };
  * const command = new CreateAppBlockCommand(input);
  * const response = await client.send(command);
@@ -80,18 +90,35 @@ export interface CreateAppBlockCommandOutput extends CreateAppBlockResult, __Met
  * //     DisplayName: "STRING_VALUE",
  * //     SourceS3Location: { // S3Location
  * //       S3Bucket: "STRING_VALUE", // required
- * //       S3Key: "STRING_VALUE", // required
+ * //       S3Key: "STRING_VALUE",
  * //     },
  * //     SetupScriptDetails: { // ScriptDetails
  * //       ScriptS3Location: {
  * //         S3Bucket: "STRING_VALUE", // required
- * //         S3Key: "STRING_VALUE", // required
+ * //         S3Key: "STRING_VALUE",
  * //       },
  * //       ExecutablePath: "STRING_VALUE", // required
  * //       ExecutableParameters: "STRING_VALUE",
  * //       TimeoutInSeconds: Number("int"), // required
  * //     },
  * //     CreatedTime: new Date("TIMESTAMP"),
+ * //     PostSetupScriptDetails: {
+ * //       ScriptS3Location: {
+ * //         S3Bucket: "STRING_VALUE", // required
+ * //         S3Key: "STRING_VALUE",
+ * //       },
+ * //       ExecutablePath: "STRING_VALUE", // required
+ * //       ExecutableParameters: "STRING_VALUE",
+ * //       TimeoutInSeconds: Number("int"), // required
+ * //     },
+ * //     PackagingType: "CUSTOM" || "APPSTREAM2",
+ * //     State: "INACTIVE" || "ACTIVE",
+ * //     AppBlockErrors: [ // ErrorDetailsList
+ * //       { // ErrorDetails
+ * //         ErrorCode: "STRING_VALUE",
+ * //         ErrorMessage: "STRING_VALUE",
+ * //       },
+ * //     ],
  * //   },
  * // };
  *

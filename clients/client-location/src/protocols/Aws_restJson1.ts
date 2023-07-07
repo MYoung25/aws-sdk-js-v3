@@ -1,5 +1,10 @@
 // smithy-typescript generated code
 import {
+  HttpRequest as __HttpRequest,
+  HttpResponse as __HttpResponse,
+  isValidHostname as __isValidHostname,
+} from "@smithy/protocol-http";
+import {
   _json,
   collectBody,
   decorateServiceException as __decorateServiceException,
@@ -16,14 +21,12 @@ import {
   serializeFloat as __serializeFloat,
   take,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
+} from "@smithy/smithy-client";
 import {
-  HttpRequest as __HttpRequest,
-  HttpResponse as __HttpResponse,
-  isValidHostname as __isValidHostname,
-} from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+  Endpoint as __Endpoint,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import {
   AssociateTrackerConsumerCommandInput,
@@ -527,6 +530,9 @@ export const se_CalculateRouteCommand = async (
     "{CalculatorName}",
     false
   );
+  const query: any = map({
+    key: [, input.Key!],
+  });
   let body: any;
   body = JSON.stringify(
     take(input, {
@@ -556,6 +562,7 @@ export const se_CalculateRouteCommand = async (
     method: "POST",
     headers,
     path: resolvedPath,
+    query,
     body,
   });
 };
@@ -582,6 +589,9 @@ export const se_CalculateRouteMatrixCommand = async (
     "{CalculatorName}",
     false
   );
+  const query: any = map({
+    key: [, input.Key!],
+  });
   let body: any;
   body = JSON.stringify(
     take(input, {
@@ -609,6 +619,7 @@ export const se_CalculateRouteMatrixCommand = async (
     method: "POST",
     headers,
     path: resolvedPath,
+    query,
     body,
   });
 };
@@ -833,6 +844,7 @@ export const se_CreateTrackerCommand = async (
   body = JSON.stringify(
     take(input, {
       Description: [],
+      EventBridgeEnabled: [],
       KmsKeyId: [],
       PositionFiltering: [],
       PricingPlan: [],
@@ -1579,6 +1591,7 @@ export const se_GetPlaceCommand = async (
   resolvedPath = __resolvedPath(resolvedPath, input, "PlaceId", () => input.PlaceId!, "{PlaceId}", false);
   const query: any = map({
     language: [, input.Language!],
+    key: [, input.Key!],
   });
   let body: any;
   let { hostname: resolvedHostname } = await context.endpoint();
@@ -2047,6 +2060,9 @@ export const se_SearchPlaceIndexForPositionCommand = async (
     `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
     "/places/v0/indexes/{IndexName}/search/position";
   resolvedPath = __resolvedPath(resolvedPath, input, "IndexName", () => input.IndexName!, "{IndexName}", false);
+  const query: any = map({
+    key: [, input.Key!],
+  });
   let body: any;
   body = JSON.stringify(
     take(input, {
@@ -2069,6 +2085,7 @@ export const se_SearchPlaceIndexForPositionCommand = async (
     method: "POST",
     headers,
     path: resolvedPath,
+    query,
     body,
   });
 };
@@ -2088,6 +2105,9 @@ export const se_SearchPlaceIndexForSuggestionsCommand = async (
     `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
     "/places/v0/indexes/{IndexName}/search/suggestions";
   resolvedPath = __resolvedPath(resolvedPath, input, "IndexName", () => input.IndexName!, "{IndexName}", false);
+  const query: any = map({
+    key: [, input.Key!],
+  });
   let body: any;
   body = JSON.stringify(
     take(input, {
@@ -2114,6 +2134,7 @@ export const se_SearchPlaceIndexForSuggestionsCommand = async (
     method: "POST",
     headers,
     path: resolvedPath,
+    query,
     body,
   });
 };
@@ -2133,6 +2154,9 @@ export const se_SearchPlaceIndexForTextCommand = async (
     `${basePath?.endsWith("/") ? basePath.slice(0, -1) : basePath || ""}` +
     "/places/v0/indexes/{IndexName}/search/text";
   resolvedPath = __resolvedPath(resolvedPath, input, "IndexName", () => input.IndexName!, "{IndexName}", false);
+  const query: any = map({
+    key: [, input.Key!],
+  });
   let body: any;
   body = JSON.stringify(
     take(input, {
@@ -2159,6 +2183,7 @@ export const se_SearchPlaceIndexForTextCommand = async (
     method: "POST",
     headers,
     path: resolvedPath,
+    query,
     body,
   });
 };
@@ -2470,6 +2495,7 @@ export const se_UpdateTrackerCommand = async (
   body = JSON.stringify(
     take(input, {
       Description: [],
+      EventBridgeEnabled: [],
       PositionFiltering: [],
       PricingPlan: [],
       PricingPlanDataSource: [],
@@ -4098,6 +4124,7 @@ export const de_DescribeTrackerCommand = async (
   const doc = take(data, {
     CreateTime: (_) => __expectNonNull(__parseRfc3339DateTimeWithOffset(_)),
     Description: __expectString,
+    EventBridgeEnabled: __expectBoolean,
     KmsKeyId: __expectString,
     PositionFiltering: __expectString,
     PricingPlan: __expectString,

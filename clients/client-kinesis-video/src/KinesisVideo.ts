@@ -1,6 +1,6 @@
 // smithy-typescript generated code
-import { createAggregatedClient } from "@aws-sdk/smithy-client";
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/smithy-client";
+import { HttpHandlerOptions as __HttpHandlerOptions } from "@smithy/types";
 
 import {
   CreateSignalingChannelCommand,
@@ -12,6 +12,11 @@ import {
   CreateStreamCommandInput,
   CreateStreamCommandOutput,
 } from "./commands/CreateStreamCommand";
+import {
+  DeleteEdgeConfigurationCommand,
+  DeleteEdgeConfigurationCommandInput,
+  DeleteEdgeConfigurationCommandOutput,
+} from "./commands/DeleteEdgeConfigurationCommand";
 import {
   DeleteSignalingChannelCommand,
   DeleteSignalingChannelCommandInput,
@@ -67,6 +72,11 @@ import {
   GetSignalingChannelEndpointCommandInput,
   GetSignalingChannelEndpointCommandOutput,
 } from "./commands/GetSignalingChannelEndpointCommand";
+import {
+  ListEdgeAgentConfigurationsCommand,
+  ListEdgeAgentConfigurationsCommandInput,
+  ListEdgeAgentConfigurationsCommandOutput,
+} from "./commands/ListEdgeAgentConfigurationsCommand";
 import {
   ListSignalingChannelsCommand,
   ListSignalingChannelsCommandInput,
@@ -131,6 +141,7 @@ import { KinesisVideoClient, KinesisVideoClientConfig } from "./KinesisVideoClie
 const commands = {
   CreateSignalingChannelCommand,
   CreateStreamCommand,
+  DeleteEdgeConfigurationCommand,
   DeleteSignalingChannelCommand,
   DeleteStreamCommand,
   DescribeEdgeConfigurationCommand,
@@ -142,6 +153,7 @@ const commands = {
   DescribeStreamCommand,
   GetDataEndpointCommand,
   GetSignalingChannelEndpointCommand,
+  ListEdgeAgentConfigurationsCommand,
   ListSignalingChannelsCommand,
   ListStreamsCommand,
   ListTagsForResourceCommand,
@@ -186,6 +198,23 @@ export interface KinesisVideo {
     args: CreateStreamCommandInput,
     options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateStreamCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEdgeConfigurationCommand}
+   */
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<DeleteEdgeConfigurationCommandOutput>;
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    cb: (err: any, data?: DeleteEdgeConfigurationCommandOutput) => void
+  ): void;
+  deleteEdgeConfiguration(
+    args: DeleteEdgeConfigurationCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: DeleteEdgeConfigurationCommandOutput) => void
   ): void;
 
   /**
@@ -361,6 +390,23 @@ export interface KinesisVideo {
     args: GetSignalingChannelEndpointCommandInput,
     options: __HttpHandlerOptions,
     cb: (err: any, data?: GetSignalingChannelEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEdgeAgentConfigurationsCommand}
+   */
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ListEdgeAgentConfigurationsCommandOutput>;
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    cb: (err: any, data?: ListEdgeAgentConfigurationsCommandOutput) => void
+  ): void;
+  listEdgeAgentConfigurations(
+    args: ListEdgeAgentConfigurationsCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ListEdgeAgentConfigurationsCommandOutput) => void
   ): void;
 
   /**

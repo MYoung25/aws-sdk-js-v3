@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
 import { CreateComputeEnvironmentRequest, CreateComputeEnvironmentResponse } from "../models/models_0";
@@ -92,8 +92,12 @@ export interface CreateComputeEnvironmentCommandOutput extends CreateComputeEnvi
  *       or <code>SPOT_CAPACITY_OPTIMIZED</code>.</p>
  *                </li>
  *                <li>
- *                   <p>Set the update to latest image version (<code>updateToLatestImageVersion</code>) parameter to
- *        <code>true</code>.</p>
+ *                   <p>Set the update to latest image version (<code>updateToLatestImageVersion</code>)
+ *             parameter to
+ *             <code>true</code>.
+ *             The <code>updateToLatestImageVersion</code> parameter is used when you update a compute
+ *             environment. This parameter is ignored when you create a compute
+ *             environment.</p>
  *                </li>
  *                <li>
  *                   <p>Don't specify an AMI ID in <code>imageId</code>, <code>imageIdOverride</code> (in <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html">

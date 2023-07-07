@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { ListObjectVersionsOutput, ListObjectVersionsRequest } from "../models/models_0";
 import { de_ListObjectVersionsCommand, se_ListObjectVersionsCommand } from "../protocols/Aws_restXml";
@@ -40,12 +40,13 @@ export interface ListObjectVersionsCommandOutput extends ListObjectVersionsOutpu
  *          parameters as selection criteria to return metadata about a subset of all the object
  *          versions.</p>
  *          <important>
- *             <p> To use this operation, you must have permissions to perform the
+ *             <p> To use this operation, you must have permission to perform the
  *                <code>s3:ListBucketVersions</code> action. Be aware of the name difference. </p>
  *          </important>
  *          <note>
- *             <p> A 200 OK response can contain valid or invalid XML. Make sure to design your
- *             application to parse the contents of the response and handle it appropriately.</p>
+ *             <p> A <code>200 OK</code> response can contain valid or invalid XML. Make sure to design
+ *             your application to parse the contents of the response and handle it
+ *             appropriately.</p>
  *          </note>
  *          <p>To use this operation, you must have READ access to the bucket.</p>
  *          <p>This action is not supported by Amazon S3 on Outposts.</p>
@@ -88,6 +89,9 @@ export interface ListObjectVersionsCommandOutput extends ListObjectVersionsOutpu
  *   VersionIdMarker: "STRING_VALUE",
  *   ExpectedBucketOwner: "STRING_VALUE",
  *   RequestPayer: "requester",
+ *   OptionalObjectAttributes: [ // OptionalObjectAttributesList
+ *     "RestoreStatus",
+ *   ],
  * };
  * const command = new ListObjectVersionsCommand(input);
  * const response = await client.send(command);
@@ -112,6 +116,10 @@ export interface ListObjectVersionsCommandOutput extends ListObjectVersionsOutpu
  * //       Owner: { // Owner
  * //         DisplayName: "STRING_VALUE",
  * //         ID: "STRING_VALUE",
+ * //       },
+ * //       RestoreStatus: { // RestoreStatus
+ * //         IsRestoreInProgress: true || false,
+ * //         RestoreExpiryDate: new Date("TIMESTAMP"),
  * //       },
  * //     },
  * //   ],

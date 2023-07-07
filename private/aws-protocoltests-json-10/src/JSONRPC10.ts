@@ -1,6 +1,6 @@
 // smithy-typescript generated code
-import { createAggregatedClient } from "@aws-sdk/smithy-client";
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/smithy-client";
+import { HttpHandlerOptions as __HttpHandlerOptions } from "@smithy/types";
 
 import {
   EmptyInputAndEmptyOutputCommand,
@@ -39,6 +39,11 @@ import {
   NoInputAndOutputCommandOutput,
 } from "./commands/NoInputAndOutputCommand";
 import {
+  PutWithContentEncodingCommand,
+  PutWithContentEncodingCommandInput,
+  PutWithContentEncodingCommandOutput,
+} from "./commands/PutWithContentEncodingCommand";
+import {
   SimpleScalarPropertiesCommand,
   SimpleScalarPropertiesCommandInput,
   SimpleScalarPropertiesCommandOutput,
@@ -54,6 +59,7 @@ const commands = {
   JsonUnionsCommand,
   NoInputAndNoOutputCommand,
   NoInputAndOutputCommand,
+  PutWithContentEncodingCommand,
   SimpleScalarPropertiesCommand,
 };
 
@@ -186,6 +192,23 @@ export interface JSONRPC10 {
     args: NoInputAndOutputCommandInput,
     options: __HttpHandlerOptions,
     cb: (err: any, data?: NoInputAndOutputCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutWithContentEncodingCommand}
+   */
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<PutWithContentEncodingCommandOutput>;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
+  ): void;
+  putWithContentEncoding(
+    args: PutWithContentEncodingCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: PutWithContentEncodingCommandOutput) => void
   ): void;
 
   /**

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { DescribeAutoMLJobV2Request, DescribeAutoMLJobV2Response } from "../models/models_2";
 import { de_DescribeAutoMLJobV2Command, se_DescribeAutoMLJobV2Command } from "../protocols/Aws_json1_1";
@@ -71,7 +71,7 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //   },
  * //   RoleArn: "STRING_VALUE", // required
  * //   AutoMLJobObjective: { // AutoMLJobObjective
- * //     MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro", // required
+ * //     MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss", // required
  * //   },
  * //   AutoMLProblemTypeConfig: { // AutoMLProblemTypeConfig Union: only one key present
  * //     ImageClassificationJobConfig: { // ImageClassificationJobConfig
@@ -112,6 +112,37 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //       TargetAttributeName: "STRING_VALUE", // required
  * //       SampleWeightAttributeName: "STRING_VALUE",
  * //     },
+ * //     TimeSeriesForecastingJobConfig: { // TimeSeriesForecastingJobConfig
+ * //       FeatureSpecificationS3Uri: "STRING_VALUE",
+ * //       CompletionCriteria: {
+ * //         MaxCandidates: Number("int"),
+ * //         MaxRuntimePerTrainingJobInSeconds: Number("int"),
+ * //         MaxAutoMLJobRuntimeInSeconds: Number("int"),
+ * //       },
+ * //       ForecastFrequency: "STRING_VALUE", // required
+ * //       ForecastHorizon: Number("int"), // required
+ * //       ForecastQuantiles: [ // ForecastQuantiles
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Transformations: { // TimeSeriesTransformations
+ * //         Filling: { // FillingTransformations
+ * //           "<keys>": { // FillingTransformationMap
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         Aggregation: { // AggregationTransformations
+ * //           "<keys>": "sum" || "avg" || "first" || "min" || "max",
+ * //         },
+ * //       },
+ * //       TimeSeriesConfig: { // TimeSeriesConfig
+ * //         TargetAttributeName: "STRING_VALUE", // required
+ * //         TimestampAttributeName: "STRING_VALUE", // required
+ * //         ItemIdentifierAttributeName: "STRING_VALUE", // required
+ * //         GroupingAttributeNames: [ // GroupingAttributeNames
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
  * //   },
  * //   CreationTime: new Date("TIMESTAMP"), // required
  * //   EndTime: new Date("TIMESTAMP"),
@@ -126,9 +157,9 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //     CandidateName: "STRING_VALUE", // required
  * //     FinalAutoMLJobObjectiveMetric: { // FinalAutoMLJobObjectiveMetric
  * //       Type: "Maximize" || "Minimize",
- * //       MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro", // required
+ * //       MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss", // required
  * //       Value: Number("float"), // required
- * //       StandardMetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro",
+ * //       StandardMetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss",
  * //     },
  * //     ObjectiveStatus: "Succeeded" || "Pending" || "Failed", // required
  * //     CandidateSteps: [ // CandidateSteps // required
@@ -156,13 +187,14 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //       CandidateArtifactLocations: { // CandidateArtifactLocations
  * //         Explainability: "STRING_VALUE", // required
  * //         ModelInsights: "STRING_VALUE",
+ * //         BacktestResults: "STRING_VALUE",
  * //       },
  * //       CandidateMetrics: [ // MetricDataList
  * //         { // MetricDatum
- * //           MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro",
+ * //           MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss",
  * //           Value: Number("float"),
  * //           Set: "Train" || "Validation" || "Test",
- * //           StandardMetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "LogLoss" || "InferenceLatency",
+ * //           StandardMetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "LogLoss" || "InferenceLatency" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss",
  * //         },
  * //       ],
  * //     },
@@ -179,7 +211,7 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //     },
  * //   },
  * //   AutoMLJobStatus: "Completed" || "InProgress" || "Failed" || "Stopped" || "Stopping", // required
- * //   AutoMLJobSecondaryStatus: "Starting" || "AnalyzingData" || "FeatureEngineering" || "ModelTuning" || "MaxCandidatesReached" || "Failed" || "Stopped" || "MaxAutoMLJobRuntimeReached" || "Stopping" || "CandidateDefinitionsGenerated" || "GeneratingExplainabilityReport" || "Completed" || "ExplainabilityError" || "DeployingModel" || "ModelDeploymentError" || "GeneratingModelInsightsReport" || "ModelInsightsError" || "TrainingModels", // required
+ * //   AutoMLJobSecondaryStatus: "Starting" || "AnalyzingData" || "FeatureEngineering" || "ModelTuning" || "MaxCandidatesReached" || "Failed" || "Stopped" || "MaxAutoMLJobRuntimeReached" || "Stopping" || "CandidateDefinitionsGenerated" || "GeneratingExplainabilityReport" || "Completed" || "ExplainabilityError" || "DeployingModel" || "ModelDeploymentError" || "GeneratingModelInsightsReport" || "ModelInsightsError" || "TrainingModels" || "PreTraining", // required
  * //   ModelDeployConfig: { // ModelDeployConfig
  * //     AutoGenerateEndpointName: true || false,
  * //     EndpointName: "STRING_VALUE",
@@ -208,7 +240,7 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //   },
  * //   ResolvedAttributes: { // AutoMLResolvedAttributes
  * //     AutoMLJobObjective: {
- * //       MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro", // required
+ * //       MetricName: "Accuracy" || "MSE" || "F1" || "F1macro" || "AUC" || "RMSE" || "MAE" || "R2" || "BalancedAccuracy" || "Precision" || "PrecisionMacro" || "Recall" || "RecallMacro" || "MAPE" || "MASE" || "WAPE" || "AverageWeightedQuantileLoss", // required
  * //     },
  * //     CompletionCriteria: {
  * //       MaxCandidates: Number("int"),
@@ -221,7 +253,7 @@ export interface DescribeAutoMLJobV2CommandOutput extends DescribeAutoMLJobV2Res
  * //       },
  * //     },
  * //   },
- * //   AutoMLProblemTypeConfigName: "ImageClassification" || "TextClassification" || "Tabular",
+ * //   AutoMLProblemTypeConfigName: "ImageClassification" || "TextClassification" || "Tabular" || "TimeSeriesForecasting",
  * // };
  *
  * ```

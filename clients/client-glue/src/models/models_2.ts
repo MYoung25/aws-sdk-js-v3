@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@smithy/smithy-client";
 
 import { GlueServiceException as __BaseException } from "./GlueServiceException";
 import {
@@ -106,9 +106,11 @@ import {
   DataCatalogEncryptionSettings,
   DataQualityEvaluationRunAdditionalRunOptions,
   JobBookmarkEntry,
+  PrincipalType,
   RegistryId,
   RegistryStatus,
   ResourceShareType,
+  ResourceUri,
   SchemaStatus,
   SchemaVersionNumber,
   SchemaVersionStatus,
@@ -118,9 +120,118 @@ import {
   TableInput,
   TransformFilterCriteria,
   TransformSortCriteria,
-  UserDefinedFunction,
   UserDefinedFunctionInput,
 } from "./models_1";
+
+/**
+ * @public
+ * <p>A filter that uses both column-level and row-level filtering.</p>
+ */
+export interface ColumnRowFilter {
+  /**
+   * <p>A string containing the name of the column.</p>
+   */
+  ColumnName?: string;
+
+  /**
+   * <p>A string containing the row-level filter expression.</p>
+   */
+  RowFilterExpression?: string;
+}
+
+/**
+ * @public
+ */
+export interface GetUnfilteredTableMetadataResponse {
+  /**
+   * <p>A Table object containing the table metadata.</p>
+   */
+  Table?: Table;
+
+  /**
+   * <p>A list of column names that the user has been granted access to.</p>
+   */
+  AuthorizedColumns?: string[];
+
+  /**
+   * <p>A Boolean value that indicates whether the partition location is registered
+   *           with Lake Formation.</p>
+   */
+  IsRegisteredWithLakeFormation?: boolean;
+
+  /**
+   * <p>A list of column row filters.</p>
+   */
+  CellFilters?: ColumnRowFilter[];
+}
+
+/**
+ * @public
+ */
+export interface GetUserDefinedFunctionRequest {
+  /**
+   * <p>The ID of the Data Catalog where the function to be retrieved is located. If none is
+   *       provided, the Amazon Web Services account ID is used by default.</p>
+   */
+  CatalogId?: string;
+
+  /**
+   * <p>The name of the catalog database where the function is located.</p>
+   */
+  DatabaseName: string | undefined;
+
+  /**
+   * <p>The name of the function.</p>
+   */
+  FunctionName: string | undefined;
+}
+
+/**
+ * @public
+ * <p>Represents the equivalent of a Hive user-defined function
+ *       (<code>UDF</code>) definition.</p>
+ */
+export interface UserDefinedFunction {
+  /**
+   * <p>The name of the function.</p>
+   */
+  FunctionName?: string;
+
+  /**
+   * <p>The name of the catalog database that contains the function.</p>
+   */
+  DatabaseName?: string;
+
+  /**
+   * <p>The Java class that contains the function code.</p>
+   */
+  ClassName?: string;
+
+  /**
+   * <p>The owner of the function.</p>
+   */
+  OwnerName?: string;
+
+  /**
+   * <p>The owner type.</p>
+   */
+  OwnerType?: PrincipalType | string;
+
+  /**
+   * <p>The time at which the function was created.</p>
+   */
+  CreateTime?: Date;
+
+  /**
+   * <p>The resource URIs for the function.</p>
+   */
+  ResourceUris?: ResourceUri[];
+
+  /**
+   * <p>The ID of the Data Catalog in which the function resides.</p>
+   */
+  CatalogId?: string;
+}
 
 /**
  * @public

@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import { KMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KMSClient";
 import { ImportKeyMaterialRequest, ImportKeyMaterialResponse } from "../models/models_0";
@@ -53,8 +53,7 @@ export interface ImportKeyMaterialCommandOutput extends ImportKeyMaterialRespons
  *          <p>Each time you import key material into KMS, you can determine whether
  *         (<code>ExpirationModel</code>) and when (<code>ValidTo</code>) the key material expires. To
  *       change the expiration of your key material, you must import it again, either by calling
- *       <code>ImportKeyMaterial</code> or using the <a href="kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-import-key-material-console">import features</a> of the
- *       KMS console.</p>
+ *         <code>ImportKeyMaterial</code> or using the <a href="kms/latest/developerguide/importing-keys-import-key-material.html#importing-keys-import-key-material-console">import features</a> of the KMS console.</p>
  *          <p>Before calling <code>ImportKeyMaterial</code>:</p>
  *          <ul>
  *             <li>
@@ -210,7 +209,9 @@ export interface ImportKeyMaterialCommandOutput extends ImportKeyMaterialRespons
  *                   </i>.</p>
  *             </li>
  *             <li>
- *                <p>For cryptographic operations on KMS keys in custom key stores, this exception represents a general failure with many possible causes. To identify the cause, see the error message that accompanies the exception.</p>
+ *                <p>For cryptographic operations on KMS keys in custom key stores, this exception
+ *           represents a general failure with many possible causes. To identify the cause, see the
+ *           error message that accompanies the exception.</p>
  *             </li>
  *          </ul>
  *

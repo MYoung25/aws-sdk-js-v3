@@ -1,4 +1,5 @@
 // smithy-typescript generated code
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
 import {
   collectBody,
   decorateServiceException as __decorateServiceException,
@@ -14,10 +15,13 @@ import {
   strictParseInt32 as __strictParseInt32,
   strictParseLong as __strictParseLong,
   withBaseException,
-} from "@aws-sdk/smithy-client";
-import { HeaderBag as __HeaderBag, ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+} from "@smithy/smithy-client";
+import {
+  Endpoint as __Endpoint,
+  HeaderBag as __HeaderBag,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 import { XMLParser } from "fast-xml-parser";
 
 import { AddRoleToDBClusterCommandInput, AddRoleToDBClusterCommandOutput } from "../commands/AddRoleToDBClusterCommand";
@@ -13988,6 +13992,25 @@ const se_CreateDBInstanceMessage = (input: CreateDBInstanceMessage, context: __S
   if (input.Domain != null) {
     entries["Domain"] = input.Domain;
   }
+  if (input.DomainFqdn != null) {
+    entries["DomainFqdn"] = input.DomainFqdn;
+  }
+  if (input.DomainOu != null) {
+    entries["DomainOu"] = input.DomainOu;
+  }
+  if (input.DomainAuthSecretArn != null) {
+    entries["DomainAuthSecretArn"] = input.DomainAuthSecretArn;
+  }
+  if (input.DomainDnsIps != null) {
+    const memberEntries = se_StringList(input.DomainDnsIps, context);
+    if (input.DomainDnsIps?.length === 0) {
+      entries.DomainDnsIps = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DomainDnsIps.${key}`;
+      entries[loc] = value;
+    });
+  }
   if (input.CopyTagsToSnapshot != null) {
     entries["CopyTagsToSnapshot"] = input.CopyTagsToSnapshot;
   }
@@ -14196,6 +14219,25 @@ const se_CreateDBInstanceReadReplicaMessage = (
   }
   if (input.DomainIAMRoleName != null) {
     entries["DomainIAMRoleName"] = input.DomainIAMRoleName;
+  }
+  if (input.DomainFqdn != null) {
+    entries["DomainFqdn"] = input.DomainFqdn;
+  }
+  if (input.DomainOu != null) {
+    entries["DomainOu"] = input.DomainOu;
+  }
+  if (input.DomainAuthSecretArn != null) {
+    entries["DomainAuthSecretArn"] = input.DomainAuthSecretArn;
+  }
+  if (input.DomainDnsIps != null) {
+    const memberEntries = se_StringList(input.DomainDnsIps, context);
+    if (input.DomainDnsIps?.length === 0) {
+      entries.DomainDnsIps = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DomainDnsIps.${key}`;
+      entries[loc] = value;
+    });
   }
   if (input.ReplicaMode != null) {
     entries["ReplicaMode"] = input.ReplicaMode;
@@ -16636,6 +16678,25 @@ const se_ModifyDBInstanceMessage = (input: ModifyDBInstanceMessage, context: __S
   if (input.Domain != null) {
     entries["Domain"] = input.Domain;
   }
+  if (input.DomainFqdn != null) {
+    entries["DomainFqdn"] = input.DomainFqdn;
+  }
+  if (input.DomainOu != null) {
+    entries["DomainOu"] = input.DomainOu;
+  }
+  if (input.DomainAuthSecretArn != null) {
+    entries["DomainAuthSecretArn"] = input.DomainAuthSecretArn;
+  }
+  if (input.DomainDnsIps != null) {
+    const memberEntries = se_StringList(input.DomainDnsIps, context);
+    if (input.DomainDnsIps?.length === 0) {
+      entries.DomainDnsIps = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DomainDnsIps.${key}`;
+      entries[loc] = value;
+    });
+  }
   if (input.CopyTagsToSnapshot != null) {
     entries["CopyTagsToSnapshot"] = input.CopyTagsToSnapshot;
   }
@@ -16653,6 +16714,9 @@ const se_ModifyDBInstanceMessage = (input: ModifyDBInstanceMessage, context: __S
   }
   if (input.DomainIAMRoleName != null) {
     entries["DomainIAMRoleName"] = input.DomainIAMRoleName;
+  }
+  if (input.DisableDomain != null) {
+    entries["DisableDomain"] = input.DisableDomain;
   }
   if (input.PromotionTier != null) {
     entries["PromotionTier"] = input.PromotionTier;
@@ -17986,6 +18050,25 @@ const se_RestoreDBInstanceFromDBSnapshotMessage = (
   if (input.Domain != null) {
     entries["Domain"] = input.Domain;
   }
+  if (input.DomainFqdn != null) {
+    entries["DomainFqdn"] = input.DomainFqdn;
+  }
+  if (input.DomainOu != null) {
+    entries["DomainOu"] = input.DomainOu;
+  }
+  if (input.DomainAuthSecretArn != null) {
+    entries["DomainAuthSecretArn"] = input.DomainAuthSecretArn;
+  }
+  if (input.DomainDnsIps != null) {
+    const memberEntries = se_StringList(input.DomainDnsIps, context);
+    if (input.DomainDnsIps?.length === 0) {
+      entries.DomainDnsIps = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DomainDnsIps.${key}`;
+      entries[loc] = value;
+    });
+  }
   if (input.CopyTagsToSnapshot != null) {
     entries["CopyTagsToSnapshot"] = input.CopyTagsToSnapshot;
   }
@@ -18328,6 +18411,25 @@ const se_RestoreDBInstanceToPointInTimeMessage = (
   }
   if (input.DomainIAMRoleName != null) {
     entries["DomainIAMRoleName"] = input.DomainIAMRoleName;
+  }
+  if (input.DomainFqdn != null) {
+    entries["DomainFqdn"] = input.DomainFqdn;
+  }
+  if (input.DomainOu != null) {
+    entries["DomainOu"] = input.DomainOu;
+  }
+  if (input.DomainAuthSecretArn != null) {
+    entries["DomainAuthSecretArn"] = input.DomainAuthSecretArn;
+  }
+  if (input.DomainDnsIps != null) {
+    const memberEntries = se_StringList(input.DomainDnsIps, context);
+    if (input.DomainDnsIps?.length === 0) {
+      entries.DomainDnsIps = [];
+    }
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `DomainDnsIps.${key}`;
+      entries[loc] = value;
+    });
   }
   if (input.EnableIAMDatabaseAuthentication != null) {
     entries["EnableIAMDatabaseAuthentication"] = input.EnableIAMDatabaseAuthentication;
@@ -22796,6 +22898,17 @@ const de_DomainMembership = (output: any, context: __SerdeContext): DomainMember
   }
   if (output["IAMRoleName"] !== undefined) {
     contents.IAMRoleName = __expectString(output["IAMRoleName"]);
+  }
+  if (output["OU"] !== undefined) {
+    contents.OU = __expectString(output["OU"]);
+  }
+  if (output["AuthSecretArn"] !== undefined) {
+    contents.AuthSecretArn = __expectString(output["AuthSecretArn"]);
+  }
+  if (output.DnsIps === "") {
+    contents.DnsIps = [];
+  } else if (output["DnsIps"] !== undefined && output["DnsIps"]["member"] !== undefined) {
+    contents.DnsIps = de_StringList(__getArrayIfSingleItem(output["DnsIps"]["member"]), context);
   }
   return contents;
 };

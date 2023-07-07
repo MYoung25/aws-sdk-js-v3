@@ -1,7 +1,8 @@
 // smithy-typescript generated code
-import { EndpointParameterInstructions, getEndpointPlugin } from "@aws-sdk/middleware-endpoint";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { Command as $Command } from "@aws-sdk/smithy-client";
+import { EndpointParameterInstructions, getEndpointPlugin } from "@smithy/middleware-endpoint";
+import { getSerdePlugin } from "@smithy/middleware-serde";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import { Command as $Command } from "@smithy/smithy-client";
 import {
   FinalizeHandlerArguments,
   Handler,
@@ -9,9 +10,8 @@ import {
   HttpHandlerOptions as __HttpHandlerOptions,
   MetadataBearer as __MetadataBearer,
   MiddlewareStack,
-} from "@aws-sdk/types";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { SerdeContext as __SerdeContext } from "@smithy/types";
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
 
 import {
   ListDeviceIdentifiersRequest,
@@ -40,9 +40,9 @@ export interface ListDeviceIdentifiersCommandOutput extends ListDeviceIdentifier
 
 /**
  * @public
- * <p>Lists device identifiers. Add filters to your request to return a more
- *             specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order,
- *             the status of device identifiers, or the ARN of the traffic group.</p>
+ * <p>Lists device identifiers. Add filters to your request to return a more specific list
+ *             of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status
+ *             of device identifiers, or the ARN of the traffic group.</p>
  *          <p>If you specify multiple filters, filters are joined with an OR, and the request
  * returns results that match all of the specified filters.</p>
  * @example

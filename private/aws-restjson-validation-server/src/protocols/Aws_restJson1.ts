@@ -1,5 +1,15 @@
 // smithy-typescript generated code
 import {
+  acceptMatches as __acceptMatches,
+  NotAcceptableException as __NotAcceptableException,
+  SerializationException as __SerializationException,
+  ServerSerdeContext,
+  ServiceException as __BaseException,
+  SmithyFrameworkException as __SmithyFrameworkException,
+  UnsupportedMediaTypeException as __UnsupportedMediaTypeException,
+} from "@aws-smithy/server-common";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
+import {
   _json,
   collectBody,
   expectBoolean as __expectBoolean,
@@ -18,20 +28,13 @@ import {
   parseRfc3339DateTime as __parseRfc3339DateTime,
   parseRfc7231DateTime as __parseRfc7231DateTime,
   take,
-} from "@aws-sdk/smithy-client";
-import { ResponseMetadata as __ResponseMetadata } from "@aws-sdk/types";
-import { calculateBodyLength } from "@aws-sdk/util-body-length-node";
+} from "@smithy/smithy-client";
 import {
-  acceptMatches as __acceptMatches,
-  NotAcceptableException as __NotAcceptableException,
-  SerializationException as __SerializationException,
-  ServerSerdeContext,
-  ServiceException as __BaseException,
-  SmithyFrameworkException as __SmithyFrameworkException,
-  UnsupportedMediaTypeException as __UnsupportedMediaTypeException,
-} from "@aws-smithy/server-common";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@smithy/protocol-http";
-import { Endpoint as __Endpoint, SerdeContext as __SerdeContext } from "@smithy/types";
+  Endpoint as __Endpoint,
+  ResponseMetadata as __ResponseMetadata,
+  SerdeContext as __SerdeContext,
+} from "@smithy/types";
+import { calculateBodyLength } from "@smithy/util-body-length-node";
 
 import {
   EnumString,
@@ -40,6 +43,7 @@ import {
   FooUnion,
   GreetingStruct,
   IntegerEnum,
+  MissingKeyStructure,
   PatternUnion,
   PatternUnionOverride,
   RecursiveUnionOne,
@@ -457,6 +461,7 @@ export const deserializeMalformedUniqueItemsRequest = async (
     shortList: (_) => de_ShortSet(_, context),
     stringList: (_) => de_StringSet(_, context),
     structureList: (_) => de_StructureSet(_, context),
+    structureListWithNoKey: (_) => de_StructureSetWithNoKey(_, context),
     timestampList: (_) => de_TimestampSet(_, context),
     unionList: (_) => de_UnionSet(_, context),
   });
@@ -1143,6 +1148,15 @@ const de_LengthMap = (output: any, context: __SerdeContext): Record<string, stri
 };
 
 /**
+ * deserializeAws_restJson1MissingKeyStructure
+ */
+const de_MissingKeyStructure = (output: any, context: __SerdeContext): MissingKeyStructure => {
+  return take(output, {
+    hi: __expectString,
+  }) as any;
+};
+
+/**
  * deserializeAws_restJson1PatternList
  */
 const de_PatternList = (output: any, context: __SerdeContext): string[] => {
@@ -1252,6 +1266,21 @@ const de_RecursiveUnionTwo = (output: any, context: __SerdeContext): RecursiveUn
     };
   }
   return { $unknown: Object.entries(output)[0] };
+};
+
+/**
+ * deserializeAws_restJson1StructureSetWithNoKey
+ */
+const de_StructureSetWithNoKey = (output: any, context: __SerdeContext): MissingKeyStructure[] => {
+  const retVal = (output || []).map((entry: any) => {
+    if (entry === null) {
+      throw new TypeError(
+        'All elements of the non-sparse list "aws.protocoltests.restjson.validation#StructureSetWithNoKey" must be non-null.'
+      );
+    }
+    return de_MissingKeyStructure(entry, context);
+  });
+  return retVal;
 };
 
 /**
